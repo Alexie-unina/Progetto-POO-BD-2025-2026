@@ -6,7 +6,9 @@ public class Volo {
     private int durata;
     private final Pilota[] piloti = new Pilota[2];
     private final Hostess[] hostess = new Hostess[2];
-    public Volo(String idVolo, String destinazione, int durata, Pilota pilota, Pilota copilota, Hostess hostess1, Hostess hostess2){
+    private Aereo aereo;
+    public Volo(String idVolo, String destinazione, int durata, Pilota pilota, Pilota copilota, Hostess hostess1, Hostess hostess2,
+                Aereo aereo){
         this.idVolo = idVolo;
         this.destinazione = destinazione;
         this.durata = durata;
@@ -14,6 +16,7 @@ public class Volo {
         this.piloti[1] = copilota;
         this.hostess[0] = hostess1;
         this.hostess[1] = hostess2;
+        this.aereo = aereo;
     }
     public void setIdVolo(String idVolo){
         this.idVolo = idVolo;
@@ -32,25 +35,29 @@ public class Volo {
         this.hostess[0] = hostess1;
         this.hostess[1] = hostess2;
     }
+    public void setAereo(Aereo aereo){
+        this.aereo = aereo;
+    }
     public String getIdVolo(){
-        return this.idVolo;
+        return idVolo;
     }
     public String getDestinazione(){
-        return this.destinazione;
+        return destinazione;
     }
     public int getDurata(){
-        return this.durata;
+        return durata;
     }
     public Pilota getPilota(){
-        return this.piloti[0];
+        return piloti[0];
     }
     public Pilota getCoPilota(){
-        return this.piloti[1];
+        return piloti[1];
     }
     public Hostess getHostess1(){
-        return this.hostess[0];
+        return hostess[0];
     }
     public Hostess getHostess2(){
-        return this.hostess[1];
+        return hostess[1];
     }
+    public Aereo getAereo() {return aereo;}
 }

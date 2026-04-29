@@ -1,20 +1,17 @@
 package model;
 
 public class Cliente extends Utente {
-    private String idCliente;
-    public Cliente(String login,String password, String codiceFiscale, String idCliente){
-        super(login,password,codiceFiscale);
+    private final String idCliente;
+    public Cliente(String login,String password,String nomeCompleto, String codiceFiscale, String idCliente){
+        super(login, password, nomeCompleto, codiceFiscale);
         this.idCliente = idCliente;
     }
-    public Cliente(String login,String password, String codiceFiscale, String numeroDiCellulare, String idCliente){
-        super(login,password, codiceFiscale, numeroDiCellulare);
-        this.idCliente = idCliente;
-    }
-    public void setIdCliente(String idCliente){
+    public Cliente(String login,String password, String nomeCompleto, String codiceFiscale, String numeroDiCellulare, String idCliente){
+        super(login, password,nomeCompleto,  codiceFiscale, numeroDiCellulare);
         this.idCliente = idCliente;
     }
     public String getIdCliente(){
-        return this.idCliente;
+        return idCliente;
     }
     public void prenotaVolo(String idVolo){
         //da farsi
