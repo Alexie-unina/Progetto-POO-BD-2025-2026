@@ -1,13 +1,13 @@
-package org.example;
+package model;
 
-public class Cliente extends Persona {
+public class Cliente extends Utente {
     private String idCliente;
-    public Cliente(String nomeCompleto, String codiceFiscale, String idCliente){
-        super(nomeCompleto, codiceFiscale);
+    public Cliente(String login,String password, String codiceFiscale, String idCliente){
+        super(login,password,codiceFiscale);
         this.idCliente = idCliente;
     }
-    public Cliente(String nomeCompleto, String codiceFiscale, int numeroDiCellulare, String idCliente){
-        super(nomeCompleto, codiceFiscale, numeroDiCellulare);
+    public Cliente(String login,String password, String codiceFiscale, String numeroDiCellulare, String idCliente){
+        super(login,password, codiceFiscale, numeroDiCellulare);
         this.idCliente = idCliente;
     }
     public void setIdCliente(String idCliente){

@@ -1,19 +1,20 @@
-package org.example;
+package model;
 
-public class Pilota extends Persona{
-    private String idPilota;
-    public Pilota(String nomeCompleto, String codiceFiscale, String idPilota){
-        super(nomeCompleto, codiceFiscale);
-        this.idPilota = idPilota;
-    }public Pilota(String nomeCompleto, String codiceFiscale, int numeroDiCellulare, String idPilota){
-        super(nomeCompleto, codiceFiscale, numeroDiCellulare);
-        this.idPilota = idPilota;
+public class Pilota extends Utente {
+    private double salario;
+    public Pilota(String login,String password, String codiceFiscale, double salario){
+        super(login,password,codiceFiscale);
+        this.salario = salario;
+    }
+    public Pilota(String login,String password, String codiceFiscale, String numeroDiCellulare,double salario){
+        super(login,password,codiceFiscale,numeroDiCellulare);
+        this.salario = salario;
     }
 
-    public void setIdPilota(String idPilota) {
-        this.idPilota = idPilota;
+    public void setSalario(double salario) {
+        this.salario = salario;
     }
-    public String getIdPilota(){
-        return this.idPilota;
+    public double getSalario(){
+        return salario;
     }
 }

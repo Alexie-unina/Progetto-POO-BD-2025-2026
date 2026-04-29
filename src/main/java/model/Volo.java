@@ -1,11 +1,11 @@
-package org.example;
+package model;
 
 public class Volo {
     private String idVolo;
     private String destinazione;
     private int durata;
-    private Pilota[] piloti;
-    private Hostess[] hostess;
+    private final Pilota[] piloti = new Pilota[2];
+    private final Hostess[] hostess = new Hostess[2];
     public Volo(String idVolo, String destinazione, int durata, Pilota pilota, Pilota copilota, Hostess hostess1, Hostess hostess2){
         this.idVolo = idVolo;
         this.destinazione = destinazione;
