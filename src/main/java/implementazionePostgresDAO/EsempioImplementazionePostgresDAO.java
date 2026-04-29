@@ -1,5 +1,5 @@
 package implementazioniPostgresDAO;
-
+/*
 import Database.ConnessioneDatabase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,4 +24,4 @@ public class EsempioImplementazionePostgresDAO implements EsempioDAO {
 
 	}
 
-}
+}*/

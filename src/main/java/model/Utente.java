@@ -40,7 +40,7 @@ public abstract class Utente {
         return codiceFiscale;
     }
     public String getNomeCompleto(){
-        return nomeCompleto; 
+        return nomeCompleto;
     }
     public String getNumeroDiCellulare(){
         return numeroDiCellulare;
