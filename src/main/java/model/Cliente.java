@@ -17,7 +17,7 @@ public class Cliente extends Utente {
         //da farsi
         System.out.println("volo prenotato");
     }
-    public void chiamaSupporto(){
-        System.out.println("MAYDAYMAYDAY");
-    }
+//    public void chiamaSupporto(){
+//        System.out.println("MAYDAYMAYDAY");
+//    }
 }
