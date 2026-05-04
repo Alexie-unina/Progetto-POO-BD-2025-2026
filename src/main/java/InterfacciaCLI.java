@@ -99,11 +99,36 @@ public class InterfacciaCLI{
                     addPilota(login,password,nomeCompleto,codiceFiscale,idPilota,salario);
                     break;
                 case 2:
-
                     //Crea Hostess
+                    sc.nextLine();
+                    System.out.println("Inserire login Hostess:");
+                    login = sc.nextLine();
+                    System.out.println("Inserire password Hostess:");
+                    password = sc.nextLine();
+                    System.out.println("Inserire nome Hostess:");
+                    nomeCompleto = sc.nextLine();
+                    System.out.println("Inserire codice fiscale Hostess:");
+                    codiceFiscale = sc.nextLine();
+                    System.out.println("Inserire ID Hostess:");
+                    idHostess = sc.nextLine();
+                    System.out.println("Inserire salario Hostess:");
+                    salario = sc.nextDouble();
+                    addHostess(login,password,nomeCompleto,codiceFiscale,idHostess,salario);
                     break;
                 case 3:
                     //Crea Cliente
+                    sc.nextLine();
+                    System.out.println("Inserire login Cliente:");
+                    login = sc.nextLine();
+                    System.out.println("Inserire password Cliente:");
+                    password = sc.nextLine();
+                    System.out.println("Inserire nome Cliente:");
+                    nomeCompleto = sc.nextLine();
+                    System.out.println("Inserire codice fiscale Cliente:");
+                    codiceFiscale = sc.nextLine();
+                    System.out.println("Inserire ID Cliente:");
+                    idCliente = sc.nextLine();
+                    addCliente(login,password,nomeCompleto,codiceFiscale,idCliente);
                     break;
                 case 4:
                     //Crea Volo
@@ -120,9 +145,15 @@ public class InterfacciaCLI{
                     break;
                 case 7:
                     //Get Hostesses
+                    for (Hostess h : hostess){
+                        System.out.println("Hostess:" + h.getLogin() + "\t" + h.getNomeCompleto());
+                    }
                     break;
                 case 8:
                     //Get Clienti
+                    for (Cliente c : clienti){
+                        System.out.println("Cliente:" + c.getLogin() + "\t" + c.getNomeCompleto());
+                    }
                     break;
                 case 9:
                     //Get Voli
