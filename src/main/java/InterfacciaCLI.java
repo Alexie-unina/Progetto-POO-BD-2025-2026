@@ -17,7 +17,7 @@ public class InterfacciaCLI{
     Cliente C = new Cliente("Alessandro", "pass", "Alessandro qualcosa", "AJDLGJ395LF",
             "C3533322");
     Volo v = new Volo("V43452", "MonteRuscello", 176, c, c1, h1, h2, A);
-    Prenotazione p = new Prenotazione("P1512", C, v, "14F");
+    Prenotazione p = new Prenotazione("P1512", C, v, "14F","ECONOMY");
 
     private ArrayList<Pilota> piloti = new ArrayList<Pilota>();
     private ArrayList<Hostess> hostess = new ArrayList<Hostess>();
@@ -44,8 +44,8 @@ public class InterfacciaCLI{
                         Aereo aereo){
         voli.add(new Volo(idVolo, destinazione, durata, pilota, copilota, hostess1, hostess2, aereo));
     }
-    public void addPrenotazione(String idPrenotazione, Cliente cliente,Volo volo, String posto){
-        prenotazioni.add(new Prenotazione(idPrenotazione, cliente, volo, posto));
+    public void addPrenotazione(String idPrenotazione, Cliente cliente,Volo volo, String posto,String classe){
+        prenotazioni.add(new Prenotazione(idPrenotazione, cliente, volo, posto , classe));
     }
 
     Scanner sc = new Scanner(System.in);
