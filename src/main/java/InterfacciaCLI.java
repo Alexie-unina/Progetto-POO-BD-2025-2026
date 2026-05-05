@@ -5,19 +5,19 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InterfacciaCLI {
-    Pilota c = new Pilota("EmyServi", "password1", "Emy Servillo", "SRVMLR06R08A024O",
-            "+393917021117", "P934", 6767.67);
-    Pilota c1 = new Pilota("alekg44", "password2", "Alessio Riccio",
-            "ALKGGG44R04A023F", "+393917021112", "P134", 5000.00);
-    Hostess h1 = new Hostess("AlexPizzi", "passwordgay", "Alessandro Pizzi", "ALALALALLLLALLAAL",
-            "+393918691020", "H563", 1324.3);
-    Hostess h2 = new Hostess("ErDeltarune", "Monster", "Emanuele toledo", "DDG315DKLG51A95V",
-            "+393849583940", "H654", 32142.3);
-    Aereo A = new Aereo("778834", "Piselling", 9000);
-    Cliente C = new Cliente("Alessandro", "pass", "Alessandro qualcosa", "AJDLGJ395LF",
-            "C3533322");
-    Volo v = new Volo("V43452", "MonteRuscello", 176, c, c1, h1, h2, A);
-    Prenotazione p = new Prenotazione("P1512", C, v, "14F", "ECONOMY");
+//    Pilota c = new Pilota("EmyServi", "password1", "Emy Servillo", "SRVMLR06R08A024O",
+//            "+393917021117", "P934", 6767.67);
+//    Pilota c1 = new Pilota("alekg44", "password2", "Alessio Riccio",
+//            "ALKGGG44R04A023F", "+393917021112", "P134", 5000.00);
+//    Hostess h1 = new Hostess("AlexPizzi", "passwordgay", "Alessandro Pizzi", "ALALALALLLLALLAAL",
+//            "+393918691020", "H563", 1324.3);
+//    Hostess h2 = new Hostess("ErDeltarune", "Monster", "Emanuele toledo", "DDG315DKLG51A95V",
+//            "+393849583940", "H654", 32142.3);
+//    Aereo A = new Aereo("778834", "Piselling", 9000);
+//    Cliente C = new Cliente("Alessandro", "pass", "Alessandro qualcosa", "AJDLGJ395LF",
+//            "C3533322");
+//    Volo v = new Volo("V43452", "MonteRuscello", 176, c, c1, h1, h2, A);
+//    Prenotazione p = new Prenotazione("P1512", C, v, "14F", "ECONOMY");
 
     private ArrayList<Pilota> piloti = new ArrayList<Pilota>();
     private ArrayList<Hostess> hostess = new ArrayList<Hostess>();
@@ -78,6 +78,9 @@ public class InterfacciaCLI {
         String temp;
         int durata;
         Aereo a1;
+        Cliente c;
+        Volo v;
+        String posto,classe;
 
         while (!exit) {
             System.out.println("Scegliere un Opzione");
@@ -220,6 +223,32 @@ public class InterfacciaCLI {
                     break;
                 case 5:
                     //Crea Prenotazione
+                    sc.nextLine();
+                    System.out.println("Inserire IdPrenotazione");
+                    idPrenotazione = sc.nextLine();
+                    System.out.println("Inserire IdCliente");
+                    temp = sc.nextLine();
+                    c = null;
+                    for(Cliente cli : clienti){
+                        if(cli.getIdCliente().equals(temp))
+                            c = cli;
+                    }
+                    if (c==null)
+                        throw new InputMismatchException("Cliente non trovato");
+                    System.out.println("Inserire idVolo");
+                    temp = sc.nextLine();
+                    v = null;
+                    for(Volo vol : voli){
+                        if(vol.getIdVolo().equals(temp))
+                            v = vol;
+                    }
+                    if(v == null)
+                        throw new InputMismatchException("Volo non trovato");
+                    System.out.println("Inserire Posto");
+                    posto = sc.nextLine();
+                    System.out.println("Inserire classe (Opzioni: Economy, EconomyPlus, Business, Prima)");
+                    classe = sc.nextLine();
+                    addPrenotazione(idPrenotazione,c,v,posto,classe);
                     break;
                 case 6:
                     //Get Piloti
