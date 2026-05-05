@@ -186,7 +186,7 @@ public class InterfacciaCLI {
                     temp = sc.nextLine();
                     p1 = null;
                     for(Pilota p : piloti){
-                        if(p.getLogin().equals(temp)){
+                        if(p.getIdPilota().equals(temp)){
                             p1 = p;
                         }
                     }
@@ -198,7 +198,7 @@ public class InterfacciaCLI {
                     temp = sc.nextLine();
                     p2 = null;
                     for(Pilota p : piloti){
-                        if(p.getLogin().equals(temp)){
+                        if(p.getIdPilota().equals(temp)){
                             p2 = p;
                         }
                     }
@@ -209,7 +209,7 @@ public class InterfacciaCLI {
                     temp = sc.nextLine();
                     h1 = null;
                     for(Hostess h : hostess){
-                        if(h.getLogin().equals(temp)){
+                        if(h.getIdHostess().equals(temp)){
                             h1 = h;
                         }
                     }
@@ -220,7 +220,7 @@ public class InterfacciaCLI {
                     temp = sc.nextLine();
                     h2 = null;
                     for(Hostess h : hostess){
-                        if(h.getLogin().equals(temp)){
+                        if(h.getIdHostess().equals(temp)){
                             h2 = h;
                         }
                     }
@@ -259,6 +259,7 @@ public class InterfacciaCLI {
                     sc.nextLine();
                     addAereo(idAereo,modello,nPosti);
                     System.out.println("Aggiunto aereo!");
+                    sc.nextLine();
                     premiPerContinuare();
                     break;
                 case 6:
@@ -295,22 +296,24 @@ public class InterfacciaCLI {
                 case 7:
                     //Get Piloti
                     for (Pilota p : piloti) {
-                        System.out.println("Pilota:" + p.getLogin() + "\t" + p.getNomeCompleto());
+                        System.out.println("Pilota:" + p.getIdPilota() + "\t" + p.getNomeCompleto());
                     }
                     premiPerContinuare();
                     break;
                 case 8:
                     //Get Hostesses
                     for (Hostess h : hostess) {
-                        System.out.println("Hostess:" + h.getLogin() + "\t" + h.getNomeCompleto());
+                        System.out.println("Hostess:" + h.getIdHostess() + "\t" + h.getNomeCompleto());
                     }
+                    sc.nextLine();
                     premiPerContinuare();
                     break;
                 case 9:
                     //Get Clienti
                     for (Cliente cli : clienti) {
-                        System.out.println("Cliente:" + cli.getLogin() + "\t" + cli.getNomeCompleto());
+                        System.out.println("Cliente:" + cli.getIdCliente() + "\t" + cli.getNomeCompleto());
                     }
+                    sc.nextLine();
                     premiPerContinuare();
 
                     break;
@@ -332,6 +335,13 @@ public class InterfacciaCLI {
                     break;
                 case 12:
                     //Get Prenotazioni
+                    for(Prenotazione p : prenotazioni){
+                        System.out.println("Prenotazione: "+ p.getIdPrenotazione() + "\t"
+                                + p.getVolo().getIdVolo() + "\t"
+                                + p.getCliente().getIdCliente() + "\t"
+                                + p.getPosto() + "\t"
+                                + p.getClasse());
+                    }
                     break;
                 default:
                     System.out.println("Opzione non trovata");
