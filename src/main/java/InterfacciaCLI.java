@@ -28,17 +28,29 @@ public class InterfacciaCLI {
 
 
     public void addAereo(String idAereo, String modello, int nPosti){
+        for(Aereo aereoI : aerei)
+            if(aereoI.getIdAereo().equals(idAereo))
+                throw new IllegalArgumentException("Questo Id Esiste già");
         aerei.add(new Aereo(idAereo,modello,nPosti));
     }
     public void addPilota(String login, String password, String nomeCompleto, String codiceFiscale, String idPilota, double salario) {
+        for(Pilota p : piloti)
+            if(p.getLogin().equals(login) || p.getIdPilota().equals(idPilota))
+                throw new IllegalArgumentException("Questo Id Esiste già");
         piloti.add(new Pilota(login, password, nomeCompleto, codiceFiscale, idPilota, salario));
     }
 
     public void addHostess(String login, String password, String nomeCompleto, String codiceFiscale, String idHostess, double salario) {
+        for(Hostess h : hostess)
+            if(h.getLogin().equals(login))
+                throw new IllegalArgumentException("Questo Id Esiste già");
         hostess.add(new Hostess(login, password, nomeCompleto, codiceFiscale, idHostess, salario));
     }
 
     public void addCliente(String login, String password, String nomeCompleto, String codiceFiscale, String idCliente) {
+        for(Cliente c : clienti)
+            if(c.getIdCliente().equals(idCliente))
+                throw new IllegalArgumentException("Questo Id Esiste già");
         clienti.add(new Cliente(login, password, nomeCompleto, codiceFiscale, idCliente));
     }
 
@@ -50,10 +62,16 @@ public class InterfacciaCLI {
                         Hostess hostess1,
                         Hostess hostess2,
                         Aereo aereo) {
+        for(Volo volo : voli)
+            if(volo.getIdVolo().equals(idVolo))
+                throw new IllegalArgumentException("Questo Id Esiste già");
         voli.add(new Volo(idVolo, destinazione, durata, pilota, copilota, hostess1, hostess2, aereo));
     }
 
     public void addPrenotazione(String idPrenotazione, Cliente cliente, Volo volo, String posto, String classe) {
+        for(Prenotazione p : prenotazioni)
+            if(p.getIdPrenotazione().equals(idPrenotazione))
+                throw new IllegalArgumentException("Questo Id Esiste già");
         prenotazioni.add(new Prenotazione(idPrenotazione, cliente, volo, posto, classe));
     }
 
@@ -81,6 +99,8 @@ public class InterfacciaCLI {
         Cliente c;
         Volo v;
         String posto,classe;
+        String idAereo,modello;
+        int nPosti;
 
         while (!exit) {
             System.out.println("Scegliere un Opzione");
@@ -88,13 +108,15 @@ public class InterfacciaCLI {
             System.out.println("2. Aggiungi un nuovo hostess");
             System.out.println("3. Aggiungi un nuovo cliente");
             System.out.println("4. Aggiungi un nuovo volo");
-            System.out.println("5. Aggiungi una nuova prenotazione");
-            System.out.println("6. Stampa Lista piloti");
-            System.out.println("7. Stampa Lista hostess");
-            System.out.println("8. Stampa Lista clienti");
-            System.out.println("9. Stampa Lista voli");
-            System.out.println("10. Stampa Lista aerei");
-            System.out.println("11. Stampa Lista prenotazioni");
+            System.out.println("5. Aggiungi un nuovo aereo");
+            System.out.println("6. Aggiungi una nuova prenotazione");
+            System.out.println("7. Stampa Lista piloti");
+            System.out.println("8. Stampa Lista hostess");
+            System.out.println("9. Stampa Lista clienti");
+            System.out.println("10. Stampa Lista voli");
+            System.out.println("11. Stampa Lista aerei");
+            System.out.println("12. Stampa Lista prenotazioni");
+            System.out.println("0. Uscire");
             System.out.print("Input: ");
             input = sc.nextInt();
             switch (input) {
@@ -220,8 +242,26 @@ public class InterfacciaCLI {
                     if (a1 == null){
                         throw new InputMismatchException("Aereo non trovato");
                     }
+
+                    addVolo(idVolo,destinazione,durata,p1,p2,h1,h2,a1);
+                    System.out.println("Aggiunto volo");
+                    premiPerContinuare();
                     break;
                 case 5:
+                    //AddAereo
+                    sc.nextLine();
+                    System.out.println("Inserire IdAereo");
+                    idAereo = sc.nextLine();
+                    System.out.println("Inserire modello Aereo");
+                    modello = sc.nextLine();
+                    System.out.println("Inserire numero posti");
+                    nPosti = sc.nextInt();
+                    sc.nextLine();
+                    addAereo(idAereo,modello,nPosti);
+                    System.out.println("Aggiunto aereo!");
+                    premiPerContinuare();
+                    break;
+                case 6:
                     //Crea Prenotazione
                     sc.nextLine();
                     System.out.println("Inserire IdPrenotazione");
@@ -249,38 +289,48 @@ public class InterfacciaCLI {
                     System.out.println("Inserire classe (Opzioni: Economy, EconomyPlus, Business, Prima)");
                     classe = sc.nextLine();
                     addPrenotazione(idPrenotazione,c,v,posto,classe);
+                    System.out.println("Aggiunta prenotazione!");
+                    premiPerContinuare();
                     break;
-                case 6:
+                case 7:
                     //Get Piloti
                     for (Pilota p : piloti) {
                         System.out.println("Pilota:" + p.getLogin() + "\t" + p.getNomeCompleto());
                     }
                     premiPerContinuare();
                     break;
-                case 7:
+                case 8:
                     //Get Hostesses
                     for (Hostess h : hostess) {
                         System.out.println("Hostess:" + h.getLogin() + "\t" + h.getNomeCompleto());
                     }
-                    break;
-                case 8:
-                    //Get Clienti
-                    for (Cliente c : clienti) {
-                        System.out.println("Cliente:" + c.getLogin() + "\t" + c.getNomeCompleto());
-                    }
+                    premiPerContinuare();
                     break;
                 case 9:
-                    //Get Voli
-                    for(Volo v : voli){
-                        System.out.println("Volo: " + v.getIdVolo() + "\t" + v.getDestinazione());
+                    //Get Clienti
+                    for (Cliente cli : clienti) {
+                        System.out.println("Cliente:" + cli.getLogin() + "\t" + cli.getNomeCompleto());
                     }
+                    premiPerContinuare();
+
                     break;
                 case 10:
+                    //Get Voli
+                    for(Volo vol : voli){
+                        System.out.println("Volo: " + vol.getIdVolo() + "\t" + vol.getDestinazione());
+                    }
+                    premiPerContinuare();
+
+                    break;
+                case 11:
+                    //Get aerei
                     for(Aereo a : aerei){
                         System.out.println("Aereo: " + a.getIdAereo() + "\t" + a.getModello());
                     }
+                    premiPerContinuare();
+
                     break;
-                case 11:
+                case 12:
                     //Get Prenotazioni
                     break;
                 default:

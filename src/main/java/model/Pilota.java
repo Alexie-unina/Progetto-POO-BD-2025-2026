@@ -21,4 +21,5 @@ public class Pilota extends Utente {
     public double getSalario(){
         return salario;
     }
+    public String getIdPilota(){return idPilota;}
 }
