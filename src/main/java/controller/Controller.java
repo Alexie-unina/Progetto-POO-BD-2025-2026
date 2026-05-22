@@ -1,5 +1,13 @@
 package controller;
 
-public class Controller {
+import javax.swing.*;
+
+public class  Controller {
+
+
+    public void exit(){
+        System.exit(0);
+    }
+
 
 }
