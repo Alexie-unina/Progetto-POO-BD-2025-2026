@@ -1,6 +1,7 @@
 package gui;
 
 import controller.Controller;
+import gui.ListaClassi.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -68,6 +69,12 @@ public class Home {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ListaVoli(frameHome,controller);
+            }
+        });
+        btnListaPrenotazioni.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ListaPrenotazioni(frameHome,controller);
             }
         });
     }
