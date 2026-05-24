@@ -30,11 +30,14 @@
           <text value="Indietro"/>
         </properties>
       </component>
-      <hspacer id="660f3">
+      <component id="324cd" class="javax.swing.JButton" binding="creaNuovoButton" default-binding="true">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-      </hspacer>
+        <properties>
+          <text value="Crea Nuovo"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

@@ -1,6 +1,7 @@
 package gui.ListaClassi;
 
 import controller.Controller;
+import gui.CreaClassi.CreaAereo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ public class ListaAerei {
     private Controller controller;
     private JPanel mainPanel;
     private JButton indietroButton;
+    private JButton btnCreaNuovo;
 
     public ListaAerei(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
@@ -30,5 +32,16 @@ public class ListaAerei {
                 frame.dispose();
             }
         });
+        btnCreaNuovo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Pulsante premuto!"); //Debug
+                new CreaAereo(frameChiamante,frame,controller);
+            }
+        });
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

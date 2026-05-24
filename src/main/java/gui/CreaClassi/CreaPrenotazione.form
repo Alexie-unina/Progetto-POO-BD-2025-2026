@@ -160,4 +160,12 @@
       </grid>
     </children>
   </grid>
+  <buttonGroups>
+    <group name="Classe">
+      <member id="93dbb"/>
+      <member id="a33b9"/>
+      <member id="16a0d"/>
+      <member id="685bc"/>
+    </group>
+  </buttonGroups>
 </form>

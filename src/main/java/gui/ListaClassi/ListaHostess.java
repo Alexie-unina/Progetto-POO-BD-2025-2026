@@ -1,6 +1,9 @@
 package gui.ListaClassi;
 
 import controller.Controller;
+import gui.CreaClassi.CreaAereo;
+import gui.CreaClassi.CreaCliente;
+import gui.CreaClassi.CreaHostess;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +16,7 @@ public class ListaHostess {
     private Controller controller;
     private JPanel mainPanel;
     private JButton indietroButton;
+    private JButton creaNuovoButton;
 
     public ListaHostess(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
@@ -29,6 +33,14 @@ public class ListaHostess {
             public void actionPerformed(ActionEvent e) {
                 frameChiamante.setVisible(true);
                 frame.dispose();
+            }
+        });
+
+        creaNuovoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Pulsante premuto!"); //Debug
+                new CreaHostess(frameChiamante,frame,controller);
             }
         });
     }
