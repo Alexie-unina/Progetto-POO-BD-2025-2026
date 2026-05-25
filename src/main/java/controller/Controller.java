@@ -1,5 +1,10 @@
 package controller;
 
+import exceptions.ChiaveException;
+import exceptions.ParameterMissingException;
+import model.Cliente;
+
+import javax.naming.AuthenticationException;
 import model.Aereo;
 
 import javax.swing.*;
@@ -8,7 +13,9 @@ import java.util.ArrayList;
 
 public class  Controller {
 
+    ArrayList<Cliente> clienti = new ArrayList<Cliente>();
     private ArrayList<Aereo> aerei = new ArrayList<Aereo>();
+
 
     public void exit(){
         System.exit(0);
@@ -25,11 +32,48 @@ public class  Controller {
        login già esistente
        idPilota già esistente
 
+    */
+    public void creaCliente(String login,
+                            String password,
+                            String nomeCompleto,
+                            String codiceFiscale,
+                            String numeroDiCellulare,
+                            String idCliente) throws ChiaveException, AuthenticationException {
 
+        boolean hasNumero = true;
+        if(login.isBlank() || idCliente.isBlank()){
+            throw new ChiaveException("Una o piu chiavi (login o idCliente) mancanti");
+        }
+        if(password.isBlank() || password.length() < 8)
+            throw new AuthenticationException("password mancante o troppo corta");
+        if(nomeCompleto.isBlank())
+            throw new ParameterMissingException("Nome Mancante");
+        if(codiceFiscale.length() != 16)
+            throw new ParameterMissingException("Formato codice fiscale non corretto");
+        if(numeroDiCellulare.isBlank())
+            hasNumero = false;
+        for (Cliente cliente : clienti){
+            if(cliente.getLogin().equals(login) || cliente.getIdCliente().equals(idCliente)){
+                throw new ChiaveException("Login o id Cliente gia' esistenti");
+            }
+        }
 
+        if(hasNumero){
+            clienti.add(new Cliente(login,password,nomeCompleto,codiceFiscale,numeroDiCellulare,idCliente));
+        }else{
+            clienti.add(new Cliente(login,password,nomeCompleto,codiceFiscale,idCliente));
+        }
+    }
 
-     */
+    public ArrayList<Cliente> getClienti(){
+        return clienti;
+    }
 
+    public void stampaClienti(){ //Per debug
+        for (Cliente cliente : clienti){
+            System.out.println(cliente.getLogin() + cliente.getNomeCompleto());
+        }
+    }
     public void creaAereo(String idAereo,
                           String modello,
                           String nPosti) throws InvalidParameterException,NumberFormatException,IllegalArgumentException {

@@ -1,12 +1,13 @@
 package gui.ListaClassi;
 
 import controller.Controller;
-import gui.CreaClassi.CreaAereo;
 import gui.CreaClassi.CreaCliente;
+import model.Cliente;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ListaClienti {
 
@@ -16,7 +17,11 @@ public class ListaClienti {
     private JPanel mainPanel;
     private JButton indietroButton;
     private JButton creaNuovoButton;
-
+    private JScrollPane scrollPane;
+    private JList listaClienti;
+    private ArrayList<Cliente> clienti;
+//    private String[] clientiStrings;
+    private DefaultListModel<String> model;
     public ListaClienti(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
         this.controller = controller;
@@ -26,6 +31,18 @@ public class ListaClienti {
         frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
+
+        clienti = controller.getClienti();
+//        clientiStrings = new String[clienti.size()];
+        model = new DefaultListModel<String>();
+
+        for(int i = 0; i < clienti.size(); i++){
+//            clientiStrings[i] = clienti.get(i).getIdCliente() + " " + clienti.get(i).getNomeCompleto();
+            model.add(i,clienti.get(i).getIdCliente() + " " + clienti.get(i).getNomeCompleto());
+        }
+        listaClienti = new JList(model);
+
+
         indietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
