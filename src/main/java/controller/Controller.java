@@ -23,7 +23,8 @@ public class  Controller {
         System.exit(0);
     }
 
-    /* login non inserito
+    /*
+       login non inserito
        password non inserita
        nome non inserito
        idPilota non inserito
@@ -34,7 +35,6 @@ public class  Controller {
        salario non valido
        login già esistente
        idPilota già esistente
-
     */
     public void creaCliente(String login,
                             String password,
@@ -156,5 +156,9 @@ public class  Controller {
 
     public ArrayList<Aereo> getAerei(){
         return aerei;
+    }
+
+    public void dbg(){ //funzione debug
+        System.out.println("dbg");
     }
 }
