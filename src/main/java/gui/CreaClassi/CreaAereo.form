@@ -32,7 +32,7 @@
           <text value="Numero di Posti"/>
         </properties>
       </component>
-      <component id="dbfc3" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="dbfc3" class="javax.swing.JTextField" binding="txt_idAereo">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -40,7 +40,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="98009" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="98009" class="javax.swing.JTextField" binding="txt_modello">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -48,7 +48,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="68629" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="68629" class="javax.swing.JTextField" binding="txt_nPosti">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>

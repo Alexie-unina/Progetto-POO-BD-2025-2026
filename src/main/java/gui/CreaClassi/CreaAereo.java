@@ -5,12 +5,13 @@ import controller.Controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.InvalidParameterException;
 
 public class CreaAereo {
     private JPanel mainPanel;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
+    private JTextField txt_idAereo;
+    private JTextField txt_modello;
+    private JTextField txt_nPosti;
     private JButton creaButton;
     private JButton indietroButton;
     private JFrame frame,mainFrame,frameChiamante;
@@ -25,6 +26,7 @@ public class CreaAereo {
         frame.pack();
         frame.setVisible(true);
 
+
         indietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,8 +34,28 @@ public class CreaAereo {
                 frame.dispose();
             }
         });
-    }
+        creaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nPosti,modello,idAereo;
 
+                idAereo = txt_idAereo.getText();
+                modello = txt_modello.getText();
+                nPosti  = txt_nPosti.getText();
+
+                try
+                {
+                    controller.creaAereo(idAereo, modello, nPosti);
+                }
+                catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(frame,ex.getMessage());
+                }
+
+                mainFrame.setVisible(true);
+                frame.dispose();
+            }
+        });
+    }
 
 
 }

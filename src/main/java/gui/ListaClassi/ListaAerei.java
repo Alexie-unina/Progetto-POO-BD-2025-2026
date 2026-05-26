@@ -2,10 +2,14 @@ package gui.ListaClassi;
 
 import controller.Controller;
 import gui.CreaClassi.CreaAereo;
+import model.Aereo;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ListaAerei {
 
@@ -14,7 +18,11 @@ public class ListaAerei {
     private Controller controller;
     private JPanel mainPanel;
     private JButton indietroButton;
-    private JButton btnCreaNuovo;
+    private JButton creaNuovoButton;
+    private JPanel leftPanel;
+    private JPanel rightPanel;
+    private JList<String> listaAerei;
+    private JTextArea textArea;
 
     public ListaAerei(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
@@ -25,6 +33,16 @@ public class ListaAerei {
         frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
+
+        DefaultListModel<String> listaModel = new DefaultListModel<String>();
+        ArrayList<Aereo> aerei = controller.getAerei();
+        for(int i = 0; i < aerei.size() ; i++){
+            listaModel.addElement(aerei.get(i).getIdAereo() + " " + aerei.get(i).getModello() );
+        }
+        System.out.println("Aggiornata lista aerei"); //Debug
+        listaAerei.setModel(listaModel);
+
+
         indietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,11 +50,25 @@ public class ListaAerei {
                 frame.dispose();
             }
         });
-        btnCreaNuovo.addActionListener(new ActionListener() {
+        creaNuovoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Pulsante premuto!"); //Debug
                 new CreaAereo(frameChiamante,frame,controller);
+            }
+        });
+
+
+        listaAerei.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int i = listaAerei.getSelectedIndex();
+                String s =  "Proprietà dell' aereo: " + "\n" +
+                            "Id Aereo:     " + aerei.get(i).getIdAereo() + "\n" +
+                            "Modello:      " + aerei.get(i).getModello() + "\n" +
+                            "Numero Posti: " + aerei.get(i).getnPosti()  + "\n";
+                textArea.setText(s);
+
             }
         });
     }
