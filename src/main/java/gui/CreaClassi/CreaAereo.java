@@ -39,9 +39,9 @@ public class CreaAereo {
             public void actionPerformed(ActionEvent e) {
                 String nPosti,modello,idAereo;
 
-                idAereo = txt_idAereo.getText();
-                modello = txt_modello.getText();
-                nPosti  = txt_nPosti.getText();
+                idAereo = txt_idAereo.getText().strip();
+                modello = txt_modello.getText().strip();
+                nPosti  = txt_nPosti.getText().strip();
 
                 try
                 {

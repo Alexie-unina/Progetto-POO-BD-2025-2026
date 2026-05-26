@@ -49,12 +49,12 @@ public class CreaCliente {
             public void actionPerformed(ActionEvent e) {
                 String login,password,nome,codiceFiscale,numero,idCliente;
 
-                login         = txt_login.getText();
-                password      = txt_password.getText();
-                nome          = txt_nomeCompleto.getText();
-                codiceFiscale = txt_codiceFiscale.getText();
-                numero        = txt_cellulare.getText();
-                idCliente     = txt_idCliente.getText();
+                login         = txt_login.getText().strip();
+                password      = txt_password.getText().strip();
+                nome          = txt_nomeCompleto.getText().strip();
+                codiceFiscale = txt_codiceFiscale.getText().strip();
+                numero        = txt_cellulare.getText().strip();
+                idCliente     = txt_idCliente.getText().strip();
 
                 try
                 {

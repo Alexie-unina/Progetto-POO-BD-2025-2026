@@ -13,13 +13,14 @@ import java.util.ArrayList;
 
 public class  Controller {
 
-    ArrayList<Cliente> clienti = new ArrayList<Cliente>();
-    private ArrayList<Aereo> aerei = new ArrayList<Aereo>();
+    private ArrayList<Cliente> clienti = new ArrayList<Cliente>();
+    private ArrayList<Aereo>   aerei = new ArrayList<Aereo>();
 
 
     public void exit(){
         System.exit(0);
     }
+
     /* login non inserito
        password non inserita
        nome non inserito
@@ -39,7 +40,6 @@ public class  Controller {
                             String codiceFiscale,
                             String numeroDiCellulare,
                             String idCliente) throws ChiaveException, AuthenticationException {
-
         boolean hasNumero = true;
         if(login.isBlank() || idCliente.isBlank()){
             throw new ChiaveException("Una o piu chiavi (login o idCliente) mancanti");
@@ -74,6 +74,7 @@ public class  Controller {
             System.out.println(cliente.getLogin() + cliente.getNomeCompleto());
         }
     }
+
     public void creaAereo(String idAereo,
                           String modello,
                           String nPosti) throws InvalidParameterException,NumberFormatException,IllegalArgumentException {
