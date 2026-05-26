@@ -3,10 +3,13 @@ package gui.ListaClassi;
 import controller.Controller;
 import gui.CreaClassi.CreaAereo;
 import gui.CreaClassi.CreaPilota;
+import model.Aereo;
+import model.Pilota;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ListaPiloti {
     private JPanel mainPanel;
@@ -25,6 +28,9 @@ public class ListaPiloti {
         frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
+
+        DefaultListModel<String> listaModel = new DefaultListModel<String>();
+        ArrayList<Pilota> piloti = controller.getPiloti();
 
 
         indietroButton.addActionListener(new ActionListener() {

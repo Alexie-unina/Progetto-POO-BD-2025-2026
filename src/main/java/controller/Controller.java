@@ -6,6 +6,7 @@ import model.Cliente;
 
 import javax.naming.AuthenticationException;
 import model.Aereo;
+import model.Pilota;
 
 import javax.swing.*;
 import java.security.InvalidParameterException;
@@ -15,6 +16,7 @@ public class  Controller {
 
     private ArrayList<Cliente> clienti = new ArrayList<Cliente>();
     private ArrayList<Aereo>   aerei = new ArrayList<Aereo>();
+    private ArrayList<Pilota>  piloti = new ArrayList<Pilota>();
 
 
     public void exit(){
@@ -74,6 +76,57 @@ public class  Controller {
             System.out.println(cliente.getLogin() + cliente.getNomeCompleto());
         }
     }
+    public void creaPilota(String login,
+                            String password,
+                            String nomeCompleto,
+                            String codiceFiscale,
+                            String numeroDiCellulare,
+                            String idPilota,
+                            String salario) throws ChiaveException, AuthenticationException {
+        int salarioInt;
+
+        try {
+            salarioInt = Integer.parseInt(salario);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Il salario deve essere un numero");
+        }
+        boolean hasNumero = true;
+        if(login.isBlank() || idPilota.isBlank()){
+            throw new ChiaveException("Una o piu chiavi (login o idCliente) mancanti");
+        }
+        if(password.isBlank() || password.length() < 8)
+            throw new AuthenticationException("password mancante o troppo corta");
+        if(nomeCompleto.isBlank())
+            throw new ParameterMissingException("Nome Mancante");
+        if(codiceFiscale.length() != 16)
+            throw new ParameterMissingException("Formato codice fiscale non corretto");
+        if(numeroDiCellulare.isBlank())
+            hasNumero = false;
+        if(salarioInt < 0)
+            throw new IllegalArgumentException("salario non valido");
+        for (Cliente cliente : clienti){
+            if(cliente.getLogin().equals(login) || cliente.getIdCliente().equals(idPilota)){
+                throw new ChiaveException("Login o id Cliente gia' esistenti");
+            }
+        }
+
+        if(hasNumero){
+            piloti.add(new Pilota(login,password,nomeCompleto,codiceFiscale,numeroDiCellulare,idPilota, salarioInt));
+        }else{
+            piloti.add(new Pilota(login,password,nomeCompleto,codiceFiscale,idPilota, salarioInt));
+        }
+    }
+    public ArrayList<Pilota> getPiloti(){
+        return piloti;
+    }
+
+    public void stampaPiloti(){ //Per debug
+        for (Pilota pilota : piloti){
+            System.out.println(pilota.getLogin() + pilota.getNomeCompleto());
+        }
+    }
+
+
 
     public void creaAereo(String idAereo,
                           String modello,
