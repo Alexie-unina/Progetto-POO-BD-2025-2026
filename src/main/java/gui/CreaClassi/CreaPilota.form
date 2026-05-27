@@ -73,7 +73,7 @@
           <text value="Salario"/>
         </properties>
       </component>
-      <component id="e8cc2" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="e8cc2" class="javax.swing.JTextField" binding="txt_login">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -81,7 +81,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="a463d" class="javax.swing.JTextField" default-binding="true">
+      <component id="a463d" class="javax.swing.JTextField" binding="txt_nomeCompleto">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -89,7 +89,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="bce1c" class="javax.swing.JTextField" default-binding="true">
+      <component id="bce1c" class="javax.swing.JTextField" binding="txt_codiceFiscale">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -97,7 +97,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="4e5da" class="javax.swing.JTextField" default-binding="true">
+      <component id="4e5da" class="javax.swing.JTextField" binding="txt_numeroDiCellulare">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -105,7 +105,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="f3456" class="javax.swing.JTextField" default-binding="true">
+      <component id="f3456" class="javax.swing.JTextField" binding="txt_idPilota">
         <constraints>
           <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -113,7 +113,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="b58f7" class="javax.swing.JTextField" default-binding="true">
+      <component id="b58f7" class="javax.swing.JTextField" binding="txt_Salario">
         <constraints>
           <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -121,7 +121,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="a14e4" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+      <component id="a14e4" class="javax.swing.JPasswordField" binding="txt_password">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>

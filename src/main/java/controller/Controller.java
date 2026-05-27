@@ -94,7 +94,7 @@ public class  Controller {
         }
         boolean hasNumero = true;
         if(login.isBlank() || idPilota.isBlank()){
-            throw new ChiaveException("Una o piu chiavi (login o idHostess) mancanti");
+            throw new ChiaveException("Una o piu chiavi (login o idPilota) mancanti");
         }
         if(password.isBlank() || password.length() < 8)
             throw new AuthenticationException("password mancante o troppo corta");
@@ -106,9 +106,9 @@ public class  Controller {
             hasNumero = false;
         if(salarioInt < 0)
             throw new IllegalArgumentException("salario non valido");
-        for (Cliente cliente : clienti){
-            if(cliente.getLogin().equals(login) || cliente.getIdCliente().equals(idPilota)){
-                throw new ChiaveException("Login o id Hostess gia' esistenti");
+        for (Pilota pilota : piloti){
+            if(pilota.getLogin().equals(login) || pilota.getIdPilota().equals(idPilota)){
+                throw new ChiaveException("Login o idPilota gia' esistenti");
             }
         }
 

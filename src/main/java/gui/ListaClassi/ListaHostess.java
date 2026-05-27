@@ -4,10 +4,12 @@ import controller.Controller;
 import gui.CreaClassi.CreaAereo;
 import gui.CreaClassi.CreaCliente;
 import gui.CreaClassi.CreaHostess;
+import model.Pilota;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ListaHostess {
 
@@ -27,6 +29,9 @@ public class ListaHostess {
         frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
+
+
+
 
         indietroButton.addActionListener(new ActionListener() {
             @Override
