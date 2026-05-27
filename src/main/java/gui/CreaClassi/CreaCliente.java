@@ -30,12 +30,7 @@ public class CreaCliente {
         frame.pack();
         frame.setVisible(true);
 
-        creaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
 
         indietroButton.addActionListener(new ActionListener() {
             @Override

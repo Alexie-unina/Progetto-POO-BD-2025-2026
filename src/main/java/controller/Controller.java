@@ -7,6 +7,7 @@ import model.Cliente;
 import javax.naming.AuthenticationException;
 import model.Aereo;
 import model.Pilota;
+import model.Hostess;
 
 import javax.swing.*;
 import java.security.InvalidParameterException;
@@ -17,6 +18,7 @@ public class  Controller {
     private ArrayList<Cliente> clienti = new ArrayList<Cliente>();
     private ArrayList<Aereo>   aerei = new ArrayList<Aereo>();
     private ArrayList<Pilota>  piloti = new ArrayList<Pilota>();
+    private ArrayList<Hostess> hostess = new ArrayList<Hostess>();
 
 
     public void exit(){
@@ -92,7 +94,7 @@ public class  Controller {
         }
         boolean hasNumero = true;
         if(login.isBlank() || idPilota.isBlank()){
-            throw new ChiaveException("Una o piu chiavi (login o idCliente) mancanti");
+            throw new ChiaveException("Una o piu chiavi (login o idHostess) mancanti");
         }
         if(password.isBlank() || password.length() < 8)
             throw new AuthenticationException("password mancante o troppo corta");
@@ -106,7 +108,7 @@ public class  Controller {
             throw new IllegalArgumentException("salario non valido");
         for (Cliente cliente : clienti){
             if(cliente.getLogin().equals(login) || cliente.getIdCliente().equals(idPilota)){
-                throw new ChiaveException("Login o id Cliente gia' esistenti");
+                throw new ChiaveException("Login o id Hostess gia' esistenti");
             }
         }
 
@@ -123,6 +125,56 @@ public class  Controller {
     public void stampaPiloti(){ //Per debug
         for (Pilota pilota : piloti){
             System.out.println(pilota.getLogin() + pilota.getNomeCompleto());
+        }
+    }
+
+    public void creaHostess(String login,
+                           String password,
+                           String nomeCompleto,
+                           String codiceFiscale,
+                           String numeroDiCellulare,
+                           String idHostess,
+                           String salario) throws ChiaveException, AuthenticationException {
+        int salarioInt;
+
+        try {
+            salarioInt = Integer.parseInt(salario);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Il salario deve essere un numero");
+        }
+        boolean hasNumero = true;
+        if(login.isBlank() || idHostess.isBlank()){
+            throw new ChiaveException("Una o piu chiavi (login o idHostess) mancanti");
+        }
+        if(password.isBlank() || password.length() < 8)
+            throw new AuthenticationException("password mancante o troppo corta");
+        if(nomeCompleto.isBlank())
+            throw new ParameterMissingException("Nome Mancante");
+        if(codiceFiscale.length() != 16)
+            throw new ParameterMissingException("Formato codice fiscale non corretto");
+        if(numeroDiCellulare.isBlank())
+            hasNumero = false;
+        if(salarioInt < 0)
+            throw new IllegalArgumentException("salario non valido");
+        for (Hostess hostess : hostess){
+            if(hostess.getLogin().equals(login) || hostess.getIdHostess().equals(idHostess)){
+                throw new ChiaveException("Login o id Hostess gia' esistenti");
+            }
+        }
+
+        if(hasNumero){
+            hostess.add(new Hostess(login,password,nomeCompleto,codiceFiscale,numeroDiCellulare,idHostess, salarioInt));
+        }else{
+            hostess.add(new Hostess(login,password,nomeCompleto,codiceFiscale,idHostess, salarioInt));
+        }
+    }
+    public ArrayList<Hostess> getHostess(){
+        return hostess;
+    }
+
+    public void stampaHostess(){ //Per debug
+        for (Hostess hostess : hostess){
+            System.out.println(hostess.getLogin() + hostess.getNomeCompleto());
         }
     }
 
