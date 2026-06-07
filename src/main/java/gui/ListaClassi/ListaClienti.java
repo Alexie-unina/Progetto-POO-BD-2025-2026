@@ -19,7 +19,7 @@ public class ListaClienti {
     private JButton creaNuovoButton;
     private JScrollPane scrollPane;
     private JList listaClienti;
-    private ArrayList<Cliente> clienti;
+    private ArrayList<String> clienti;
 //    private String[] clientiStrings;
     private DefaultListModel<String> model;
     public ListaClienti(JFrame frameChiamante, Controller controller){
@@ -32,16 +32,11 @@ public class ListaClienti {
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
-        clienti = controller.getClienti();
-//        clientiStrings = new String[clienti.size()];
+
         model = new DefaultListModel<String>();
-
-        for(int i = 0; i < clienti.size(); i++){
-//            clientiStrings[i] = clienti.get(i).getIdCliente() + " " + clienti.get(i).getNomeCompleto();
-            model.add(i,clienti.get(i).getIdCliente() + " " + clienti.get(i).getNomeCompleto());
-        }
-        listaClienti = new JList(model);
-
+        ArrayList<String> clienti = controller.getListaClienti();
+        model.addAll(clienti);
+        listaClienti.setModel(model);
 
         indietroButton.addActionListener(new ActionListener() {
             @Override

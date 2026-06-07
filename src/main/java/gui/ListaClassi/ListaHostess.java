@@ -1,10 +1,7 @@
 package gui.ListaClassi;
 
 import controller.Controller;
-import gui.CreaClassi.CreaAereo;
-import gui.CreaClassi.CreaCliente;
 import gui.CreaClassi.CreaHostess;
-import model.Pilota;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +16,7 @@ public class ListaHostess {
     private JPanel mainPanel;
     private JButton indietroButton;
     private JButton creaNuovoButton;
+    private JList JListaClienti;
 
     public ListaHostess(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
@@ -30,6 +28,10 @@ public class ListaHostess {
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
+        ArrayList<String> hostess = controller.getHostessLists();
+        DefaultListModel<String> model = new DefaultListModel<>();
+        model.addAll(hostess);
+        JListaClienti.setModel(model);
 
 
 

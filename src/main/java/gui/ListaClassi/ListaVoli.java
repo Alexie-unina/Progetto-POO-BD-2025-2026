@@ -1,11 +1,11 @@
 package gui.ListaClassi;
 import controller.Controller;
-import gui.CreaClassi.CreaAereo;
 import gui.CreaClassi.CreaVolo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ListaVoli {
 
@@ -15,6 +15,7 @@ public class ListaVoli {
     private JPanel mainPanel;
     private JButton indietroButton;
     private JButton creaNuovoButton;
+    private JList jListaVoli;
 
     public ListaVoli(JFrame frameChiamante, Controller controller) {
         this.frameChiamante = frameChiamante;
@@ -25,6 +26,11 @@ public class ListaVoli {
         frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
+
+        ArrayList<String> listaVoli = controller.getListaVoli();
+        DefaultListModel<String> listaVoliModel = new DefaultListModel<>();
+        listaVoliModel.addAll(listaVoli);
+        jListaVoli.setModel(listaVoliModel);
 
         indietroButton.addActionListener(new ActionListener() {
             @Override

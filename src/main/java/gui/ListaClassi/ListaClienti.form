@@ -48,9 +48,7 @@
           <component id="73fc4" class="javax.swing.JList" binding="listaClienti">
             <constraints/>
             <properties>
-              <model>
-                <item value="123"/>
-              </model>
+              <model/>
             </properties>
           </component>
         </children>

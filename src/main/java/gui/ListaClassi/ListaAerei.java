@@ -2,8 +2,6 @@ package gui.ListaClassi;
 
 import controller.Controller;
 import gui.CreaClassi.CreaAereo;
-import model.Aereo;
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -35,10 +33,8 @@ public class ListaAerei {
         frame.setVisible(true);
 
         DefaultListModel<String> listaModel = new DefaultListModel<String>();
-        ArrayList<Aereo> aerei = controller.getAerei();
-        for(int i = 0; i < aerei.size() ; i++){
-            listaModel.addElement(aerei.get(i).getIdAereo() + " " + aerei.get(i).getModello() );
-        }
+        ArrayList<String> aerei = controller.getListaAerei();
+        listaModel.addAll(aerei);
         System.out.println("Aggiornata lista aerei"); //Debug
         listaAerei.setModel(listaModel);
 
@@ -63,10 +59,12 @@ public class ListaAerei {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int i = listaAerei.getSelectedIndex();
+                ArrayList<String> proprietaAereo = controller.getProprietaAereo(i);
+
                 String s =  "Proprietà dell' aereo: " + "\n" +
-                            "Id Aereo:     " + aerei.get(i).getIdAereo() + "\n" +
-                            "Modello:      " + aerei.get(i).getModello() + "\n" +
-                            "Numero Posti: " + aerei.get(i).getnPosti()  + "\n";
+                            "Id Aereo:     " + proprietaAereo.getFirst() + "\n" +
+                            "Modello:      " + proprietaAereo.get(1)     + "\n" +
+                            "Numero Posti: " + proprietaAereo.getLast()  + "\n";
                 textArea.setText(s);
 
             }

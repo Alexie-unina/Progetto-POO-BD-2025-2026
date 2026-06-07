@@ -2,25 +2,22 @@ package controller;
 
 import exceptions.ChiaveException;
 import exceptions.ParameterMissingException;
-import model.Cliente;
+import model.*;
 
 import javax.naming.AuthenticationException;
-import model.Aereo;
-import model.Pilota;
-import model.Hostess;
 
-import javax.swing.*;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class  Controller {
 
-    private ArrayList<Cliente> clienti = new ArrayList<Cliente>();
-    private ArrayList<Aereo>   aerei = new ArrayList<Aereo>();
-    private ArrayList<Pilota>  piloti = new ArrayList<Pilota>();
-    private ArrayList<Hostess> hostess = new ArrayList<Hostess>();
-
-
+    private ArrayList<Cliente> clienti  = new ArrayList<Cliente>();
+    private ArrayList<Aereo>   aerei    = new ArrayList<Aereo>();
+    private ArrayList<Pilota>  piloti   = new ArrayList<Pilota>();
+    private ArrayList<Hostess> hostess  = new ArrayList<Hostess>();
+    private ArrayList<Volo>    voli     = new ArrayList<Volo>();
+    private ArrayList<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
     public void exit(){
         System.exit(0);
     }
@@ -72,7 +69,13 @@ public class  Controller {
     public ArrayList<Cliente> getClienti(){
         return clienti;
     }
-
+    public ArrayList<String> getListaClienti(){
+        ArrayList<String> listaClienti = new ArrayList<>();
+        for (Cliente cliente : clienti){
+            listaClienti.add(cliente.getIdCliente() + " " + cliente.getNomeCompleto());
+        }
+        return listaClienti;
+    }
     public void stampaClienti(){ //Per debug
         for (Cliente cliente : clienti){
             System.out.println(cliente.getLogin() + cliente.getNomeCompleto());
@@ -121,7 +124,13 @@ public class  Controller {
     public ArrayList<Pilota> getPiloti(){
         return piloti;
     }
-
+    public ArrayList<String> getListaPiloti(){
+        ArrayList<String> listaPiloti = new ArrayList<>();
+        for (Pilota pilota : piloti){
+            listaPiloti.add(pilota.getIdPilota() + " " + pilota.getNomeCompleto());
+        }
+        return listaPiloti;
+    }
     public void stampaPiloti(){ //Per debug
         for (Pilota pilota : piloti){
             System.out.println(pilota.getLogin() + pilota.getNomeCompleto());
@@ -168,10 +177,18 @@ public class  Controller {
             hostess.add(new Hostess(login,password,nomeCompleto,codiceFiscale,idHostess, salarioInt));
         }
     }
+
     public ArrayList<Hostess> getHostess(){
         return hostess;
     }
 
+    public ArrayList<String> getHostessLists(){
+        ArrayList<String> hostessList = new ArrayList<>();
+        for (Hostess hostess : hostess){
+            hostessList.add(hostess.getIdHostess() + " " + hostess.getNomeCompleto());
+        }
+        return hostessList;
+    }
     public void stampaHostess(){ //Per debug
         for (Hostess hostess : hostess){
             System.out.println(hostess.getLogin() + hostess.getNomeCompleto());
@@ -206,11 +223,40 @@ public class  Controller {
         aerei.add(new Aereo(idAereo, modello, nPostiInt));
     }
 
-    public ArrayList<Aereo> getAerei(){
-        return aerei;
+    public ArrayList<String> getListaAerei(){
+        ArrayList<String> listaAerei = new ArrayList<>();
+        for (Aereo aereo : aerei){
+            listaAerei.add(aereo.getIdAereo() +  " " + aereo.getModello());
+        }
+        return listaAerei;
+    }
+
+    public ArrayList<String> getProprietaAereo(int indice){
+        ArrayList<String> proprietaAereo = new ArrayList<>();
+        Aereo a = aerei.get(indice);
+        proprietaAereo.add(a.getIdAereo());
+        proprietaAereo.add(a.getModello());
+        proprietaAereo.add(Integer.toString(a.getnPosti()));
+        return proprietaAereo;
     }
 
     public void dbg(){ //funzione debug
         System.out.println("dbg");
+    }
+
+    public ArrayList<String> getListaVoli(){
+        ArrayList<String> listaVoli = new ArrayList<>();
+        for (Volo volo : voli){
+            listaVoli.add(volo.getIdVolo() + " " + volo.getDestinazione());
+        }
+        return listaVoli;
+    }
+
+    public ArrayList<String> getListaPrenotazioni(){
+        ArrayList<String> listaPrenotazioni = new ArrayList<>();
+        for(Prenotazione prenotazione : prenotazioni){
+            listaPrenotazioni.add(prenotazione.getIdPrenotazione() + " " + prenotazione.getClasse());
+        }
+        return listaPrenotazioni;
     }
 }

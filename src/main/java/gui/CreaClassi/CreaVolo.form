@@ -89,13 +89,13 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="aeb68" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="aeb68" class="javax.swing.JComboBox" binding="comboPiloti">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="4a4a2" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+          <component id="4a4a2" class="javax.swing.JComboBox" binding="comboCoPiloti">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -127,13 +127,13 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="17152" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
+          <component id="17152" class="javax.swing.JComboBox" binding="comboHostess1">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="67298" class="javax.swing.JComboBox" binding="comboBox4" default-binding="true">
+          <component id="67298" class="javax.swing.JComboBox" binding="comboHostess2">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>

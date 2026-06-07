@@ -10,10 +10,10 @@ public class CreaVolo {
     private JLabel cv;
     private JPanel mainPanel;
     private JTextField textField1;
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
-    private JComboBox comboBox3;
-    private JComboBox comboBox4;
+    private JComboBox comboPiloti;
+    private JComboBox comboCoPiloti;
+    private JComboBox comboHostess1;
+    private JComboBox comboHostess2;
     private JButton creaButton;
     private JButton indietroButton;
     private JFrame frame;
@@ -24,6 +24,14 @@ public class CreaVolo {
         frame.setContentPane(mainPanel);
         frame.pack();
         frame.setVisible(true);
+        DefaultComboBoxModel<String> listaPilotiModel = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<String> listaHostessModel = new DefaultComboBoxModel<>();
+        listaPilotiModel.addAll(controller.getListaPiloti());
+        listaHostessModel.addAll(controller.getHostessLists());
+        comboPiloti.setModel(listaPilotiModel);
+        comboCoPiloti.setModel(listaPilotiModel);
+        comboHostess1.setModel(listaHostessModel);
+        comboHostess2.setModel(listaHostessModel);
 
         indietroButton.addActionListener(new ActionListener() {
             @Override
@@ -32,5 +40,9 @@ public class CreaVolo {
                 frame.dispose();
             }
         });
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

@@ -54,12 +54,13 @@ public class CreaCliente {
                 try
                 {
                     controller.creaCliente(login,password,nome,codiceFiscale,numero,idCliente);
+                    mainFrame.setVisible(true);
+                    frame.dispose();
                 }
                 catch (AuthenticationException | ParameterMissingException | ChiaveException ex) {
                     JOptionPane.showMessageDialog(frame,ex.getMessage());
                 }
-                mainFrame.setVisible(true);
-                frame.dispose();
+
             }
         });
     }

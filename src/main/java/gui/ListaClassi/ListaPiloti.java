@@ -17,7 +17,7 @@ public class ListaPiloti {
     private JButton creaNuovoButton;
     private JPanel leftPanel;
     private JPanel rightPanel;
-    private JList<String> listaPiloti;
+    private JList<String> JlistaPiloti;
     private JTextArea textArea;
     private JFrame frame;
     private Controller controller;
@@ -40,7 +40,7 @@ public class ListaPiloti {
             modelPiloti.add(i,piloti.get(i).getIdPilota() + " " + piloti.get(i).getNomeCompleto());
         }
 
-        listaPiloti.setModel(modelPiloti);
+        JlistaPiloti.setModel(modelPiloti);
 
 
         indietroButton.addActionListener(new ActionListener() {
@@ -58,10 +58,10 @@ public class ListaPiloti {
                 new CreaPilota(frameChiamante,frame,controller);
             }
         });
-        listaPiloti.addListSelectionListener(new ListSelectionListener() {
+        JlistaPiloti.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                int i = listaPiloti.getSelectedIndex();
+                int i = JlistaPiloti.getSelectedIndex();
                 String s =  "Proprietà del pilota: " +                                  "\n" +
                         "Login:     " + piloti.get(i).getLogin() +                      "\n" +
                         "Nome:      " + piloti.get(i).getNomeCompleto() +               "\n" +

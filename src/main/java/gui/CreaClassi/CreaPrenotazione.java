@@ -10,8 +10,8 @@ public class CreaPrenotazione {
     private JLabel cp;
     private JPanel mainPanel;
     private JTextField textField1;
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
+    private JComboBox comboClienti;
+    private JComboBox comboVoli;
     private JRadioButton economyRadioButton;
     private JRadioButton economyPlusRadioButton;
     private JRadioButton businessRadioButton;
@@ -27,6 +27,12 @@ public class CreaPrenotazione {
         frame.setContentPane(mainPanel);
         frame.pack();
         frame.setVisible(true);
+        DefaultComboBoxModel<String> clientiModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> voliModel = new DefaultComboBoxModel();
+        clientiModel.addAll(controller.getListaClienti());
+        voliModel.addAll(controller.getListaVoli());
+        comboClienti.setModel(clientiModel);
+        comboVoli.setModel(voliModel);
 
         indietroButton.addActionListener(new ActionListener() {
             @Override
