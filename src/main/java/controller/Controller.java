@@ -8,7 +8,6 @@ import javax.naming.AuthenticationException;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class  Controller {
 
@@ -182,7 +181,7 @@ public class  Controller {
         return hostess;
     }
 
-    public ArrayList<String> getHostessLists(){
+    public ArrayList<String> getListaHostess(){
         ArrayList<String> hostessList = new ArrayList<>();
         for (Hostess hostess : hostess){
             hostessList.add(hostess.getIdHostess() + " " + hostess.getNomeCompleto());
@@ -242,6 +241,43 @@ public class  Controller {
 
     public void dbg(){ //funzione debug
         System.out.println("dbg");
+    }
+    public void creaVolo(String idVolo,
+                         String destinazione,
+                         String durata,
+                         Integer idPilota,
+                         Integer idCoPilota,
+                         Integer idHostess1,
+                         Integer idHostess2,
+                         Integer idAereo) throws ChiaveException, AuthenticationException{
+        int durataInt;
+        try {
+            durataInt = Integer.parseInt(durata);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("la durata deve essere un numero");
+        }
+        if(idVolo.isBlank())
+            throw new InvalidParameterException("Il campo idVolo è vuoto");
+        if(destinazione.isBlank())
+            throw new InvalidParameterException("Il campo destinazione è vuoto");
+        if(durata.isBlank())
+            throw new InvalidParameterException("Il campo kitestramuo è vuoto");
+        if(idPilota == null)
+            throw new InvalidParameterException("manca il pilota");
+        if(idCoPilota == null)
+            throw new InvalidParameterException("manca il copilota");
+        if(idHostess1 == null)
+            throw new InvalidParameterException("manca la prima hostess");
+        if(idHostess2 == null)
+            throw new InvalidParameterException("manca la seconda hostess");
+        for (Volo volo : voli){
+            if(volo.getIdVolo().equals(idVolo))
+                throw new IllegalArgumentException("idVolo già in uso");
+        }
+        if(idAereo == null)
+            throw new InvalidParameterException("manca l'aereo");
+        voli.add(new Volo(idVolo, destinazione, durataInt, piloti.get(idPilota), piloti.get(idCoPilota), hostess.get(idHostess1), hostess.get(idHostess2), aerei.get(idAereo)));
+
     }
 
     public ArrayList<String> getListaVoli(){

@@ -28,7 +28,7 @@ public class ListaHostess {
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
-        ArrayList<String> hostess = controller.getHostessLists();
+        ArrayList<String> hostess = controller.getListaHostess();
         DefaultListModel<String> model = new DefaultListModel<>();
         model.addAll(hostess);
         JListaClienti.setModel(model);
