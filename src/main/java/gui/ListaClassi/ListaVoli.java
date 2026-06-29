@@ -3,6 +3,8 @@ import controller.Controller;
 import gui.CreaClassi.CreaVolo;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,7 +17,9 @@ public class ListaVoli {
     private JPanel mainPanel;
     private JButton indietroButton;
     private JButton creaNuovoButton;
-    private JList jListaVoli;
+    private JList JListaVoli;
+    private JTextArea textArea;
+    private JButton rimuoviButton;
 
     public ListaVoli(JFrame frameChiamante, Controller controller) {
         this.frameChiamante = frameChiamante;
@@ -30,7 +34,7 @@ public class ListaVoli {
         ArrayList<String> listaVoli = controller.getListaVoli();
         DefaultListModel<String> listaVoliModel = new DefaultListModel<>();
         listaVoliModel.addAll(listaVoli);
-        jListaVoli.setModel(listaVoliModel);
+        JListaVoli.setModel(listaVoliModel);
 
         indietroButton.addActionListener(new ActionListener() {
             @Override
@@ -46,6 +50,25 @@ public class ListaVoli {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Pulsante premuto!"); //Debug
                 new CreaVolo(frameChiamante,frame,controller);
+            }
+        });
+        JListaVoli.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int i = JListaVoli.getSelectedIndex();
+                String[] volo = controller.getVolo(i);
+                String s =  "Proprietà del volo: " +"\n" +
+                        "idVolo:" + volo[0] + "\n" +
+                        "destinazione:" + volo[1] + "\n" +
+                        "durata:" + volo[2] + "\n" +
+                        "pilota:" + volo[3] + "\n" +
+                        "Co-pilota:" + volo[4] + "\n" +
+                        "hostess 1:" + volo[5] + "\n" +
+                        "hostess 2:" + volo[6] + "\n" +
+                        "aereo:" + volo[7] + "\n";
+
+                        textArea.setText(s);
+
             }
         });
     }

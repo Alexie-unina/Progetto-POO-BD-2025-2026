@@ -2,7 +2,6 @@ package gui.ListaClassi;
 
 import controller.Controller;
 import gui.CreaClassi.CreaPilota;
-import model.Pilota;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -19,6 +18,7 @@ public class ListaPiloti {
     private JPanel rightPanel;
     private JList<String> JlistaPiloti;
     private JTextArea textArea;
+    private JButton rimuoviButton;
     private JFrame frame;
     private Controller controller;
     private JFrame frameChiamante;

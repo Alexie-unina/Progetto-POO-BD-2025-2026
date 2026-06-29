@@ -30,6 +30,7 @@ public class CreaVolo {
         frame.setContentPane(mainPanel);
         frame.pack();
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         DefaultComboBoxModel<String> listaPilotiModel = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<String> listaCopilotiModel = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<String> listaHostess1Model = new DefaultComboBoxModel<>();
@@ -71,7 +72,7 @@ public class CreaVolo {
                 {
                     controller.creaVolo(idVolo, destinazione, durata, idPilota, idCoPilota, idHostess1, idHostess2, idAereo);
                 }
-                 catch (ChiaveException | AuthenticationException ex) {
+                 catch (Exception ex) {
                     JOptionPane.showMessageDialog(frame,ex.getMessage());
                 }
 

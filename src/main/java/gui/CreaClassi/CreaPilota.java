@@ -28,6 +28,7 @@ public class CreaPilota {
         frame.setContentPane(mainPanel);
         frame.pack();
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         indietroButton.addActionListener(new ActionListener() {
             @Override
@@ -60,7 +61,7 @@ public class CreaPilota {
                 {
                     controller.creaPilota(login, password, nome, codiceFiscale, numeroDiCellulare, idPilota, salario);
                 }
-                catch (ChiaveException | AuthenticationException ex) {
+                catch (Exception ex) {
                     JOptionPane.showMessageDialog(frame,ex.getMessage());
                 }
 

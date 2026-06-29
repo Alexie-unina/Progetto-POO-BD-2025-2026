@@ -33,6 +33,7 @@ public class  Controller {
        salario non valido
        login già esistente
        idPilota già esistente
+       scemo chi legge
     */
     public void creaCliente(String login,
                             String password,
@@ -79,6 +80,21 @@ public class  Controller {
         for (Cliente cliente : clienti){
             System.out.println(cliente.getLogin() + cliente.getNomeCompleto());
         }
+    }
+    public String[] getCliente(int i){
+        String[] cliente = new String[5];
+        Cliente c = clienti.get(i);
+        cliente[0] = c.getLogin();
+        cliente[1] = c.getNomeCompleto();
+        cliente[2] = c.getCodiceFiscale();
+        cliente[3] = c.getNumeroDiCellulare();
+        cliente[4] = c.getIdCliente();
+        return cliente;
+    }
+    public void rimuoviCliente(int i)throws Exception{
+        if(i == -1)
+            throw new Exception("nessun cliente selezionato");
+        clienti.remove(i);
     }
     public void creaPilota(String login,
                             String password,
@@ -146,7 +162,11 @@ public class  Controller {
         pilota[5] = String.valueOf(p.getSalario());
         return pilota;
     }
-
+    public void rimuoviPilota(int i)throws Exception{
+        if(i == -1)
+            throw new Exception("nessun pilota selezionato");
+        piloti.remove(i);
+    }
     public void creaHostess(String login,
                            String password,
                            String nomeCompleto,
@@ -194,13 +214,13 @@ public class  Controller {
 
     public String[] getHostess(int i){
         String[] hostess = new String[6];
-        Hostess p = this.hostess.get(i);
-        hostess[0] = p.getLogin();
-        hostess[1] = p.getNomeCompleto();
-        hostess[2] = p.getCodiceFiscale();
-        hostess[3] = p.getNumeroDiCellulare();
-        hostess[4] = p.getIdHostess();
-        hostess[5] = String.valueOf(p.getSalario());
+        Hostess h = this.hostess.get(i);
+        hostess[0] = h.getLogin();
+        hostess[1] = h.getNomeCompleto();
+        hostess[2] = h.getCodiceFiscale();
+        hostess[3] = h.getNumeroDiCellulare();
+        hostess[4] = h.getIdHostess();
+        hostess[5] = String.valueOf(h.getSalario());
         return hostess;
     }
 
@@ -216,7 +236,11 @@ public class  Controller {
             System.out.println(hostess.getLogin() + hostess.getNomeCompleto());
         }
     }
-
+    public void rimuoviHostess(int i)throws Exception{
+        if(i == -1)
+            throw new Exception("nessun hostess selezionato");
+        hostess.remove(i);
+    }
 
 
     public void creaAereo(String idAereo,
@@ -261,7 +285,21 @@ public class  Controller {
         proprietaAereo.add(Integer.toString(a.getnPosti()));
         return proprietaAereo;
     }
-
+    public String[] getAereo(int i)throws Exception{
+        if(i == -1)
+            throw new Exception("aereo non selezionato");
+        Aereo a = aerei.get(i);
+        String[] aereo = new String[3];
+        aereo[0] = a.getIdAereo();
+        aereo[1] = a.getModello();
+        aereo[2] = String.valueOf(a.getnPosti());
+        return aereo;
+    }
+    public void rimuoviAereo(int i)throws Exception{
+        if(i == -1)
+            throw new Exception("nessun aereo selezionato");
+        aerei.remove(i);
+    }
     public void dbg(){ //funzione debug
         System.out.println("dbg");
     }
@@ -284,22 +322,27 @@ public class  Controller {
         if(destinazione.isBlank())
             throw new InvalidParameterException("Il campo destinazione è vuoto");
         if(durata.isBlank())
-            throw new InvalidParameterException("Il campo kitestramuo è vuoto");
-        if(idPilota == null)
+            throw new InvalidParameterException("Il campo durata è vuoto");
+        if(idPilota < 0)
             throw new InvalidParameterException("manca il pilota");
-        if(idCoPilota == null)
+        if(idCoPilota < 0)
             throw new InvalidParameterException("manca il copilota");
-        if(idHostess1 == null)
+        if(idHostess1 < 0)
             throw new InvalidParameterException("manca la prima hostess");
-        if(idHostess2 == null)
+        if(idHostess2 < 0)
             throw new InvalidParameterException("manca la seconda hostess");
+        if(piloti.get(idPilota).equals(piloti.get(idCoPilota)))
+            throw new ChiaveException("inserire due piloti distinti");
+        if(hostess.get(idHostess1).equals(hostess.get(idHostess2)))
+            throw new ChiaveException("inserire due hostess distinti");
         for (Volo volo : voli){
             if(volo.getIdVolo().equals(idVolo))
                 throw new IllegalArgumentException("idVolo già in uso");
         }
-        if(idAereo == null)
+        if(idAereo < 0)
             throw new InvalidParameterException("manca l'aereo");
-        voli.add(new Volo(idVolo, destinazione, durataInt, piloti.get(idPilota), piloti.get(idCoPilota), hostess.get(idHostess1), hostess.get(idHostess2), aerei.get(idAereo)));
+        voli.add(new Volo(idVolo, destinazione, durataInt, piloti.get(idPilota), piloti.get(idCoPilota),
+                hostess.get(idHostess1), hostess.get(idHostess2), aerei.get(idAereo)));
 
     }
 
@@ -310,6 +353,47 @@ public class  Controller {
         }
         return listaVoli;
     }
+    public String[] getVolo(int i) {
+        String[] volo = new String[8];
+        Volo v = voli.get(i);
+        volo[0] = v.getIdVolo();
+        volo[1] = v.getDestinazione();
+        volo[2] = String.valueOf(v.getDurata());
+        volo[3] = v.getPilota().getIdPilota() + " " + v.getPilota().getNomeCompleto();
+        volo[4] = v.getCoPilota().getIdPilota() + " " + v.getCoPilota().getNomeCompleto();
+        volo[5] = v.getHostess1().getIdHostess() + " " + v.getHostess1().getNomeCompleto();
+        volo[6] = v.getHostess2().getIdHostess() + " " + v.getHostess2().getNomeCompleto();
+        volo[7] = v.getAereo().getIdAereo() + " " + v.getAereo().getModello();
+        return volo;
+    }
+    public void rimuoviVolo(int i)throws Exception{
+        if(i == -1)
+            throw new Exception("nessun volo selezionato");
+        voli.remove(i);
+    }
+    public void creaPrenotazione(String idPrenotazione,
+                                 Integer idCliente,
+                                 Integer idVolo,
+                                 String posto,
+                                 String classe) throws ChiaveException, AuthenticationException,InvalidParameterException{
+            if(idPrenotazione.isBlank())
+                throw new InvalidParameterException("idPrenotazione non inserito");
+            if(idCliente < 0)
+                throw new InvalidParameterException("cliente non inserito");
+            if(idVolo < 0 )
+                throw new InvalidParameterException("volo non inserito");
+            if(posto.isBlank())
+                throw new InvalidParameterException("posto non inserito");
+            if(classe.isBlank())
+                throw new InvalidParameterException("classe non inserita");
+            for(Prenotazione p : prenotazioni) {
+                if(p.getIdPrenotazione().equals(idPrenotazione))
+                    throw new ChiaveException("chiave già usata");
+                if(p.getVolo().getIdVolo().equals(voli.get(idVolo).getIdVolo()) && p.getPosto().equals(posto))
+                    throw new ChiaveException("posto già usato");
+            }
+            prenotazioni.add(new Prenotazione(idPrenotazione, clienti.get(idCliente), voli.get(idVolo), posto, classe));
+    }
 
     public ArrayList<String> getListaPrenotazioni(){
         ArrayList<String> listaPrenotazioni = new ArrayList<>();
@@ -318,4 +402,20 @@ public class  Controller {
         }
         return listaPrenotazioni;
     }
+    public String[] getPrenotazione(int i){
+        String[] prenotazione = new String[5];
+        Prenotazione p = prenotazioni.get(i);
+        prenotazione[0] = p.getIdPrenotazione();
+        prenotazione[1] = p.getCliente().getIdCliente() + " " + p.getCliente().getNomeCompleto();
+        prenotazione[2] = p.getVolo().getIdVolo() + " " + p.getVolo().getDestinazione();
+        prenotazione[3] = p.getPosto();
+        prenotazione[4] = p.getClasse();
+        return prenotazione;
+    }
+    public void rimuoviPrenotazione(int i)throws Exception{
+        if(i == -1)
+            throw new Exception("nessuna prenotazione selezionato");
+        prenotazioni.remove(i);
+    }
 }
+

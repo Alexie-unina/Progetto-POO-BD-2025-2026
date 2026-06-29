@@ -4,6 +4,8 @@ import controller.Controller;
 import gui.CreaClassi.CreaPrenotazione;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +16,9 @@ public class ListaPrenotazioni {
     private JPanel mainPanel;
     private JButton indietroButton;
     private JButton creaNuovoButton;
-    private JList jListaPrenotazioni;
+    private JList JListaPrenotazioni;
+    private JTextArea textArea;
+    private JButton rimuoviButton;
 
     public ListaPrenotazioni(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
@@ -28,7 +32,7 @@ public class ListaPrenotazioni {
 
         DefaultListModel<String> model = new DefaultListModel<>();
         model.addAll(controller.getListaPrenotazioni());
-        jListaPrenotazioni.setModel(model);
+        JListaPrenotazioni.setModel(model);
 
 
         indietroButton.addActionListener(new ActionListener() {
@@ -46,5 +50,22 @@ public class ListaPrenotazioni {
                 new CreaPrenotazione(frameChiamante,frame,controller);
             }
         });
+        JListaPrenotazioni.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int i = JListaPrenotazioni.getSelectedIndex();
+                String[] prenotazione = controller.getPrenotazione(i);
+                String s =  "Proprietà della prenotazione: " +"\n" +
+                        "idPrenotazione:" + prenotazione[0] + "\n" +
+                        "cliente:" + prenotazione[1] + "\n" +
+                        "volo:" + prenotazione[2] + "\n" +
+                        "posto:" + prenotazione[3] + "\n" +
+                        "classe:" + prenotazione[4] + "\n";
+
+                textArea.setText(s);
+
+            }
+        });
+
     }
 }

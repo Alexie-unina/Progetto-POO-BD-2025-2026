@@ -25,6 +25,7 @@ public class CreaAereo {
         frame.setContentPane(mainPanel);
         frame.pack();
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
         indietroButton.addActionListener(new ActionListener() {
@@ -47,7 +48,7 @@ public class CreaAereo {
                 {
                     controller.creaAereo(idAereo, modello, nPosti);
                 }
-                catch (IllegalArgumentException ex) {
+                catch (Exception ex) {
                     JOptionPane.showMessageDialog(frame,ex.getMessage());
                 }
 

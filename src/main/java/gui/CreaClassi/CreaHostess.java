@@ -30,6 +30,7 @@ public class CreaHostess {
         frame.setContentPane(mainPanel);
         frame.pack();
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         indietroButton.addActionListener(new ActionListener() {
             @Override
@@ -58,7 +59,7 @@ public class CreaHostess {
                     mainFrame.setVisible(true);
                     frame.dispose();
                 }
-                catch (AuthenticationException | ParameterMissingException | ChiaveException ex) {
+                catch (Exception ex) {
                     JOptionPane.showMessageDialog(frame,ex.getMessage());
                 }
             }

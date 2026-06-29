@@ -2,9 +2,10 @@ package gui.ListaClassi;
 
 import controller.Controller;
 import gui.CreaClassi.CreaCliente;
-import model.Cliente;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,10 +19,17 @@ public class ListaClienti {
     private JButton indietroButton;
     private JButton creaNuovoButton;
     private JScrollPane scrollPane;
-    private JList listaClienti;
+    private JTextArea textArea;
+    private JList JListaClienti;
+    private JButton rimuoviButton;
     private ArrayList<String> clienti;
 //    private String[] clientiStrings;
-    private DefaultListModel<String> model;
+    private DefaultListModel<String> model = new DefaultListModel<String>();
+
+    private void refreshLista () {
+        model.clear();
+        model.addAll(controller.getListaClienti());
+    }
     public ListaClienti(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
         this.controller = controller;
@@ -31,13 +39,8 @@ public class ListaClienti {
         frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
-
-
-        model = new DefaultListModel<String>();
-        ArrayList<String> clienti = controller.getListaClienti();
-        model.addAll(clienti);
-        listaClienti.setModel(model);
-
+        refreshLista();
+        JListaClienti.setModel(model);
         indietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,6 +54,38 @@ public class ListaClienti {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Pulsante premuto!"); //Debug
                 new CreaCliente(frameChiamante,frame,controller);
+            }
+        });
+        JListaClienti.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int i = JListaClienti.getSelectedIndex();
+                String[] cliente;
+                try {
+                    cliente = controller.getCliente(i);
+                    String s = "Proprietà del cliente: " + "\n" +
+                            "Login:     " + cliente[0] + "\n" +
+                            "Nome:      " + cliente[1] + "\n" +
+                            "Codice Fiscale: " + cliente[2] + "\n" +
+                            "Numero di Cellulare:" + cliente[3] + "\n" +
+                            "ID Cliente:" + cliente[4] + "\n";
+
+                    textArea.setText(s);
+                } catch (Exception ex) {
+                    textArea.setText("");
+                }
+            }
+        });
+        rimuoviButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.rimuoviCliente(JListaClienti.getSelectedIndex());
+                    System.out.println("rimosso correttamente");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,ex.getMessage());
+                }
+                refreshLista();
             }
         });
     }

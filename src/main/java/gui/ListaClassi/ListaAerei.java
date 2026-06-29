@@ -7,7 +7,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class ListaAerei {
 
@@ -19,8 +18,15 @@ public class ListaAerei {
     private JButton creaNuovoButton;
     private JPanel leftPanel;
     private JPanel rightPanel;
-    private JList<String> listaAerei;
+    private JList<String> JListaAerei;
     private JTextArea textArea;
+    private JButton rimuoviButton;
+    DefaultListModel<String> model = new DefaultListModel<String>();
+
+    private void refreshLista () {
+        model.clear();
+        model.addAll(controller.getListaAerei());
+    }
 
     public ListaAerei(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
@@ -32,11 +38,10 @@ public class ListaAerei {
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
-        DefaultListModel<String> listaModel = new DefaultListModel<String>();
-        ArrayList<String> aerei = controller.getListaAerei();
-        listaModel.addAll(aerei);
+
+        refreshLista();
         System.out.println("Aggiornata lista aerei"); //Debug
-        listaAerei.setModel(listaModel);
+        JListaAerei.setModel(model);
 
 
         indietroButton.addActionListener(new ActionListener() {
@@ -54,24 +59,40 @@ public class ListaAerei {
             }
         });
 
-
-        listaAerei.addListSelectionListener(new ListSelectionListener() {
+        JListaAerei.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                int i = listaAerei.getSelectedIndex();
-                ArrayList<String> proprietaAereo = controller.getProprietaAereo(i);
+                int i = JListaAerei.getSelectedIndex();
+                String[] aereo;
+                try {
+                    aereo = controller.getAereo(i);
+                    String s =  "Proprietà dell'aereo: " +"\n" +
+                            "idAereo:" + aereo[0] + "\n" +
+                            "modello:" + aereo[1] + "\n" +
+                            "numero posti:" + aereo[2] + "\n";
 
-                String s =  "Proprietà dell' aereo: " + "\n" +
-                            "Id Aereo:     " + proprietaAereo.getFirst() + "\n" +
-                            "Modello:      " + proprietaAereo.get(1)     + "\n" +
-                            "Numero Posti: " + proprietaAereo.getLast()  + "\n";
-                textArea.setText(s);
+                    textArea.setText(s);
+
+                } catch (Exception ex) {
+                    textArea.setText("");
+                }
 
             }
         });
+        rimuoviButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.rimuoviAereo(JListaAerei.getSelectedIndex());
+                    System.out.println("rimosso correttamente");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,ex.getMessage());
+                }
+                refreshLista();
+            }
+        });
+
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
+
 }

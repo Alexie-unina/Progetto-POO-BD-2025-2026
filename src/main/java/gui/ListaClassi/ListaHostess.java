@@ -20,6 +20,13 @@ public class ListaHostess {
     private JButton creaNuovoButton;
     private JList JListaHostess;
     private JTextArea textArea;
+    private JButton rimuoviButton;
+    DefaultListModel<String> model = new DefaultListModel<>();
+
+    private void refreshLista () {
+        model.clear();
+        model.addAll(controller.getListaHostess());
+    }
 
     public ListaHostess(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
@@ -31,12 +38,8 @@ public class ListaHostess {
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
-        ArrayList<String> hostess = controller.getListaHostess();
-        DefaultListModel<String> model = new DefaultListModel<>();
-        model.addAll(hostess);
+        refreshLista();
         JListaHostess.setModel(model);
-
-
 
         indietroButton.addActionListener(new ActionListener() {
             @Override
@@ -57,17 +60,34 @@ public class ListaHostess {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int i = JListaHostess.getSelectedIndex();
-                String[] hostess = controller.getHostess(i);
-                String s =  "Proprietà dell'hostess: " +"\n" +
-                        "Login:     " + hostess[0] +                     "\n" +
-                        "Nome:      " + hostess[1] +                     "\n" +
-                        "Codice Fiscale: " + hostess[2]  +               "\n" +
-                        "Numero di Cellulare:" + hostess[3] +            "\n" +
-                        "ID Pilota:" + hostess[4] +                      "\n" +
-                        "Salario:" + hostess[5] +                        "\n";
+                String[] hostess;
+                try {
+                    hostess = controller.getHostess(i);
+                    String s = "Proprietà dell'hostess: " + "\n" +
+                            "Login:     " + hostess[0] + "\n" +
+                            "Nome:      " + hostess[1] + "\n" +
+                            "Codice Fiscale: " + hostess[2] + "\n" +
+                            "Numero di Cellulare:" + hostess[3] + "\n" +
+                            "ID Hostess:" + hostess[4] + "\n" +
+                            "Salario:" + hostess[5] + "\n";
 
-                textArea.setText(s);
-
+                    textArea.setText(s);
+                }
+                catch(Exception ex){
+                    textArea.setText("");
+                }
+            }
+        });
+        rimuoviButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    controller.rimuoviHostess(JListaHostess.getSelectedIndex());
+                    System.out.println("rimosso correttamente");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,ex.getMessage());
+                }
+                refreshLista();
             }
         });
     }
