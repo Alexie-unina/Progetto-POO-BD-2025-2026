@@ -4,6 +4,8 @@ import controller.Controller;
 import gui.CreaClassi.CreaHostess;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -51,6 +53,22 @@ public class ListaHostess {
                 new CreaHostess(frameChiamante,frame,controller);
             }
         });
+        JListaHostess.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int i = JListaHostess.getSelectedIndex();
+                String[] hostess = controller.getHostess(i);
+                String s =  "Proprietà del duce: " +"\n" +
+                        "Login:     " + hostess[0] +                     "\n" +
+                        "Nome:      " + hostess[1] +                     "\n" +
+                        "Codice Fiscale: " + hostess[2]  +               "\n" +
+                        "Numero di Cellulare:" + hostess[3] +            "\n" +
+                        "ID Pilota:" + hostess[4] +                      "\n" +
+                        "Salario:" + hostess[5] +                        "\n";
 
+                textArea.setText(s);
+
+            }
+        });
     }
 }

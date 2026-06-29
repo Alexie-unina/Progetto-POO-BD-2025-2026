@@ -188,7 +188,19 @@ public class  Controller {
         }
     }
 
-    public ArrayList<Hostess> getHostess(){
+    public ArrayList<Hostess> getHostesses(){
+        return hostess;
+    }
+
+    public String[] getHostess(int i){
+        String[] hostess = new String[6];
+        Hostess p = this.hostess.get(i);
+        hostess[0] = p.getLogin();
+        hostess[1] = p.getNomeCompleto();
+        hostess[2] = p.getCodiceFiscale();
+        hostess[3] = p.getNumeroDiCellulare();
+        hostess[4] = p.getIdHostess();
+        hostess[5] = String.valueOf(p.getSalario());
         return hostess;
     }
 
