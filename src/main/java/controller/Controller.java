@@ -135,6 +135,17 @@ public class  Controller {
             System.out.println(pilota.getLogin() + pilota.getNomeCompleto());
         }
     }
+    public String[] getPilota(int i){
+        String[] pilota = new String[6];
+        Pilota p = piloti.get(i);
+        pilota[0] = p.getLogin();
+        pilota[1] = p.getNomeCompleto();
+        pilota[2] = p.getCodiceFiscale();
+        pilota[3] = p.getNumeroDiCellulare();
+        pilota[4] = p.getIdPilota();
+        pilota[5] = String.valueOf(p.getSalario());
+        return pilota;
+    }
 
     public void creaHostess(String login,
                            String password,

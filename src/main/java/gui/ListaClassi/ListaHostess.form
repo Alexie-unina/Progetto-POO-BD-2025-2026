@@ -48,17 +48,20 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="656c4" class="javax.swing.JList" binding="JListaClienti">
+              <component id="656c4" class="javax.swing.JList" binding="JListaHostess">
                 <constraints/>
                 <properties/>
               </component>
             </children>
           </scrollpane>
-          <hspacer id="1ca53">
+          <component id="21fef" class="javax.swing.JTextArea" binding="textArea">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
             </constraints>
-          </hspacer>
+            <properties/>
+          </component>
         </children>
       </grid>
     </children>

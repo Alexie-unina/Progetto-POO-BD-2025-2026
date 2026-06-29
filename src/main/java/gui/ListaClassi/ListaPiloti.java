@@ -33,13 +33,9 @@ public class ListaPiloti {
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
-        ArrayList<Pilota> piloti = controller.getPiloti();
+        ArrayList<String> piloti = controller.getListaPiloti();
         DefaultListModel<String> modelPiloti = new DefaultListModel<String>();
-
-        for(int i=0;i < piloti.size();i++){
-            modelPiloti.add(i,piloti.get(i).getIdPilota() + " " + piloti.get(i).getNomeCompleto());
-        }
-
+        modelPiloti.addAll(piloti);
         JlistaPiloti.setModel(modelPiloti);
 
 
@@ -62,13 +58,14 @@ public class ListaPiloti {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int i = JlistaPiloti.getSelectedIndex();
-                String s =  "Proprietà del pilota: " +                                  "\n" +
-                        "Login:     " + piloti.get(i).getLogin() +                      "\n" +
-                        "Nome:      " + piloti.get(i).getNomeCompleto() +               "\n" +
-                        "Codice Fiscale: " + piloti.get(i).getCodiceFiscale()  +        "\n" +
-                        "Numero di Cellulare:" + piloti.get(i).getNumeroDiCellulare() + "\n" +
-                        "ID Pilota:" + piloti.get(i).getIdPilota() +                    "\n" +
-                        "Salario:" + piloti.get(i).getSalario() +                       "\n";
+                String[] pilota = controller.getPilota(i);
+                String s =  "Proprietà del pilota: " +"\n" +
+                        "Login:     " + pilota[0] +                     "\n" +
+                        "Nome:      " + pilota[1] +                     "\n" +
+                        "Codice Fiscale: " + pilota[2]  +               "\n" +
+                        "Numero di Cellulare:" + pilota[3] +            "\n" +
+                        "ID Pilota:" + pilota[4] +                      "\n" +
+                        "Salario:" + pilota[5] +                        "\n";
 
                 textArea.setText(s);
 

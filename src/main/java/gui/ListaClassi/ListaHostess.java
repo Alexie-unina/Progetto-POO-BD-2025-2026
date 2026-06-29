@@ -2,8 +2,12 @@ package gui.ListaClassi;
 
 import controller.Controller;
 import gui.CreaClassi.CreaHostess;
+import model.Hostess;
+
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,7 +20,8 @@ public class ListaHostess {
     private JPanel mainPanel;
     private JButton indietroButton;
     private JButton creaNuovoButton;
-    private JList JListaClienti;
+    private JList JListaHostess;
+    private JTextArea textArea;
 
     public ListaHostess(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
@@ -28,10 +33,10 @@ public class ListaHostess {
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
-        ArrayList<String> hostess = controller.getListaHostess();
-        DefaultListModel<String> model = new DefaultListModel<>();
-        model.addAll(hostess);
-        JListaClienti.setModel(model);
+        ArrayList<Hostess> hostess = controller.getHostess();
+        DefaultListModel<Hostess> modelPiloti = new DefaultListModel<String>();
+      //  model.addAll(hostess);
+        JListaHostess.setModel(model);
 
 
 
@@ -48,6 +53,22 @@ public class ListaHostess {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Pulsante premuto!"); //Debug
                 new CreaHostess(frameChiamante,frame,controller);
+            }
+        });
+        JlistaHostess.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int i = JListaHostess.getSelectedIndex();
+                String s =  "Proprietà dell'hostess: " +                                  "\n" +
+                        "Login:     " + hostess.get(i).getLogin() +                      "\n" +
+                        "Nome:      " + hostess.get(i).getNomeCompleto() +               "\n" +
+                        "Codice Fiscale: " + hostess.get(i).getCodiceFiscale()  +        "\n" +
+                        "Numero di Cellulare:" + hostess.get(i).getNumeroDiCellulare() + "\n" +
+                        "ID Pilota:" + hostess.get(i).getIdPilota() +                    "\n" +
+                        "Salario:" + hostess.get(i).getSalario() +                       "\n";
+
+                textArea.setText(s);
+
             }
         });
     }
