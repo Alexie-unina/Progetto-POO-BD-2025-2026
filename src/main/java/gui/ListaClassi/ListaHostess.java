@@ -58,7 +58,7 @@ public class ListaHostess {
             public void valueChanged(ListSelectionEvent e) {
                 int i = JListaHostess.getSelectedIndex();
                 String[] hostess = controller.getHostess(i);
-                String s =  "Proprietà del duce: " +"\n" +
+                String s =  "Proprietà dell'hostess: " +"\n" +
                         "Login:     " + hostess[0] +                     "\n" +
                         "Nome:      " + hostess[1] +                     "\n" +
                         "Codice Fiscale: " + hostess[2]  +               "\n" +
