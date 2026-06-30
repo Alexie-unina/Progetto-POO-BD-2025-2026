@@ -35,6 +35,8 @@ public class  Controller {
        idPilota già esistente
        scemo chi legge
     */
+
+    //crea un oggetto di tipo Cliente, facendo i dovuti controlli sui suoi attributi
     public void creaCliente(String login,
                             String password,
                             String nomeCompleto,
@@ -65,10 +67,13 @@ public class  Controller {
             clienti.add(new Cliente(login,password,nomeCompleto,codiceFiscale,idCliente));
         }
     }
-
+    //restituisce l'arraylist di clienti
     public ArrayList<Cliente> getClienti(){
         return clienti;
     }
+
+
+    //restituisce l'arraylist contenente stringhe formate da id e nome di ciascun cliente
     public ArrayList<String> getListaClienti(){
         ArrayList<String> listaClienti = new ArrayList<>();
         for (Cliente cliente : clienti){
@@ -76,11 +81,16 @@ public class  Controller {
         }
         return listaClienti;
     }
+
+    //stampa su terminale login e nomecompleto di ciascun cliente
     public void stampaClienti(){ //Per debug
         for (Cliente cliente : clienti){
             System.out.println(cliente.getLogin() + cliente.getNomeCompleto());
         }
     }
+
+
+    //restituisce un array di stringhe dovi ogni elemento è un attributo di cliente sotto forma di stringa
     public String[] getCliente(int i){
         String[] cliente = new String[5];
         Cliente c = clienti.get(i);
@@ -91,11 +101,15 @@ public class  Controller {
         cliente[4] = c.getIdCliente();
         return cliente;
     }
+
+    //rimuove un cliente dalla lista clienti
     public void rimuoviCliente(int i)throws Exception{
-        if(i == -1)
+        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
             throw new Exception("nessun cliente selezionato");
         clienti.remove(i);
     }
+
+    //crea un oggetto di tipo Pilota, facendo i dovuti controlli sui suoi attributi
     public void creaPilota(String login,
                             String password,
                             String nomeCompleto,
@@ -136,9 +150,13 @@ public class  Controller {
             piloti.add(new Pilota(login,password,nomeCompleto,codiceFiscale,idPilota, salarioInt));
         }
     }
+
+    //restituisce l'arraylist dei piloti
     public ArrayList<Pilota> getPiloti(){
         return piloti;
     }
+
+    //restituisce un arraylist contenente stringhe formate da id e nome di ciascun pilota
     public ArrayList<String> getListaPiloti(){
         ArrayList<String> listaPiloti = new ArrayList<>();
         for (Pilota pilota : piloti){
@@ -146,11 +164,15 @@ public class  Controller {
         }
         return listaPiloti;
     }
+
+    //stampa su terminale login e nome di ciascun pilota
     public void stampaPiloti(){ //Per debug
         for (Pilota pilota : piloti){
             System.out.println(pilota.getLogin() + pilota.getNomeCompleto());
         }
     }
+
+    //restituisce un array di stringhe dove ogni elemento è un attributo di pilota sotto forma di stringa
     public String[] getPilota(int i){
         String[] pilota = new String[6];
         Pilota p = piloti.get(i);
@@ -162,11 +184,15 @@ public class  Controller {
         pilota[5] = String.valueOf(p.getSalario());
         return pilota;
     }
+
+    //rimuove un pilota dalla lista dei piloti
     public void rimuoviPilota(int i)throws Exception{
-        if(i == -1)
+        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
             throw new Exception("nessun pilota selezionato");
         piloti.remove(i);
     }
+
+    //crea un oggetto di tipo Hostess, facendo i dovuti controlli sugli attributi
     public void creaHostess(String login,
                            String password,
                            String nomeCompleto,
@@ -208,10 +234,13 @@ public class  Controller {
         }
     }
 
+
+    //restituisce l'arraylist degli hostess
     public ArrayList<Hostess> getHostesses(){
         return hostess;
     }
 
+    //restituisce un array di stringhe dove ogni elemento è un attributo di hostess sotto forma di stringa
     public String[] getHostess(int i){
         String[] hostess = new String[6];
         Hostess h = this.hostess.get(i);
@@ -224,6 +253,7 @@ public class  Controller {
         return hostess;
     }
 
+    //restituisce un arraylist di stringhe contenente id e nome di ciascun hostess
     public ArrayList<String> getListaHostess(){
         ArrayList<String> hostessList = new ArrayList<>();
         for (Hostess hostess : hostess){
@@ -231,21 +261,25 @@ public class  Controller {
         }
         return hostessList;
     }
+
+    //stampa su terminale login e nome di ciascun hostess
     public void stampaHostess(){ //Per debug
         for (Hostess hostess : hostess){
             System.out.println(hostess.getLogin() + hostess.getNomeCompleto());
         }
     }
+
+    //rimuove un hostess dalla lista degli hostess
     public void rimuoviHostess(int i)throws Exception{
-        if(i == -1)
+        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
             throw new Exception("nessun hostess selezionato");
         hostess.remove(i);
     }
 
-
+    //crea un oggetto di tipo Aereo, facendo i dovuti controlli sugli attributi
     public void creaAereo(String idAereo,
                           String modello,
-                          String nPosti) throws InvalidParameterException,NumberFormatException,IllegalArgumentException {
+                          String nPosti) throws IllegalArgumentException {
         int nPostiInt;
 
         try {
@@ -269,6 +303,7 @@ public class  Controller {
         aerei.add(new Aereo(idAereo, modello, nPostiInt));
     }
 
+    //restituisce un arraylist di stringhe contenente id e modello di ciascun aereo
     public ArrayList<String> getListaAerei(){
         ArrayList<String> listaAerei = new ArrayList<>();
         for (Aereo aereo : aerei){
@@ -277,16 +312,19 @@ public class  Controller {
         return listaAerei;
     }
 
-    public ArrayList<String> getProprietaAereo(int indice){
+    //restituisce una stringa contenente gli attributi di un singolo aereo
+    public ArrayList<String> getProprietaAereo(int i){
         ArrayList<String> proprietaAereo = new ArrayList<>();
-        Aereo a = aerei.get(indice);
+        Aereo a = aerei.get(i);
         proprietaAereo.add(a.getIdAereo());
         proprietaAereo.add(a.getModello());
         proprietaAereo.add(Integer.toString(a.getnPosti()));
         return proprietaAereo;
     }
+
+    //restituisce un array di stringhe contenente gli attributi di un aereo sotto forma di stringa
     public String[] getAereo(int i)throws Exception{
-        if(i == -1)
+        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
             throw new Exception("aereo non selezionato");
         Aereo a = aerei.get(i);
         String[] aereo = new String[3];
@@ -295,14 +333,20 @@ public class  Controller {
         aereo[2] = String.valueOf(a.getnPosti());
         return aereo;
     }
+
+    //rimuove un aereo dalla lista degli aerei
     public void rimuoviAereo(int i)throws Exception{
-        if(i == -1)
+        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
             throw new Exception("nessun aereo selezionato");
         aerei.remove(i);
     }
+
+    //stampa "dbg" su terminale
     public void dbg(){ //funzione debug
         System.out.println("dbg");
     }
+
+    //crea un oggetto di tipo Volo, facendo i dovuti controlli sugli attributi
     public void creaVolo(String idVolo,
                          String destinazione,
                          String durata,
@@ -346,6 +390,7 @@ public class  Controller {
 
     }
 
+    //restituisce un arraylist di stringhe contenenti id e destinazione di ciascun volo
     public ArrayList<String> getListaVoli(){
         ArrayList<String> listaVoli = new ArrayList<>();
         for (Volo volo : voli){
@@ -353,6 +398,8 @@ public class  Controller {
         }
         return listaVoli;
     }
+
+    //restituisce un array di stringhe contenente gli attributi di volo sotto forma di stringhe
     public String[] getVolo(int i) {
         String[] volo = new String[8];
         Volo v = voli.get(i);
@@ -366,11 +413,15 @@ public class  Controller {
         volo[7] = v.getAereo().getIdAereo() + " " + v.getAereo().getModello();
         return volo;
     }
+
+    //rimuove un volo dalla lista dei voli
     public void rimuoviVolo(int i)throws Exception{
-        if(i == -1)
+        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
             throw new Exception("nessun volo selezionato");
         voli.remove(i);
     }
+
+    //crea un oggetto di tipo Prenotazione, facendo i dovuti controlli sugli attributi
     public void creaPrenotazione(String idPrenotazione,
                                  Integer idCliente,
                                  Integer idVolo,
@@ -395,6 +446,7 @@ public class  Controller {
             prenotazioni.add(new Prenotazione(idPrenotazione, clienti.get(idCliente), voli.get(idVolo), posto, classe));
     }
 
+    //restituisce un arraylist di stringhe contenente id e classe di ciascuna prenotazione
     public ArrayList<String> getListaPrenotazioni(){
         ArrayList<String> listaPrenotazioni = new ArrayList<>();
         for(Prenotazione prenotazione : prenotazioni){
@@ -402,6 +454,8 @@ public class  Controller {
         }
         return listaPrenotazioni;
     }
+
+    //restituisce un array di stringhe contenente ciascun attributo di una prenotazione sotto forma di stringhe
     public String[] getPrenotazione(int i){
         String[] prenotazione = new String[5];
         Prenotazione p = prenotazioni.get(i);
@@ -412,8 +466,10 @@ public class  Controller {
         prenotazione[4] = p.getClasse();
         return prenotazione;
     }
+
+    //rimuove una prenotazione dalla lista delle prenotazioni
     public void rimuoviPrenotazione(int i)throws Exception{
-        if(i == -1)
+        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
             throw new Exception("nessuna prenotazione selezionato");
         prenotazioni.remove(i);
     }
