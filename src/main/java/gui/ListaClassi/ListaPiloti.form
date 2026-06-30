@@ -48,7 +48,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="3bda0" class="javax.swing.JList" binding="JlistaPiloti">
+              <component id="3bda0" class="javax.swing.JList" binding="JListaPiloti">
                 <constraints/>
                 <properties/>
               </component>

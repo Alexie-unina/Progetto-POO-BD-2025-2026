@@ -1,0 +1,26 @@
+DELETE FROM Pilota;
+
+INSERT INTO Pilota (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario)
+	VALUES 	('Franco','bollo123','Carletto Franco Bolli','BLLCLT67B17F839Y','+393917021017','p000',1.5),
+			/*Guadagna euro 1.50 perchè non e un pilota molto bravo*/
+			('leone','passwordUltraEfficace1234','Andrea Cali','CLANDR00R08H501Y',NULL,'p001',2147483647),
+			/*non sappiamo dove o quando lei è nato ma spero sia sufficiente*/
+			('MrJava','passwordAltrettantoPotente4','Bernardo Breve','BRVBNR96R08B759H',NULL,'p002',2147483646);
+			/*abbiamo incluso anche il signor java perchè il progetto è per entrambe le materie*/
+
+INSERT INTO Cliente (idCliente,login,password,nomeCompleto,codiceFiscale,numeroCellulare)
+	VALUES	('c0067','EmyServi','paroladordine','Emy Servillo','SRVMLR06R08A024O','+393917021117'),
+			('c0000','a','passwordStupida2','Alex','PZZLSN07A12F839U','+393703674246'),
+			('c0001','Alekg44','dragonballlegends1','Alessio Riccio','ALKRCC05A12AFD51','+393939393939');
+INSERT INTO Hostess
+	VALUES 	('EvilServi','ofl4uto0c@136','Evil Servillo','SRVMLR06R08A024O','+393917021117','h067','2147483648'),
+			('Io','0xFFFFFFFF','Io Servillo','SRVMLR06R08A024O','+393917021117','h012','250');
+INSERT INTO Aereo (idAereo,modello, nPosti)
+	VALUES	('a05','boeing 767 MAX','200'),
+			('a12','f22','62');
+INSERT INTO Volo (idVolo,idAereo, destinazione, durata, idPilota, idCopilota, idHostess1, idHostess2)
+	VALUES 	('v03921','a05','Beijing','600','p000','p001','h012','h067');
+
+INSERT INTO Prenotazione(idPrenotazione,idCliente,idVolo,posto,classe)
+	VALUES	('pr309419','c0067','v03921','B67','Prima'),
+			('pr123456','c0001','v03921','B66','Economy');

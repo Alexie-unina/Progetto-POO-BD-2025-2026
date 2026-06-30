@@ -19,6 +19,12 @@ public class ListaPrenotazioni {
     private JList JListaPrenotazioni;
     private JTextArea textArea;
     private JButton rimuoviButton;
+    DefaultListModel<String> model = new DefaultListModel<>();
+
+    public void refreshLista(){
+        model.clear();
+        model.addAll(controller.getListaPrenotazioni());
+    }
 
     public ListaPrenotazioni(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
@@ -30,8 +36,7 @@ public class ListaPrenotazioni {
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
-        DefaultListModel<String> model = new DefaultListModel<>();
-        model.addAll(controller.getListaPrenotazioni());
+        refreshLista();
         JListaPrenotazioni.setModel(model);
 
 
@@ -54,18 +59,34 @@ public class ListaPrenotazioni {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int i = JListaPrenotazioni.getSelectedIndex();
-                String[] prenotazione = controller.getPrenotazione(i);
-                String s =  "Proprietà della prenotazione: " +"\n" +
-                        "idPrenotazione:" + prenotazione[0] + "\n" +
-                        "cliente:" + prenotazione[1] + "\n" +
-                        "volo:" + prenotazione[2] + "\n" +
-                        "posto:" + prenotazione[3] + "\n" +
-                        "classe:" + prenotazione[4] + "\n";
+                String[] prenotazione;
+                try {
+                    prenotazione = controller.getPrenotazione(i);
+                    String s = "Proprietà della prenotazione: " + "\n" +
+                            "idPrenotazione:" + prenotazione[0] + "\n" +
+                            "cliente:" + prenotazione[1] + "\n" +
+                            "volo:" + prenotazione[2] + "\n" +
+                            "posto:" + prenotazione[3] + "\n" +
+                            "classe:" + prenotazione[4] + "\n";
 
-                textArea.setText(s);
-
+                    textArea.setText(s);
+                }
+                catch (Exception ex){
+                    textArea.setText("");
+                }
             }
         });
-
+        rimuoviButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    controller.rimuoviPrenotazione(JListaPrenotazioni.getSelectedIndex());
+                    System.out.println("rimosso correttamente");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,ex.getMessage());
+                }
+                refreshLista();
+            }
+        });
     }
 }

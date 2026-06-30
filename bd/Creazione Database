@@ -1,0 +1,72 @@
+/*CREATE DATABASE areoporto;
+c aereoporto*/
+CREATE TABLE Pilota(
+
+	login				VARCHAR(30) NOT NULL,
+	password			VARCHAR(60) NOT NULL,
+	nomeCompleto		VARCHAR(30) NOT NULL,
+	codiceFiscale		CHAR(16)	NOT NULL,
+	numeroCellulare		CHAR(13),
+	idPilota			TEXT		NOT NULL PRIMARY KEY,
+	salario				REAL		NOT NULL,
+
+	CONSTRAINT passwdlenght CHECK (length(password) >= 8),
+	CONSTRAINT salarioPositivo CHECK (salario > 0)
+);
+CREATE TABLE Hostess(
+
+	login				VARCHAR(30) NOT NULL,
+	password			VARCHAR(60) NOT NULL,
+	nomeCompleto		VARCHAR(30) NOT NULL,
+	codiceFiscale		CHAR(16)	NOT NULL,
+	numeroCellulare		CHAR(13),
+	idHostess			TEXT		NOT NULL PRIMARY KEY,
+	salario				REAL		NOT NULL,
+
+	CONSTRAINT passwdlenght CHECK (length(password) >= 8),
+	CONSTRAINT salarioPositivo CHECK (salario > 0)
+);
+CREATE TABLE Cliente(
+
+	login				VARCHAR(30) NOT NULL,
+	password			VARCHAR(60) NOT NULL,
+	nomeCompleto		VARCHAR(30) NOT NULL,
+	codiceFiscale		CHAR(16)	NOT NULL,
+	numeroCellulare		CHAR(13),
+	idCliente			TEXT		NOT NULL PRIMARY KEY,
+
+	CONSTRAINT passwdlenght CHECK (length(password) >= 8)
+);
+CREATE TABLE Aereo(
+	idAereo				TEXT		NOT NULL PRIMARY KEY,
+	modello				VARCHAR(30) NOT NULL,
+	nPosti				INTEGER     NOT NULL,
+	CONSTRAINT nPostiPositivo CHECK (nPosti > 0) 
+);
+CREATE TABLE Volo(
+	idVolo				TEXT 		NOT NULL PRIMARY KEY,
+	destinazione 		VARCHAR(30) NOT NULL,
+	durata 				INTEGER 	NOT NULL,
+	idPilota 			TEXT		NOT NULL,
+	idCoPilota			TEXT		NOT NULL,
+	idHostess1			TEXT 		NOT NULL,
+	idHostess2			TEXT 		NOT NULL,
+	idAereo				TEXT		NOT NULL,
+	CONSTRAINT FK_PILOTA FOREIGN KEY (idPilota) REFERENCES Pilota(idPilota),
+	CONSTRAINT FK_COPILOTA FOREIGN KEY (idCoPilota) REFERENCES Pilota(idPilota),
+	CONSTRAINT FK_HOSTESS1 FOREIGN KEY (idHostess1) REFERENCES Hostess(idHostess),
+	CONSTRAINT FK_HOSTESS2 FOREIGN KEY (idHostess2) REFERENCES Hostess(idHostess),
+	CONSTRAINT FK_AEREO FOREIGN KEY (idAereo) REFERENCES Aereo(idAereo),
+	CONSTRAINT durata_reale CHECK (durata > 0) 
+);
+CREATE TABLE Prenotazione(
+	idPrenotazione 		TEXT 		NOT NULL PRIMARY KEY,
+	idCliente			TEXT		NOT NULL,
+	idVolo				TEXT		NOT NULL,
+	posto				CHAR(3)		NOT NULL,
+	classe				VARCHAR(15) NOT NULL,
+	CONSTRAINT FK_CLIENTE FOREIGN KEY (idCliente) REFERENCES CLIENTE(idCliente)
+		ON DELETE CASCADE,
+	CONSTRAINT FK_VOLO FOREIGN KEY (idVolo) REFERENCES VOLO(idVolo)
+		ON DELETE CASCADE,
+);
