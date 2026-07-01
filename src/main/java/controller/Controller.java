@@ -67,6 +67,7 @@ public class  Controller {
             clienti.add(new Cliente(login,password,nomeCompleto,codiceFiscale,idCliente));
         }
     }
+    //OBSOLETO
     //restituisce l'arraylist di clienti
     public ArrayList<Cliente> getClienti(){
         return clienti;
@@ -150,7 +151,7 @@ public class  Controller {
             piloti.add(new Pilota(login,password,nomeCompleto,codiceFiscale,idPilota, salarioInt));
         }
     }
-
+    //OBSOLETO
     //restituisce l'arraylist dei piloti
     public ArrayList<Pilota> getPiloti(){
         return piloti;
@@ -234,7 +235,7 @@ public class  Controller {
         }
     }
 
-
+    //OBSOLETO
     //restituisce l'arraylist degli hostess
     public ArrayList<Hostess> getHostesses(){
         return hostess;
@@ -312,6 +313,7 @@ public class  Controller {
         return listaAerei;
     }
 
+    //OBSOLETO
     //restituisce una stringa contenente gli attributi di un singolo aereo
     public ArrayList<String> getProprietaAereo(int i){
         ArrayList<String> proprietaAereo = new ArrayList<>();

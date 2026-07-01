@@ -1,5 +1,12 @@
 /*CREATE DATABASE areoporto;
 c aereoporto*/
+DROP TABLE Pilota CASCADE;
+DROP TABLE Hostess CASCADE;
+DROP TABLE Cliente CASCADE;
+DROP TABLE Aereo CASCADE;
+DROP TABLE Volo CASCADE;
+DROP TABLE Prenotazione CASCADE;
+
 CREATE TABLE Pilota(
 
 	login				VARCHAR(30) NOT NULL,
@@ -11,6 +18,7 @@ CREATE TABLE Pilota(
 	salario				REAL		NOT NULL,
 
 	CONSTRAINT passwdlenght CHECK (length(password) >= 8),
+	CONSTRAINT CodiceFiscaleLenght CHECK (length(codiceFiscale) = 16),
 	CONSTRAINT salarioPositivo CHECK (salario > 0)
 );
 CREATE TABLE Hostess(
@@ -24,6 +32,7 @@ CREATE TABLE Hostess(
 	salario				REAL		NOT NULL,
 
 	CONSTRAINT passwdlenght CHECK (length(password) >= 8),
+    CONSTRAINT CodiceFiscaleLenght CHECK (length(codiceFiscale)=16),
 	CONSTRAINT salarioPositivo CHECK (salario > 0)
 );
 CREATE TABLE Cliente(
@@ -35,7 +44,9 @@ CREATE TABLE Cliente(
 	numeroCellulare		CHAR(13),
 	idCliente			TEXT		NOT NULL PRIMARY KEY,
 
-	CONSTRAINT passwdlenght CHECK (length(password) >= 8)
+	CONSTRAINT passwdlenght CHECK (length(password) >= 8),
+	CONSTRAINT CodiceFiscaleLenght CHECK (length(codiceFiscale) = 16)
+
 );
 CREATE TABLE Aereo(
 	idAereo				TEXT		NOT NULL PRIMARY KEY,
@@ -57,6 +68,7 @@ CREATE TABLE Volo(
 	CONSTRAINT FK_HOSTESS1 FOREIGN KEY (idHostess1) REFERENCES Hostess(idHostess),
 	CONSTRAINT FK_HOSTESS2 FOREIGN KEY (idHostess2) REFERENCES Hostess(idHostess),
 	CONSTRAINT FK_AEREO FOREIGN KEY (idAereo) REFERENCES Aereo(idAereo),
+	CONSTRAINT LAVORATORI_DIVERSI CHECK (NOT ((idPilota = idCopilota) OR (idHostess1 = idHostess2))),
 	CONSTRAINT durata_reale CHECK (durata > 0) 
 );
 CREATE TABLE Prenotazione(
@@ -69,4 +81,5 @@ CREATE TABLE Prenotazione(
 		ON DELETE CASCADE,
 	CONSTRAINT FK_VOLO FOREIGN KEY (idVolo) REFERENCES VOLO(idVolo)
 		ON DELETE CASCADE,
+	CONSTRAINT ClasseENUM CHECK (classe IN ('Prima','Economy','EconomyPlus','Business'))
 );
