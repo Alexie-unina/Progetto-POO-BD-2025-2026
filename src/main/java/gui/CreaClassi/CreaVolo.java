@@ -7,6 +7,7 @@ import javax.naming.AuthenticationException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class CreaVolo {
     private JLabel cv;
@@ -40,7 +41,12 @@ public class CreaVolo {
         listaCopilotiModel.addAll(controller.getListaPiloti());
         listaHostess1Model.addAll(controller.getListaHostess());
         listaHostess2Model.addAll(controller.getListaHostess());
-        listaAereiModel.addAll(controller.getListaAerei());
+//        try {
+//            listaAereiModel.addAll(controller.getListaAerei());
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null,"E stato riscontrato un problema con il database \n Informazioni in Console");
+//           e.printStackTrace();
+//        }
         comboPiloti1.setModel(listaPilotiModel);
         comboCoPiloti.setModel(listaCopilotiModel);
         comboHostess1.setModel(listaHostess1Model);

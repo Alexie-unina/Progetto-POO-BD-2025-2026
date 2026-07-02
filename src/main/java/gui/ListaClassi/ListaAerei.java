@@ -7,6 +7,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ListaAerei {
 
@@ -22,10 +26,21 @@ public class ListaAerei {
     private JTextArea textArea;
     private JButton rimuoviButton;
     DefaultListModel<String> model = new DefaultListModel<String>();
+    private List<String[]> listaAerei = new ArrayList<>();
 
     private void refreshLista () {
         model.clear();
-        model.addAll(controller.getListaAerei());
+        try {
+            listaAerei = controller.getListaAerei();
+            List<String> listaAereiFormattata = new ArrayList<>();
+            for (int i = 0; i < listaAerei.size() ; i++){
+                listaAereiFormattata.add(listaAerei.get(i)[0] + " " + listaAerei.get(i)[1]);
+            }
+            model.addAll(listaAereiFormattata);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"E stato riscontrato un problema con il database \n Informazioni in Console");
+            e.printStackTrace();
+        }
     }
 
     public ListaAerei(JFrame frameChiamante, Controller controller){
@@ -64,19 +79,13 @@ public class ListaAerei {
             public void valueChanged(ListSelectionEvent e) {
                 int i = JListaAerei.getSelectedIndex();
                 String[] aereo;
-                try {
-                    aereo = controller.getAereo(i);
-                    String s =  "Proprietà dell'aereo: " +"\n" +
-                            "idAereo:" + aereo[0] + "\n" +
-                            "modello:" + aereo[1] + "\n" +
-                            "numero posti:" + aereo[2] + "\n";
+                aereo = listaAerei.get(i);
+                String s =  "Proprietà dell'aereo: " +"\n" +
+                        "idAereo:" + aereo[0] + "\n" +
+                        "modello:" + aereo[1] + "\n" +
+                        "numero posti:" + aereo[2] + "\n";
 
-                    textArea.setText(s);
-
-                } catch (Exception ex) {
-                    textArea.setText("");
-                }
-
+                textArea.setText(s);
             }
         });
         rimuoviButton.addActionListener(new ActionListener() {

@@ -1,16 +1,15 @@
 package dao;
 
 import database.ConnessioneDatabase;
-import model.Pilota;
+import model.Aereo;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PilotaDAO {
+public class AereoDAO {
     Connection connection;
-
-    public PilotaDAO(){
+    public AereoDAO(){
         try {
             connection = ConnessioneDatabase.getInstance().connection;
         } catch (SQLException e) {
@@ -18,20 +17,17 @@ public class PilotaDAO {
         }
     }
 
-    public boolean salvaPilota(Pilota p) throws SQLException {
+    public boolean salvaAereo(Aereo a) throws SQLException {
         String query = """
-                INSERT INTO Pilota (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario)
-                	VALUES 	(?,?,?,?,?,?,?);
+                INSERT INTO Hostess (idAereo,modello,nPosti)
+                	VALUES 	(?,?,?);
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1,p.getLogin());
-            ps.setString(2,p.getPassword());
-            ps.setString(3,p.getNomeCompleto());
-            ps.setString(4,p.getCodiceFiscale());
-            ps.setString(5,p.getNumeroDiCellulare());
-            ps.setString(6,p.getIdPilota());
-            ps.setDouble(7,p.getSalario());
+            ps.setString(1,a.getIdAereo());
+            ps.setString(2,a.getModello());
+            ps.setInt(3,a.getnPosti());
+
             boolean res = ps.execute();
             
             return res;
@@ -41,62 +37,58 @@ public class PilotaDAO {
         }
 
     }
-    public Pilota getPilota(String idPilota) throws SQLException {
+    public Aereo getAereo(String idAereo) throws SQLException {
         String query = """
-                SELECT login,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario
-                FROM pilota
-                WHERE idPilota = '?';
+                SELECT idAereo,modello,nPosti
+                FROM Aereo
+                WHERE idAereo = ?;
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1,idPilota);
+            ps.setString(1,idAereo);
             ResultSet rs = ps.executeQuery();
             if(!rs.next()){
-                throw new SQLDataException("Pilota Non Trovato");
+                throw new SQLDataException("Aereo Non Trovato");
             }
             
-            return new Pilota(rs.getString(1),
+            return new Aereo(rs.getString(1),
                     rs.getString(2),
-                    rs.getString(3),
-                    rs.getString(4),
-                    rs.getString(5),
-                    rs.getString(6),
-                    rs.getDouble(7));
+                    rs.getInt(3));
         } catch (SQLException e) {
             
             throw new RuntimeException(e);
         }
     }
 
-    public List<String> getNomiPiloti() throws SQLException {
+    public List<Aereo> getAerei() throws SQLException {
         String query = """
-                SELECT login,nomeCompleto
-                FROM pilota;
+                SELECT *
+                FROM Aereo;
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            List<String> piloti = new ArrayList<>();;
+            List<Aereo> aerei = new ArrayList<>();;
             while(rs.next()){
-                piloti.add(rs.getString(1) + " " + rs.getString(2));
+                aerei.add(new Aereo(rs.getString(1),rs.getString(2),rs.getInt(3)));
             }
             
-            return piloti;
+            return aerei;
         } catch (SQLException e) {
             
             throw new RuntimeException(e);
         }
     }
 
-    public boolean rimuoviPilota(String idPilota) throws SQLException {
+    public boolean rimuoviAereo(String idAereo) throws SQLException {
         String query = """
                 DELETE
-                FROM PILOTA
-                WHERE (idPilota = ?);
+                FROM AEREO
+                WHERE (idAereo = ?);
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1,idPilota);
+            ps.setString(1,idAereo);
             
             return ps.execute();
         } catch (SQLException e) {

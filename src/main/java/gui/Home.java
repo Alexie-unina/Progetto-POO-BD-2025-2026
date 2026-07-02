@@ -1,6 +1,7 @@
 package gui;
 
 import controller.Controller;
+import dao.PilotaDAO;
 import gui.ListaClassi.*;
 
 import javax.swing.*;
@@ -26,8 +27,7 @@ public class Home {
         frameHome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameHome.pack();
         frameHome.setVisible(true);
-
-
+    new PilotaDAO();
     }
 
     public Home() {
@@ -78,6 +78,5 @@ public class Home {
             }
         });
     }
-
 
 }

@@ -11,7 +11,7 @@ public class ConnessioneDatabase {
 	public Connection connection = null;
 	private String nome = "postgres";
 	private String password = "123";
-	private String url = "jdbc:postgresql://localhost:5432/aereoporto";
+	private String url = "jdbc:postgresql://101.58.71.46:5432/aereoporto";
 	private String driver = "org.postgresql.Driver";
 
 	// COSTRUTTORE

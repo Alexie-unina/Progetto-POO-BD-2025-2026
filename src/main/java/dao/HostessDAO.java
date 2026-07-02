@@ -1,16 +1,15 @@
 package dao;
 
 import database.ConnessioneDatabase;
-import model.Pilota;
+import model.Hostess;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PilotaDAO {
-    Connection connection;
-
-    public PilotaDAO(){
+public class HostessDAO {
+            Connection connection;
+    public HostessDAO(){
         try {
             connection = ConnessioneDatabase.getInstance().connection;
         } catch (SQLException e) {
@@ -18,20 +17,20 @@ public class PilotaDAO {
         }
     }
 
-    public boolean salvaPilota(Pilota p) throws SQLException {
+    public boolean salvaHostess(Hostess h) throws SQLException {
         String query = """
-                INSERT INTO Pilota (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario)
+                INSERT INTO Hostess (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idHostess,salario)
                 	VALUES 	(?,?,?,?,?,?,?);
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1,p.getLogin());
-            ps.setString(2,p.getPassword());
-            ps.setString(3,p.getNomeCompleto());
-            ps.setString(4,p.getCodiceFiscale());
-            ps.setString(5,p.getNumeroDiCellulare());
-            ps.setString(6,p.getIdPilota());
-            ps.setDouble(7,p.getSalario());
+            ps.setString(1,h.getLogin());
+            ps.setString(2,h.getPassword());
+            ps.setString(3,h.getNomeCompleto());
+            ps.setString(4,h.getCodiceFiscale());
+            ps.setString(5,h.getNumeroDiCellulare());
+            ps.setString(6,h.getIdHostess());
+            ps.setDouble(7,h.getSalario());
             boolean res = ps.execute();
             
             return res;
@@ -41,21 +40,21 @@ public class PilotaDAO {
         }
 
     }
-    public Pilota getPilota(String idPilota) throws SQLException {
+    public Hostess getHostess(String idHostess) throws SQLException {
         String query = """
-                SELECT login,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario
-                FROM pilota
-                WHERE idPilota = '?';
+                SELECT login,nomeCompleto,codiceFiscale,numeroCellulare,idHostess,salario
+                FROM hostess
+                WHERE idHostess = '?';
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1,idPilota);
+            ps.setString(1,idHostess);
             ResultSet rs = ps.executeQuery();
             if(!rs.next()){
-                throw new SQLDataException("Pilota Non Trovato");
+                throw new SQLDataException("Hostess Non Trovato");
             }
             
-            return new Pilota(rs.getString(1),
+            return new Hostess(rs.getString(1),
                     rs.getString(2),
                     rs.getString(3),
                     rs.getString(4),
@@ -68,35 +67,35 @@ public class PilotaDAO {
         }
     }
 
-    public List<String> getNomiPiloti() throws SQLException {
+    public List<String> getNomiHostess() throws SQLException {
         String query = """
                 SELECT login,nomeCompleto
-                FROM pilota;
+                FROM Hostess;
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            List<String> piloti = new ArrayList<>();;
+            List<String> hostess = new ArrayList<>();;
             while(rs.next()){
-                piloti.add(rs.getString(1) + " " + rs.getString(2));
+                hostess.add(rs.getString(1) + " " + rs.getString(2));
             }
             
-            return piloti;
+            return hostess;
         } catch (SQLException e) {
             
             throw new RuntimeException(e);
         }
     }
 
-    public boolean rimuoviPilota(String idPilota) throws SQLException {
+    public boolean rimuoviHostess(String idHostess) throws SQLException {
         String query = """
                 DELETE
-                FROM PILOTA
-                WHERE (idPilota = ?);
+                FROM HOSTESS
+                WHERE (idHostess = ?);
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1,idPilota);
+            ps.setString(1,idHostess);
             
             return ps.execute();
         } catch (SQLException e) {
@@ -108,4 +107,5 @@ public class PilotaDAO {
     public void closeConnection() throws SQLException {
         connection.close();
     }
+
 }

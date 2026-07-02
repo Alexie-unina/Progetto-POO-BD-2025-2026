@@ -1,5 +1,6 @@
 package controller;
 
+import dao.*;
 import exceptions.ChiaveException;
 import exceptions.ParameterMissingException;
 import model.*;
@@ -7,7 +8,10 @@ import model.*;
 import javax.naming.AuthenticationException;
 
 import java.security.InvalidParameterException;
+import java.security.PublicKey;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class  Controller {
 
@@ -304,13 +308,17 @@ public class  Controller {
         aerei.add(new Aereo(idAereo, modello, nPostiInt));
     }
 
-    //restituisce un arraylist di stringhe contenente id e modello di ciascun aereo
-    public ArrayList<String> getListaAerei(){
-        ArrayList<String> listaAerei = new ArrayList<>();
-        for (Aereo aereo : aerei){
-            listaAerei.add(aereo.getIdAereo() +  " " + aereo.getModello());
+    //restituisce un arraylist di array di stringhe contenente id modello e nPosti di ciascun aereo
+    public List<String[]> getListaAerei() throws SQLException {
+        List<String[]> aerei = new ArrayList<>();
+        for(Aereo a : new AereoDAO().getAerei()){
+            String[] aereo = new String[3];
+            aereo[0] = a.getIdAereo();
+            aereo[1] = a.getModello();
+            aereo[2] = String.valueOf(a.getnPosti());
+            aerei.add(aereo);
         }
-        return listaAerei;
+        return aerei;
     }
 
     //OBSOLETO
@@ -325,10 +333,19 @@ public class  Controller {
     }
 
     //restituisce un array di stringhe contenente gli attributi di un aereo sotto forma di stringa
-    public String[] getAereo(int i)throws Exception{
-        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
-            throw new Exception("aereo non selezionato");
-        Aereo a = aerei.get(i);
+//    public String[] getAereo(int i)throws Exception{
+//        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
+//            throw new Exception("aereo non selezionato");
+//        Aereo a = aerei.get(i);
+//        String[] aereo = new String[3];
+//        aereo[0] = a.getIdAereo();
+//        aereo[1] = a.getModello();
+//        aereo[2] = String.valueOf(a.getnPosti());
+//        return aereo;
+//    }
+
+    public String[] getAereo(String idAereo) throws SQLException {
+        Aereo a = new AereoDAO().getAereo(idAereo);
         String[] aereo = new String[3];
         aereo[0] = a.getIdAereo();
         aereo[1] = a.getModello();

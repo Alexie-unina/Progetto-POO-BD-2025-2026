@@ -1,16 +1,15 @@
 package dao;
 
 import database.ConnessioneDatabase;
-import model.Pilota;
+import model.Cliente;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PilotaDAO {
+public class ClienteDAO {
     Connection connection;
-
-    public PilotaDAO(){
+    public ClienteDAO(){
         try {
             connection = ConnessioneDatabase.getInstance().connection;
         } catch (SQLException e) {
@@ -18,89 +17,87 @@ public class PilotaDAO {
         }
     }
 
-    public boolean salvaPilota(Pilota p) throws SQLException {
+    public boolean salvaCliente(Cliente c) throws SQLException {
         String query = """
-                INSERT INTO Pilota (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario)
-                	VALUES 	(?,?,?,?,?,?,?);
+                INSERT INTO Cliente (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idCliente)
+                	VALUES 	(?,?,?,?,?,?);
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1,p.getLogin());
-            ps.setString(2,p.getPassword());
-            ps.setString(3,p.getNomeCompleto());
-            ps.setString(4,p.getCodiceFiscale());
-            ps.setString(5,p.getNumeroDiCellulare());
-            ps.setString(6,p.getIdPilota());
-            ps.setDouble(7,p.getSalario());
+            ps.setString(1,c.getLogin());
+            ps.setString(2,c.getPassword());
+            ps.setString(3,c.getNomeCompleto());
+            ps.setString(4,c.getCodiceFiscale());
+            ps.setString(5,c.getNumeroDiCellulare());
+            ps.setString(6,c.getIdCliente());
             boolean res = ps.execute();
-            
+            connection.close();
             return res;
         } catch (SQLException e) {
-            
+            connection.close();
             throw new RuntimeException(e);
         }
 
     }
-    public Pilota getPilota(String idPilota) throws SQLException {
+    public Cliente getCliente(String idCliente) throws SQLException {
         String query = """
-                SELECT login,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario
-                FROM pilota
-                WHERE idPilota = '?';
+                SELECT login,nomeCompleto,codiceFiscale,numeroCellulare,idCliente
+                FROM cliente
+                WHERE idCliente = '?';
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1,idPilota);
+            ps.setString(1,idCliente);
             ResultSet rs = ps.executeQuery();
             if(!rs.next()){
-                throw new SQLDataException("Pilota Non Trovato");
+                throw new SQLDataException("Cliente Non Trovato");
             }
-            
-            return new Pilota(rs.getString(1),
+            connection.close();
+            return new Cliente(rs.getString(1),
                     rs.getString(2),
                     rs.getString(3),
                     rs.getString(4),
                     rs.getString(5),
-                    rs.getString(6),
-                    rs.getDouble(7));
+                    rs.getString(6));
         } catch (SQLException e) {
-            
+            connection.close();
             throw new RuntimeException(e);
         }
     }
 
-    public List<String> getNomiPiloti() throws SQLException {
+    public List<String> getNomiClienti() throws SQLException {
         String query = """
                 SELECT login,nomeCompleto
-                FROM pilota;
+                FROM Cliente;
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            List<String> piloti = new ArrayList<>();;
+            List<String> clienti = new ArrayList<>();;
             while(rs.next()){
-                piloti.add(rs.getString(1) + " " + rs.getString(2));
+                clienti.add(rs.getString(1) + " " + rs.getString(2));
             }
-            
-            return piloti;
+            connection.close();
+            return clienti;
         } catch (SQLException e) {
-            
+            connection.close();
             throw new RuntimeException(e);
         }
     }
 
-    public boolean rimuoviPilota(String idPilota) throws SQLException {
+    public boolean rimuoviCliente(String idCliente) throws SQLException {
         String query = """
                 DELETE
-                FROM PILOTA
-                WHERE (idPilota = ?);
+                FROM CLIENTE
+                WHERE (idCliente = ?);
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1,idPilota);
-            
+            ps.setString(1,idCliente);
+            connection.close();
             return ps.execute();
         } catch (SQLException e) {
-            
+            connection.close();
             throw new RuntimeException(e);
         }
     }
