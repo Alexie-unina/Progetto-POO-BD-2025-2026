@@ -81,4 +81,20 @@ public class PilotaDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean rimuoviPilota(String idPilota){
+        var query = """
+                DELETE
+                FROM PILOTA
+                WHERE (idPilota = ?);
+                """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1,idPilota);
+            return ps.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
