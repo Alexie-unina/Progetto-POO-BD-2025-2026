@@ -34,7 +34,7 @@ public class CreaPrenotazione {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         DefaultComboBoxModel<String> clientiModel = new DefaultComboBoxModel();
         DefaultComboBoxModel<String> voliModel = new DefaultComboBoxModel();
-        clientiModel.addAll(controller.getListaClienti());
+        //clientiModel.addAll(controller.getListaClienti());
         voliModel.addAll(controller.getListaVoli());
         comboClienti.setModel(clientiModel);
         comboVoli.setModel(voliModel);

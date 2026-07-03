@@ -1,6 +1,7 @@
 package dao;
 
 import database.ConnessioneDatabase;
+import model.Cliente;
 import model.Pilota;
 
 import java.sql.*;
@@ -21,7 +22,14 @@ public class PilotaDAO {
     public boolean salvaPilota(Pilota p) throws SQLException {
         String query = """
                 INSERT INTO Pilota (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario)
-                	VALUES 	(?,?,?,?,?,?,?);
+                VALUES 	(?,?,?,?,?,?,?)
+                    ON CONFLICT (idPilota) DO UPDATE
+                            SET login               =   EXCLUDED.login,
+                                password            =   EXCLUDED.password,
+                                nomeCompleto        =   EXCLUDED.nomeCompleto,
+                                codiceFiscale       =   EXCLUDED.codiceFiscale,
+                                numeroCellulare     =   EXCLUDED.numeroCellulare,
+                                salario             =   EXCLUDED.salario;
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -33,7 +41,6 @@ public class PilotaDAO {
             ps.setString(6,p.getIdPilota());
             ps.setDouble(7,p.getSalario());
             boolean res = ps.execute();
-            
             return res;
         } catch (SQLException e) {
             
@@ -68,24 +75,25 @@ public class PilotaDAO {
         }
     }
 
-    public List<String> getNomiPiloti() throws SQLException {
+    public List<Pilota> getPiloti() throws SQLException {
         String query = """
-                SELECT login,nomeCompleto
-                FROM pilota;
+                SELECT *
+                FROM Pilota
                 """;
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            List<String> piloti = new ArrayList<>();;
-            while(rs.next()){
-                piloti.add(rs.getString(1) + " " + rs.getString(2));
-            }
-            
-            return piloti;
-        } catch (SQLException e) {
-            
-            throw new RuntimeException(e);
+
+        PreparedStatement ps = connection.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        List<Pilota> piloti = new ArrayList<>();;
+        while(rs.next()){
+            piloti.add(new Pilota(rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getDouble(7)));
         }
+        return piloti;
     }
 
     public boolean rimuoviPilota(String idPilota) throws SQLException {
@@ -98,10 +106,11 @@ public class PilotaDAO {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1,idPilota);
             
-            return ps.execute();
+            int i = ps.executeUpdate();
+            System.out.println(i);
+            return true;
         } catch (SQLException e) {
-            
-            throw new RuntimeException(e);
+            throw new SQLException(e);
         }
     }
 

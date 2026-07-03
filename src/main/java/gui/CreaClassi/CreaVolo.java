@@ -37,8 +37,8 @@ public class CreaVolo {
         DefaultComboBoxModel<String> listaHostess1Model = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<String> listaHostess2Model = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<String> listaAereiModel = new DefaultComboBoxModel<>();
-        listaPilotiModel.addAll(controller.getListaPiloti());
-        listaCopilotiModel.addAll(controller.getListaPiloti());
+        //listaPilotiModel.addAll(controller.getListaPiloti());
+        //listaCopilotiModel.addAll(controller.getListaPiloti());
         listaHostess1Model.addAll(controller.getListaHostess());
         listaHostess2Model.addAll(controller.getListaHostess());
 //        try {

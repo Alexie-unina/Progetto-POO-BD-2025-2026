@@ -6,8 +6,12 @@ import gui.CreaClassi.CreaPilota;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListaPiloti {
     private JPanel mainPanel;
@@ -22,10 +26,21 @@ public class ListaPiloti {
     private Controller controller;
     private JFrame frameChiamante;
     DefaultListModel<String> model = new DefaultListModel<>();
+    private List<String[]> listaPiloti = new ArrayList<>();
 
     public void refreshLista(){
         model.clear();
-        model.addAll(controller.getListaPiloti());
+        try {
+            listaPiloti = controller.getListaPiloti();
+            List<String> listaPilotiFormattata = new ArrayList<>();
+            for (int i = 0; i < listaPiloti.size() ; i++){
+                listaPilotiFormattata.add(listaPiloti.get(i)[0] + " " + listaPiloti.get(i)[2]);
+            }
+            model.addAll(listaPilotiFormattata);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"E stato riscontrato un problema con il database \n Informazioni in Console");
+            System.out.println(e.getMessage());
+        }
     }
 
     public ListaPiloti(JFrame frameChiamante,Controller controller) {
@@ -61,29 +76,31 @@ public class ListaPiloti {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int i = JListaPiloti.getSelectedIndex();
-                String[] pilota;
-                try {
-                    pilota = controller.getPilota(i);
-                    String s = "Proprietà del pilota: " + "\n" +
-                            "Login:     " + pilota[0] + "\n" +
-                            "Nome:      " + pilota[1] + "\n" +
-                            "Codice Fiscale: " + pilota[2] + "\n" +
-                            "Numero di Cellulare:" + pilota[3] + "\n" +
-                            "ID Pilota:" + pilota[4] + "\n" +
-                            "Salario:" + pilota[5] + "\n";
-
-                    textArea.setText(s);
-                }
-                catch (Exception ex){
+                if(i == -1) {
                     textArea.setText("");
+                    return;
                 }
+                String[] pilota;
+                pilota = listaPiloti.get(i);
+                String s = "Proprietà del pilota: " + "\n" +
+                        "Login:     " + pilota[0] + "\n" +
+                        "Nome:      " + pilota[2] + "\n" +
+                        "Codice Fiscale: " + pilota[3] + "\n" +
+                        "Numero di Cellulare:" + pilota[4] + "\n" +
+                        "ID Pilota:" + pilota[5] + "\n" +
+                        "salario:" + pilota[6] + "\n";
+                textArea.setText(s);
             }
         });
         rimuoviButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{
-                    controller.rimuoviPilota(JListaPiloti.getSelectedIndex());
+                try {
+                    if(JListaPiloti.getSelectedIndex() == -1){
+                        JOptionPane.showMessageDialog(null,"Selezionare prima un pilota");
+                        return;
+                    }
+                    controller.rimuoviPilota(listaPiloti.get(JListaPiloti.getSelectedIndex())[0]);
                     System.out.println("rimosso correttamente");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null,ex.getMessage());

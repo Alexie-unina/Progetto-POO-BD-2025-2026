@@ -46,7 +46,7 @@ public class  Controller {
                             String nomeCompleto,
                             String codiceFiscale,
                             String numeroDiCellulare,
-                            String idCliente) throws ChiaveException, AuthenticationException {
+                            String idCliente) throws ChiaveException, AuthenticationException, SQLException {
         boolean hasNumero = true;
         if(login.isBlank() || idCliente.isBlank()){
             throw new ChiaveException("Una o piu chiavi (login o idCliente) mancanti");
@@ -65,10 +65,12 @@ public class  Controller {
             }
         }
 
+        ClienteDAO clienteDAO = new ClienteDAO();
+
         if(hasNumero){
-            clienti.add(new Cliente(login,password,nomeCompleto,codiceFiscale,numeroDiCellulare,idCliente));
+            clienteDAO.salvaCliente(new Cliente(login,password,nomeCompleto,codiceFiscale,numeroDiCellulare,idCliente));
         }else{
-            clienti.add(new Cliente(login,password,nomeCompleto,codiceFiscale,idCliente));
+            clienteDAO.salvaCliente(new Cliente(login,password,nomeCompleto,codiceFiscale,null,idCliente));
         }
     }
     //OBSOLETO
@@ -78,12 +80,23 @@ public class  Controller {
     }
 
 
-    //restituisce l'arraylist contenente stringhe formate da id e nome di ciascun cliente
-    public ArrayList<String> getListaClienti(){
-        ArrayList<String> listaClienti = new ArrayList<>();
-        for (Cliente cliente : clienti){
-            listaClienti.add(cliente.getIdCliente() + " " + cliente.getNomeCompleto());
+    //restituisce la lista contenente array di stringhe formati dai singoli attributi di cliente
+    public List<String[]> getListaClienti() throws SQLException {
+        List<String[]> listaClienti = new ArrayList<>();
+        ClienteDAO clienteDAO = new ClienteDAO();
+        for (Cliente cliente : clienteDAO.getClienti()){
+            String[] c = new String[6];
+            c[0] = cliente.getLogin();
+            c[1] = cliente.getPassword();
+            c[2] = cliente.getNomeCompleto();
+            c[3] = cliente.getCodiceFiscale();
+            c[4] = cliente.getNumeroDiCellulare();
+            c[5] = cliente.getIdCliente();
+
+            listaClienti.add(c);
         }
+
+        clienteDAO.closeConnection();
         return listaClienti;
     }
 
@@ -94,8 +107,8 @@ public class  Controller {
         }
     }
 
-
-    //restituisce un array di stringhe dovi ogni elemento è un attributo di cliente sotto forma di stringa
+    //OBSOLETO
+    //restituisce un array di stringhe dove ogni elemento è un attributo di cliente sotto forma di stringa
     public String[] getCliente(int i){
         String[] cliente = new String[5];
         Cliente c = clienti.get(i);
@@ -108,10 +121,12 @@ public class  Controller {
     }
 
     //rimuove un cliente dalla lista clienti
-    public void rimuoviCliente(int i)throws Exception{
-        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
+    public void rimuoviCliente(String idCliente)throws Exception{
+        if(idCliente.isEmpty())
             throw new Exception("nessun cliente selezionato");
-        clienti.remove(i);
+        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO.rimuoviCliente(idCliente);
+        clienteDAO.closeConnection();
     }
 
     //crea un oggetto di tipo Pilota, facendo i dovuti controlli sui suoi attributi
@@ -121,7 +136,7 @@ public class  Controller {
                             String codiceFiscale,
                             String numeroDiCellulare,
                             String idPilota,
-                            String salario) throws ChiaveException, AuthenticationException {
+                            String salario) throws ChiaveException, AuthenticationException, SQLException {
         int salarioInt;
 
         try {
@@ -148,25 +163,38 @@ public class  Controller {
                 throw new ChiaveException("Login o idPilota gia' esistenti");
             }
         }
+        PilotaDAO pilotaDAO = new PilotaDAO();
 
         if(hasNumero){
-            piloti.add(new Pilota(login,password,nomeCompleto,codiceFiscale,numeroDiCellulare,idPilota, salarioInt));
+            pilotaDAO.salvaPilota(new Pilota(login,password,nomeCompleto,codiceFiscale,numeroDiCellulare,idPilota,salarioInt));
         }else{
-            piloti.add(new Pilota(login,password,nomeCompleto,codiceFiscale,idPilota, salarioInt));
+            pilotaDAO.salvaPilota(new Pilota(login,password,nomeCompleto,codiceFiscale,null,idPilota, salarioInt));
         }
+
     }
-    //OBSOLETO
     //restituisce l'arraylist dei piloti
-    public ArrayList<Pilota> getPiloti(){
+    public ArrayList<Pilota> getPiloti() {
         return piloti;
     }
 
-    //restituisce un arraylist contenente stringhe formate da id e nome di ciascun pilota
-    public ArrayList<String> getListaPiloti(){
-        ArrayList<String> listaPiloti = new ArrayList<>();
-        for (Pilota pilota : piloti){
-            listaPiloti.add(pilota.getIdPilota() + " " + pilota.getNomeCompleto());
+    //restituisce un arraylist contenente array di stringhe formati dai singoli attributi di pilota
+    public List<String[]> getListaPiloti() throws SQLException {
+        List<String[]> listaPiloti = new ArrayList<>();
+        PilotaDAO pilotaDAO = new PilotaDAO();
+        for (Pilota pilota : pilotaDAO.getPiloti()){
+            String[] p = new String[7];
+            p[0] = pilota.getLogin();
+            p[1] = pilota.getPassword();
+            p[2] = pilota.getNomeCompleto();
+            p[3] = pilota.getCodiceFiscale();
+            p[4] = pilota.getNumeroDiCellulare();
+            p[5] = pilota.getIdPilota();
+            p[6] = String.valueOf(pilota.getSalario());
+
+            listaPiloti.add(p);
         }
+
+        pilotaDAO.closeConnection();
         return listaPiloti;
     }
 
@@ -177,6 +205,7 @@ public class  Controller {
         }
     }
 
+    //OBSOLETO
     //restituisce un array di stringhe dove ogni elemento è un attributo di pilota sotto forma di stringa
     public String[] getPilota(int i){
         String[] pilota = new String[6];
@@ -191,10 +220,14 @@ public class  Controller {
     }
 
     //rimuove un pilota dalla lista dei piloti
-    public void rimuoviPilota(int i)throws Exception{
-        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
+    public void rimuoviPilota(String idPilota)throws Exception{
+        if(idPilota.isEmpty()){
             throw new Exception("nessun pilota selezionato");
-        piloti.remove(i);
+        }
+        PilotaDAO pilotaDAO = new PilotaDAO();
+        System.out.println("provo a rimuovere" + idPilota);
+        pilotaDAO.rimuoviPilota(idPilota);
+        pilotaDAO.closeConnection();
     }
 
     //crea un oggetto di tipo Hostess, facendo i dovuti controlli sugli attributi
