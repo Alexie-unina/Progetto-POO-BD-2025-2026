@@ -72,14 +72,16 @@ public class CreaPrenotazione {
 
                 idPrenotazione = TXT_idPrenotazione.getText().strip();
                 posto = TXT_posto.getText().strip();
+                System.out.println("classe prenotazione in gui:" + classe);
                 if(economyRadioButton.isSelected())
-                    classe = "economy";
+                    classe = "Economy";
                 if(economyPlusRadioButton.isSelected())
-                    classe = "economy plus";
+                    classe = "EconomyPlus";
                 if(businessRadioButton.isSelected())
-                    classe = "business";
+                    classe = "Business";
                 if(primaRadioButton.isSelected())
-                    classe = "prima classe";
+                    classe = "Prima";
+                System.out.println("classe prenotazione in gui:" + classe);
                 try
                 {
                     controller.creaPrenotazione(idPrenotazione, listaClienti.get(comboClienti.getSelectedIndex())[5], listaVoli.get(comboClienti.getSelectedIndex())[0], posto, classe);

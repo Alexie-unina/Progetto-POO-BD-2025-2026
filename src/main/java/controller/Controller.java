@@ -545,6 +545,20 @@ public class  Controller {
                 throw new InvalidParameterException("posto non inserito");
             if(classe.isBlank())
                 throw new InvalidParameterException("classe non inserita");
+//            switch (classe){
+//                case "Economy":
+//                    classe = "ECONOMY";
+//                    break;
+//                case "Economy Plus":
+//                    classe = "ECONOMYPLUS";
+//                    break;
+//                case "Business":
+//                    classe = "BUSINESS";
+//                    break;
+//                case "Prima Classe":
+//                    classe = "PRIMA";
+//                    break;
+//            }
             //TODO
             //OVERBOOKING LIVELLO DATABASE
             PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();

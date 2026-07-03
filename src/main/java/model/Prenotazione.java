@@ -9,7 +9,7 @@ public class Prenotazione {
         ECONOMY,
         ECONOMYPLUS,
         BUSINESS,
-        PRIMA;
+        PRIMA
     }
     private ClassePrenotazione classePrenotazione;
 //    public void setIdPrenotazione(String idPrenotazione){
@@ -39,6 +39,7 @@ public class Prenotazione {
         this.cliente = cliente;
         this.volo = volo;
         this.posto = posto;
+        System.out.println(classePrenotazione);
         this.classePrenotazione = ClassePrenotazione.valueOf(classePrenotazione.toUpperCase());
     }
 }
