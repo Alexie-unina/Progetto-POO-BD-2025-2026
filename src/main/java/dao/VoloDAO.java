@@ -76,14 +76,18 @@ public class VoloDAO {
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1,idvolo);
         ResultSet rs = ps.executeQuery();
+        if(rs.next()){
         return new Volo(rs.getString(1),
-                rs.getString(2),
-                rs.getInt(3),
-                new PilotaDAO().getPilota(rs.getString(4)),
-                new PilotaDAO().getPilota(rs.getString(5)),
-                new HostessDAO().getHostess(rs.getString(6)),
-                new HostessDAO().getHostess(rs.getString(7)),
-                new AereoDAO().getAereo(rs.getString(8)));
+            rs.getString(2),
+            rs.getInt(3),
+            new PilotaDAO().getPilota(rs.getString(4)),
+            new PilotaDAO().getPilota(rs.getString(5)),
+            new HostessDAO().getHostess(rs.getString(6)),
+            new HostessDAO().getHostess(rs.getString(7)),
+            new AereoDAO().getAereo(rs.getString(8)));
+        }else {
+            throw new SQLException("Volo non trovato");
+        }
     }
 
     public boolean rimuoviVolo(String idVolo) throws SQLException {

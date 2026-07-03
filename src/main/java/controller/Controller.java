@@ -547,7 +547,8 @@ public class  Controller {
                 throw new InvalidParameterException("classe non inserita");
             //TODO
             //OVERBOOKING LIVELLO DATABASE
-            prenotazioni.add(new Prenotazione(idPrenotazione, new ClienteDAO().getCliente(idCliente), new VoloDAO().getVolo(idVolo), posto, classe));
+            PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
+            prenotazioneDAO.salvaPrenotazione(new Prenotazione(idPrenotazione, new ClienteDAO().getCliente(idCliente), new VoloDAO().getVolo(idVolo), posto, classe));
     }
 
     //restituisce un arraylist di stringhe contenente id e classe di ciascuna prenotazione

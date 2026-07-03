@@ -14,9 +14,10 @@ public class PrenotazioneDAO {
     }
 
     public boolean salvaPrenotazione(Prenotazione p) throws SQLException {
+        System.out.println("salvataggio prenotazione");
         String query = """
                 INSERT INTO Prenotazione (idPrenotazione,idCliente,idVolo,posto,classe)
-                    VALUES (?,?,?,?,?);
+                VALUES (?,?,?,?,?);
                 """;
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1,p.getIdPrenotazione());

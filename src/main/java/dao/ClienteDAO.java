@@ -40,7 +40,7 @@ public class ClienteDAO {
     }
     public Cliente getCliente(String idCliente) throws SQLException {
         String query = """
-                SELECT login,nomeCompleto,codiceFiscale,numeroCellulare,idCliente
+                SELECT login,password,nomeCompleto,codiceFiscale,numeroCellulare,idCliente
                 FROM cliente
                 WHERE idCliente = ?;
                 """;
@@ -68,7 +68,7 @@ public class ClienteDAO {
         ResultSet rs = ps.executeQuery();
         List<Cliente> clienti = new ArrayList<>();;
         while(rs.next()){
-        clienti.add(new Cliente(rs.getString(1),
+            clienti.add(new Cliente(rs.getString(1),
             rs.getString(2),
             rs.getString(3),
             rs.getString(4),
