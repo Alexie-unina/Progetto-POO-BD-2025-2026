@@ -1,6 +1,8 @@
 package dao;
 
 import database.ConnessioneDatabase;
+import model.Aereo;
+import model.Hostess;
 import model.Volo;
 
 import java.sql.*;
@@ -18,10 +20,12 @@ public class VoloDAO {
 
         String query = """
                 INSERT INTO Volo (idVolo,destinazione,durata,idPilota,idCopilota,idHostess1,idHostess2,idAereo)
-                    VALUES(?,?,?,?,?,?,?,?);
+                    VALUES(?,?,?,?,?,?,?,?)
                 """;
         try{
             PreparedStatement ps = connection.prepareStatement(query);
+            System.out.println("Param count: " + ps.getParameterMetaData().getParameterCount());
+
             ps.setString(1,v.getIdVolo());
             ps.setString(2,v.getDestinazione());
             ps.setInt(3,v.getDurata());
@@ -38,19 +42,28 @@ public class VoloDAO {
         }
     }
 
-    public List<String> getListaVoli() throws SQLException {
+    public List<Volo> getListaVoli() throws SQLException {
         Connection connection = ConnessioneDatabase.getInstance().connection;
 
         String query = """
-                SELECT idVolo Destinazione
+                SELECT *
                 FROM Volo;
                 """;
 
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
-        List<String> voli = new ArrayList<>();
+        List<Volo> voli = new ArrayList<>();
         while (rs.next()){
-            voli.add(rs.getString(1) + " " + rs.getString(2));
+            voli.add(new Volo(
+                rs.getString(1),
+                rs.getString(2),
+                rs.getInt(3),
+                new PilotaDAO().getPilota(rs.getString(4)),
+                new PilotaDAO().getPilota(rs.getString(5)),
+                new HostessDAO().getHostess(rs.getString(6)),
+                new HostessDAO().getHostess(rs.getString(7)),
+                new AereoDAO().getAereo(rs.getString(8))
+                    ));
         }
         return voli;
     }
@@ -75,7 +88,7 @@ public class VoloDAO {
 
     public boolean rimuoviVolo(String idVolo) throws SQLException {
         String query = """
-                DELETE 
+                DELETE
                 FROM VOLO
                 WHERE (idVolo = ?);
                 """;

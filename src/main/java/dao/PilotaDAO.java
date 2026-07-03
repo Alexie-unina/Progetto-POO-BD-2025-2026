@@ -49,9 +49,9 @@ public class PilotaDAO {
     }
     public Pilota getPilota(String idPilota) throws SQLException {
         String query = """
-                SELECT login,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario
+                SELECT login,password,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario
                 FROM pilota
-                WHERE idPilota = '?';
+                WHERE idPilota = ?;
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);

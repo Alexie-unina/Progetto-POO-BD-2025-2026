@@ -443,11 +443,11 @@ public class  Controller {
     public void creaVolo(String idVolo,
                          String destinazione,
                          String durata,
-                         Integer idPilota,
-                         Integer idCoPilota,
-                         Integer idHostess1,
-                         Integer idHostess2,
-                         Integer idAereo) throws ChiaveException, AuthenticationException{
+                         String idPilota,
+                         String idCoPilota,
+                         String idHostess1,
+                         String idHostess2,
+                         String idAereo) throws ChiaveException, AuthenticationException, SQLException {
         int durataInt;
         try {
             durataInt = Integer.parseInt(durata);
@@ -460,35 +460,50 @@ public class  Controller {
             throw new InvalidParameterException("Il campo destinazione è vuoto");
         if(durata.isBlank())
             throw new InvalidParameterException("Il campo durata è vuoto");
-        if(idPilota < 0)
+        if(idPilota.isEmpty())
             throw new InvalidParameterException("manca il pilota");
-        if(idCoPilota < 0)
+        if(idCoPilota.isEmpty())
             throw new InvalidParameterException("manca il copilota");
-        if(idHostess1 < 0)
+        if(idHostess1.isEmpty())
             throw new InvalidParameterException("manca la prima hostess");
-        if(idHostess2 < 0)
+        if(idHostess2.isEmpty())
             throw new InvalidParameterException("manca la seconda hostess");
-        if(piloti.get(idPilota).equals(piloti.get(idCoPilota)))
+        if(idPilota.equals(idCoPilota))
             throw new ChiaveException("inserire due piloti distinti");
-        if(hostess.get(idHostess1).equals(hostess.get(idHostess2)))
+        if(idHostess1.equals(idHostess2))
             throw new ChiaveException("inserire due hostess distinti");
-        for (Volo volo : voli){
-            if(volo.getIdVolo().equals(idVolo))
-                throw new IllegalArgumentException("idVolo già in uso");
-        }
-        if(idAereo < 0)
+        if(idAereo.isEmpty())
             throw new InvalidParameterException("manca l'aereo");
-        voli.add(new Volo(idVolo, destinazione, durataInt, piloti.get(idPilota), piloti.get(idCoPilota),
-                hostess.get(idHostess1), hostess.get(idHostess2), aerei.get(idAereo)));
-
+        VoloDAO voloDAO = new VoloDAO();
+        voloDAO.salvaVolo(new Volo(idVolo,
+                destinazione,
+                durataInt,
+                new PilotaDAO().getPilota(idPilota),
+                new PilotaDAO().getPilota(idCoPilota),
+                new HostessDAO().getHostess(idHostess1),
+                new HostessDAO().getHostess(idHostess2),
+                new AereoDAO().getAereo(idAereo)));
+        voloDAO.closeConnection();
     }
 
-    //restituisce un arraylist di stringhe contenenti id e destinazione di ciascun volo
-    public ArrayList<String> getListaVoli(){
-        ArrayList<String> listaVoli = new ArrayList<>();
-        for (Volo volo : voli){
-            listaVoli.add(volo.getIdVolo() + " " + volo.getDestinazione());
+    //restituisce un arraylist di array di stringhe contenenti i dati di ciascun volo
+    public List<String[]> getListaVoli() throws SQLException {
+        VoloDAO voloDAO = new VoloDAO();
+        List<String[]> listaVoli = new ArrayList<>();
+        for (Volo volo : voloDAO.getListaVoli()){
+            String[] v = new String[9];
+            v[0] = volo.getIdVolo();
+            v[1] = volo.getDestinazione();
+            v[3] = String.valueOf(volo.getDurata());
+            v[4] = volo.getPilota().getIdPilota()    + " " + volo.getPilota().getNomeCompleto();
+            v[5] = volo.getCoPilota().getIdPilota()  + " " + volo.getCoPilota().getNomeCompleto();
+            v[6] = volo.getHostess1().getIdHostess() + " " + volo.getHostess1().getNomeCompleto();
+            v[7] = volo.getHostess2().getIdHostess() + " " + volo.getHostess2().getNomeCompleto();
+            v[8] = volo.getAereo().getIdAereo();
+
+            listaVoli.add(v);
         }
+        voloDAO.closeConnection();
         return listaVoli;
     }
 

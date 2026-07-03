@@ -7,7 +7,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaVoli {
 
@@ -21,10 +23,19 @@ public class ListaVoli {
     private JTextArea textArea;
     private JButton rimuoviButton;
     DefaultListModel<String> model = new DefaultListModel<>();
-
+    List<String[]> listaVoli;
     public void refreshLista(){
         model.clear();
-        model.addAll(controller.getListaVoli());
+        try {
+            listaVoli = controller.getListaVoli();
+            List<String> listaPilotiFormattata = new ArrayList<>();
+            for (int i = 0; i < listaVoli.size() ; i++){
+                listaPilotiFormattata.add(listaVoli.get(i)[0] + " " + listaVoli.get(i)[1]);
+            }
+            model.addAll(listaPilotiFormattata);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
     }
 
     public ListaVoli(JFrame frameChiamante, Controller controller) {
@@ -33,11 +44,11 @@ public class ListaVoli {
         frame = new JFrame("Lista Voli");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
         refreshLista();
         JListaVoli.setModel(model);
+        frame.pack();
 
         indietroButton.addActionListener(new ActionListener() {
             @Override
@@ -59,24 +70,24 @@ public class ListaVoli {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int i = JListaVoli.getSelectedIndex();
-                String[] volo;
-                try {
-                    volo = controller.getVolo(i);
-                    String s = "Proprietà del volo: " + "\n" +
-                            "idVolo:" + volo[0] + "\n" +
-                            "destinazione:" + volo[1] + "\n" +
-                            "durata:" + volo[2] + "\n" +
-                            "pilota:" + volo[3] + "\n" +
-                            "Co-pilota:" + volo[4] + "\n" +
-                            "hostess 1:" + volo[5] + "\n" +
-                            "hostess 2:" + volo[6] + "\n" +
-                            "aereo:" + volo[7] + "\n";
-
-                    textArea.setText(s);
-                }
-                catch (Exception ex){
+                if(i == -1){
                     textArea.setText("");
+                    return;
                 }
+
+                String[] volo;
+                volo = listaVoli.get(i);
+                String s = "Proprietà del volo: " + "\n" +
+                "idVolo:" + volo[0] + "\n" +
+                "destinazione:" + volo[1] + "\n" +
+                "durata:" + volo[2] + "\n" +
+                "pilota:" + volo[3] + "\n" +
+                "Co-pilota:" + volo[4] + "\n" +
+                "hostess 1:" + volo[5] + "\n" +
+                "hostess 2:" + volo[6] + "\n" +
+                "aereo:" + volo[7] + "\n";
+
+                textArea.setText(s);
             }
         });
         rimuoviButton.addActionListener(new ActionListener() {

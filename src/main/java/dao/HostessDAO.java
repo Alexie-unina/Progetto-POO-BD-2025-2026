@@ -50,9 +50,9 @@ public class HostessDAO {
     }
     public Hostess getHostess(String idHostess) throws SQLException {
         String query = """
-                SELECT login,nomeCompleto,codiceFiscale,numeroCellulare,idHostess,salario
+                SELECT login,password,nomeCompleto,codiceFiscale,numeroCellulare,idHostess,salario
                 FROM hostess
-                WHERE idHostess = '?';
+                WHERE idHostess = ?;
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);

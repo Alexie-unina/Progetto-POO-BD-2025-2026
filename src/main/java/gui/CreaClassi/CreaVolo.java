@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreaVolo {
     private JLabel cv;
@@ -25,11 +27,14 @@ public class CreaVolo {
     private JComboBox comboAerei;
     private JFrame frame;
 
+    List<String[]> listaPiloti = new ArrayList<>();
+    List<String[]> listaHostess = new ArrayList<>();
+    List<String[]> listaAerei = new ArrayList<>();
+
     public CreaVolo(JFrame mainFrame, JFrame frameChiamante, Controller controller){
         frameChiamante.dispose();
         frame = new JFrame("Crea Nuovo Aereo");
         frame.setContentPane(mainPanel);
-        frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         DefaultComboBoxModel<String> listaPilotiModel = new DefaultComboBoxModel<>();
@@ -37,21 +42,36 @@ public class CreaVolo {
         DefaultComboBoxModel<String> listaHostess1Model = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<String> listaHostess2Model = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<String> listaAereiModel = new DefaultComboBoxModel<>();
-        //listaPilotiModel.addAll(controller.getListaPiloti());
-        //listaCopilotiModel.addAll(controller.getListaPiloti());
-        listaHostess1Model.addAll(controller.getListaHostess());
-        listaHostess2Model.addAll(controller.getListaHostess());
-//        try {
-//            listaAereiModel.addAll(controller.getListaAerei());
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null,"E stato riscontrato un problema con il database \n Informazioni in Console");
-//           e.printStackTrace();
-//        }
+
+
+
+        try {
+            listaPiloti = controller.getListaPiloti();
+            listaHostess = controller.getListaHostess();
+            listaAerei = controller.getListaAerei();
+
+            for(String[] pilota : listaPiloti){
+                listaPilotiModel.addElement(pilota[0] + " " + pilota[2]);
+                listaCopilotiModel.addElement(pilota[0] + " " + pilota[2]);
+            }
+            for(String[] hostess : listaHostess){
+                listaHostess1Model.addElement(hostess[0] + " " + hostess[2]);
+                listaHostess2Model.addElement(hostess[0] + " " + hostess[2]);
+            }
+            for(String[] aereo : listaAerei){
+                listaAereiModel.addElement(aereo[0] + " " + aereo[1]);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.exit(1);
+        }
         comboPiloti1.setModel(listaPilotiModel);
         comboCoPiloti.setModel(listaCopilotiModel);
         comboHostess1.setModel(listaHostess1Model);
         comboHostess2.setModel(listaHostess2Model);
         comboAerei.setModel(listaAereiModel);
+
+        frame.pack();
 
         creaButton.addActionListener(new ActionListener() {
             @Override
@@ -59,20 +79,20 @@ public class CreaVolo {
                 String idVolo;
                 String destinazione;
                 String durata;
-                int idPilota;
-                int idCoPilota;
-                int idHostess1;
-                int idHostess2;
-                int idAereo;
+                String idPilota;
+                String idCoPilota;
+                String idHostess1;
+                String idHostess2;
+                String idAereo;
 
                 idVolo = txt_idVolo.getText().strip();
                 destinazione = txt_destinazione.getText().strip();
                 durata = txt_durata.getText().strip();
-                idPilota = comboPiloti1.getSelectedIndex();
-                idCoPilota = comboCoPiloti.getSelectedIndex();
-                idHostess1 = comboHostess1.getSelectedIndex();
-                idHostess2 = comboHostess2.getSelectedIndex();
-                idAereo = comboAerei.getSelectedIndex();
+                idPilota   = listaPiloti.get(comboPiloti1.getSelectedIndex())[5];
+                idCoPilota = listaPiloti.get(comboCoPiloti.getSelectedIndex())[5];
+                idHostess1 = listaHostess.get(comboHostess1.getSelectedIndex())[5];
+                idHostess2 = listaHostess.get(comboHostess2.getSelectedIndex())[5];
+                idAereo = listaAerei.get(comboAerei.getSelectedIndex())[0];
 
                 try
                 {

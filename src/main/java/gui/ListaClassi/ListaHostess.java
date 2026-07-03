@@ -73,29 +73,33 @@ public class ListaHostess {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int i = JListaHostess.getSelectedIndex();
+                if(i == -1){
+                    textArea.setText("");
+                    return;
+                }
                 String[] hostess;
-                try {
-                    hostess = controller.getHostess(i);
-                    String s = "Proprietà dell'hostess: " + "\n" +
-                            "Login:     " + hostess[0] + "\n" +
-                            "Nome:      " + hostess[1] + "\n" +
-                            "Codice Fiscale: " + hostess[2] + "\n" +
-                            "Numero di Cellulare:" + hostess[3] + "\n" +
-                            "ID Hostess:" + hostess[4] + "\n" +
-                            "Salario:" + hostess[5] + "\n";
+                hostess = listaHostess.get(i);
+                String s = "Proprietà dell'hostess: " + "\n" +
+                        "Login:     " + hostess[0] + "\n" +
+                        "Nome:      " + hostess[2] + "\n" +
+                        "Codice Fiscale: " + hostess[3] + "\n" +
+                        "Numero di Cellulare:" + hostess[4] + "\n" +
+                        "ID Hostess:" + hostess[5] + "\n" +
+                        "Salario:" + hostess[6] + "\n";
 
                     textArea.setText(s);
-                }
-                catch(Exception ex){
-                    textArea.setText("");
-                }
+
             }
         });
         rimuoviButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    controller.rimuoviHostess(JListaHostess.getSelectedIndex());
+                    if(JListaHostess.getSelectedIndex() == -1){
+                        JOptionPane.showMessageDialog(null,"Selezionare prima un hostess");
+                        return;
+                    }
+                    controller.rimuoviHostess(listaHostess.get(JListaHostess.getSelectedIndex())[5]);
                     System.out.println("rimosso correttamente");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null,ex.getMessage());
