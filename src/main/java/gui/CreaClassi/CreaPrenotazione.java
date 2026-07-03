@@ -38,7 +38,7 @@ public class CreaPrenotazione {
         //voliModel.addAll(controller.getListaVoli());
         comboClienti.setModel(clientiModel);
         comboVoli.setModel(voliModel);
-
+        //indetro
         indietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
