@@ -281,7 +281,7 @@ public class  Controller {
         hostess.remove(i);
     }
 
-    //crea un oggetto di tipo Aereo, facendo i dovuti controlli sugli attributi
+    /*
     public void creaAereo(String idAereo,
                           String modello,
                           String nPosti) throws IllegalArgumentException {
@@ -307,17 +307,41 @@ public class  Controller {
 
         aerei.add(new Aereo(idAereo, modello, nPostiInt));
     }
+*/
+    //crea un oggetto di tipo Aereo, facendo i dovuti controlli sugli attributi
+    public void creaAereo(String idAereo, String modello, String nPosti) throws SQLException {
+        int nPostiInt;
 
+        try {
+            nPostiInt = Integer.parseInt(nPosti);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Il numero di posti deve essere un numero");
+        }
+
+        if (idAereo.isBlank())
+            throw new InvalidParameterException("Il campo idaereo è vuoto");
+        if (modello.isBlank())
+            throw new InvalidParameterException("il campo modello è vuoto");
+        if (nPostiInt < 0)
+            throw new InvalidParameterException(("numero posti non valido"));
+
+        var aereoDAO = new AereoDAO();
+        aereoDAO.salvaAereo(new Aereo(idAereo, modello, nPostiInt));
+        aereoDAO.closeConnection();
+        return;
+    }
     //restituisce un arraylist di array di stringhe contenente id modello e nPosti di ciascun aereo
     public List<String[]> getListaAerei() throws SQLException {
         List<String[]> aerei = new ArrayList<>();
-        for(Aereo a : new AereoDAO().getAerei()){
+        AereoDAO aereoDAO = new AereoDAO();
+        for(Aereo a : aereoDAO.getAerei()){
             String[] aereo = new String[3];
             aereo[0] = a.getIdAereo();
             aereo[1] = a.getModello();
             aereo[2] = String.valueOf(a.getnPosti());
             aerei.add(aereo);
         }
+        aereoDAO.closeConnection();
         return aerei;
     }
 
@@ -354,10 +378,12 @@ public class  Controller {
     }
 
     //rimuove un aereo dalla lista degli aerei
-    public void rimuoviAereo(int i)throws Exception{
-        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
+    public void rimuoviAereo(String idAereo)throws Exception{
+        if(idAereo.isEmpty()) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
             throw new Exception("nessun aereo selezionato");
-        aerei.remove(i);
+        AereoDAO aereoDAO = new AereoDAO();
+        aereoDAO.rimuoviAereo(idAereo);
+        aereoDAO.closeConnection();
     }
 
     //stampa "dbg" su terminale

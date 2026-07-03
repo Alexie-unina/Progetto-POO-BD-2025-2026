@@ -39,7 +39,7 @@ public class ListaAerei {
             model.addAll(listaAereiFormattata);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"E stato riscontrato un problema con il database \n Informazioni in Console");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -49,14 +49,13 @@ public class ListaAerei {
         frame = new JFrame("Lista Aerei");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
-
-
         refreshLista();
         System.out.println("Aggiornata lista aerei"); //Debug
         JListaAerei.setModel(model);
+        frame.pack();
+
 
 
         indietroButton.addActionListener(new ActionListener() {
@@ -79,6 +78,10 @@ public class ListaAerei {
             public void valueChanged(ListSelectionEvent e) {
                 int i = JListaAerei.getSelectedIndex();
                 String[] aereo;
+                if(i == -1) {
+                    textArea.setText("");
+                    return;
+                }
                 aereo = listaAerei.get(i);
                 String s =  "Proprietà dell'aereo: " +"\n" +
                         "idAereo:" + aereo[0] + "\n" +
@@ -92,7 +95,11 @@ public class ListaAerei {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.rimuoviAereo(JListaAerei.getSelectedIndex());
+                    if(JListaAerei.getSelectedIndex() == -1){
+                        JOptionPane.showMessageDialog(null,"Selezionare prima un aereo");
+                        return;
+                    }
+                    controller.rimuoviAereo(listaAerei.get(JListaAerei.getSelectedIndex())[0]);
                     System.out.println("rimosso correttamente");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null,ex.getMessage());

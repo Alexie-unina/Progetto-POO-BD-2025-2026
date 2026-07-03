@@ -9,18 +9,21 @@ import java.util.List;
 
 public class AereoDAO {
     Connection connection;
-    public AereoDAO(){
+    public AereoDAO()  throws SQLException{
         try {
             connection = ConnessioneDatabase.getInstance().connection;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new SQLException(e);
         }
     }
 
     public boolean salvaAereo(Aereo a) throws SQLException {
         String query = """
-                INSERT INTO Hostess (idAereo,modello,nPosti)
-                	VALUES 	(?,?,?);
+                INSERT INTO Aereo (idAereo,modello,nPosti)
+                VALUES 	(?,?,?)
+                ON CONFLICT (idAereo) DO UPDATE
+                    SET modello = EXCLUDED.modello,
+                    nPosti = EXCLUDED.nPosti;
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -55,8 +58,8 @@ public class AereoDAO {
                     rs.getString(2),
                     rs.getInt(3));
         } catch (SQLException e) {
-            
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            throw new SQLException("Errore nel database, controllare la console");
         }
     }
 
