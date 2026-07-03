@@ -46,7 +46,7 @@ public class CreaPrenotazione {
                 clientiModel.addElement(cliente[0] + " " + cliente[2]);
             }
             for (String[] volo : listaVoli){
-                voliModel.addElement(volo[0] + " " + volo[2]);
+                voliModel.addElement(volo[0] + " " + volo[1]);
             }
         }
         catch (SQLException e){

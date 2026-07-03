@@ -42,7 +42,7 @@ public class ClienteDAO {
         String query = """
                 SELECT login,nomeCompleto,codiceFiscale,numeroCellulare,idCliente
                 FROM cliente
-                WHERE idCliente = '?';
+                WHERE idCliente = ?;
                 """;
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1,idCliente);
