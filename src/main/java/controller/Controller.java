@@ -531,27 +531,23 @@ public class  Controller {
 
     //crea un oggetto di tipo Prenotazione, facendo i dovuti controlli sugli attributi
     public void creaPrenotazione(String idPrenotazione,
-                                 Integer idCliente,
-                                 Integer idVolo,
+                                 String idCliente,
+                                 String idVolo,
                                  String posto,
-                                 String classe) throws ChiaveException, AuthenticationException,InvalidParameterException{
+                                 String classe) throws ChiaveException, AuthenticationException, InvalidParameterException, SQLException {
             if(idPrenotazione.isBlank())
                 throw new InvalidParameterException("idPrenotazione non inserito");
-            if(idCliente < 0)
+            if(idCliente.isEmpty())
                 throw new InvalidParameterException("cliente non inserito");
-            if(idVolo < 0 )
+            if(idVolo.isEmpty() )
                 throw new InvalidParameterException("volo non inserito");
             if(posto.isBlank())
                 throw new InvalidParameterException("posto non inserito");
             if(classe.isBlank())
                 throw new InvalidParameterException("classe non inserita");
-            for(Prenotazione p : prenotazioni) {
-                if(p.getIdPrenotazione().equals(idPrenotazione))
-                    throw new ChiaveException("chiave già usata");
-                if(p.getVolo().getIdVolo().equals(voli.get(idVolo).getIdVolo()) && p.getPosto().equals(posto))
-                    throw new ChiaveException("posto già usato");
-            }
-            prenotazioni.add(new Prenotazione(idPrenotazione, clienti.get(idCliente), voli.get(idVolo), posto, classe));
+            //TODO
+            //OVERBOOKING LIVELLO DATABASE
+            prenotazioni.add(new Prenotazione(idPrenotazione, new ClienteDAO().getCliente(idCliente), new VoloDAO().getVolo(idVolo), posto, classe));
     }
 
     //restituisce un arraylist di stringhe contenente id e classe di ciascuna prenotazione

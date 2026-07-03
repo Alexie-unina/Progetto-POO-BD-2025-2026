@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.InvalidParameterException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class CreaPrenotazione {
     private JLabel cp;
@@ -23,7 +25,8 @@ public class CreaPrenotazione {
     private JButton indietroButton;
     private JTextField TXT_posto;
     private JFrame frame;
-
+    List<String[]> listaClienti;
+    List<String[]> listaVoli;
 
     public CreaPrenotazione(JFrame mainFrame, JFrame frameChiamante, Controller controller){
         frameChiamante.dispose();
@@ -34,11 +37,25 @@ public class CreaPrenotazione {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         DefaultComboBoxModel<String> clientiModel = new DefaultComboBoxModel();
         DefaultComboBoxModel<String> voliModel = new DefaultComboBoxModel();
-        //clientiModel.addAll(controller.getListaClienti());
-        //voliModel.addAll(controller.getListaVoli());
+
+        try{
+            listaClienti = controller.getListaClienti();
+            listaVoli = controller.getListaVoli();
+
+            for (String [] cliente : listaClienti){
+                clientiModel.addElement(cliente[0] + " " + cliente[2]);
+            }
+            for (String[] volo : listaVoli){
+                voliModel.addElement(volo[0] + " " + volo[2]);
+            }
+        }
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+
         comboClienti.setModel(clientiModel);
         comboVoli.setModel(voliModel);
-        //indetro
+
         indietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,14 +67,10 @@ public class CreaPrenotazione {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String idPrenotazione;
-                int idCliente;
-                int idVolo;
                 String posto;
                 String classe = "economy";
 
                 idPrenotazione = TXT_idPrenotazione.getText().strip();
-                idCliente = comboClienti.getSelectedIndex();
-                idVolo = comboVoli.getSelectedIndex();
                 posto = TXT_posto.getText().strip();
                 if(economyRadioButton.isSelected())
                     classe = "economy";
@@ -69,7 +82,7 @@ public class CreaPrenotazione {
                     classe = "prima classe";
                 try
                 {
-                    controller.creaPrenotazione(idPrenotazione, idCliente, idVolo, posto, classe);
+                    controller.creaPrenotazione(idPrenotazione, listaClienti.get(comboClienti.getSelectedIndex())[5], listaVoli.get(comboClienti.getSelectedIndex())[0], posto, classe);
                 }
                 catch (Exception ex) {
                     JOptionPane.showMessageDialog(frame,ex.getMessage());
