@@ -2,6 +2,7 @@ package dao;
 
 import database.ConnessioneDatabase;
 import model.Hostess;
+import model.Pilota;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,7 +21,14 @@ public class HostessDAO {
     public boolean salvaHostess(Hostess h) throws SQLException {
         String query = """
                 INSERT INTO Hostess (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idHostess,salario)
-                	VALUES 	(?,?,?,?,?,?,?);
+                VALUES 	(?,?,?,?,?,?,?)
+                    ON CONFLICT (idHostess) DO UPDATE
+                            SET login               =   EXCLUDED.login,
+                                password            =   EXCLUDED.password,
+                                nomeCompleto        =   EXCLUDED.nomeCompleto,
+                                codiceFiscale       =   EXCLUDED.codiceFiscale,
+                                numeroCellulare     =   EXCLUDED.numeroCellulare,
+                                salario             =   EXCLUDED.salario;
                 """;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -67,24 +75,26 @@ public class HostessDAO {
         }
     }
 
-    public List<String> getNomiHostess() throws SQLException {
+    public List<Hostess> getListaHostess() throws SQLException {
         String query = """
-                SELECT login,nomeCompleto
+                SELECT *
                 FROM Hostess;
                 """;
-        try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            List<String> hostess = new ArrayList<>();;
+            List<Hostess> hostess = new ArrayList<>();;
             while(rs.next()){
-                hostess.add(rs.getString(1) + " " + rs.getString(2));
+                hostess.add(new Hostess(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
             }
             
             return hostess;
-        } catch (SQLException e) {
-            
-            throw new RuntimeException(e);
-        }
+
     }
 
     public boolean rimuoviHostess(String idHostess) throws SQLException {
@@ -96,11 +106,10 @@ public class HostessDAO {
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1,idHostess);
-            
+
             return ps.execute();
         } catch (SQLException e) {
-            
-            throw new RuntimeException(e);
+            throw new SQLException(e);
         }
     }
 

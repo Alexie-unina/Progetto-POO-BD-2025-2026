@@ -8,7 +8,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaHostess {
 
@@ -22,10 +24,21 @@ public class ListaHostess {
     private JTextArea textArea;
     private JButton rimuoviButton;
     DefaultListModel<String> model = new DefaultListModel<>();
+    private List<String[]> listaHostess = new ArrayList<>();
 
     private void refreshLista () {
         model.clear();
-        model.addAll(controller.getListaHostess());
+        try {
+            listaHostess = controller.getListaHostess();
+            List<String> listaHostessFormattata = new ArrayList<>();
+            for (int i = 0; i < listaHostess.size() ; i++){
+                listaHostessFormattata.add(listaHostess.get(i)[0] + " " + listaHostess.get(i)[2]);
+            }
+            model.addAll(listaHostessFormattata);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"E stato riscontrato un problema con il database \n Informazioni in Console");
+            System.out.println(e.getMessage());
+        }
     }
 
     public ListaHostess(JFrame frameChiamante, Controller controller){

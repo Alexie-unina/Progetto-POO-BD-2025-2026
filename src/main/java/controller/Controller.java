@@ -8,7 +8,6 @@ import model.*;
 import javax.naming.AuthenticationException;
 
 import java.security.InvalidParameterException;
-import java.security.PublicKey;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -181,7 +180,7 @@ public class  Controller {
     public List<String[]> getListaPiloti() throws SQLException {
         List<String[]> listaPiloti = new ArrayList<>();
         PilotaDAO pilotaDAO = new PilotaDAO();
-        for (Pilota pilota : pilotaDAO.getPiloti()){
+        for (Pilota pilota : pilotaDAO.getListaPiloti()){
             String[] p = new String[7];
             p[0] = pilota.getLogin();
             p[1] = pilota.getPassword();
@@ -225,7 +224,6 @@ public class  Controller {
             throw new Exception("nessun pilota selezionato");
         }
         PilotaDAO pilotaDAO = new PilotaDAO();
-        System.out.println("provo a rimuovere" + idPilota);
         pilotaDAO.rimuoviPilota(idPilota);
         pilotaDAO.closeConnection();
     }
@@ -237,7 +235,7 @@ public class  Controller {
                            String codiceFiscale,
                            String numeroDiCellulare,
                            String idHostess,
-                           String salario) throws ChiaveException, AuthenticationException {
+                           String salario) throws ChiaveException, AuthenticationException, SQLException {
         int salarioInt;
 
         try {
@@ -264,11 +262,12 @@ public class  Controller {
                 throw new ChiaveException("Login o id Hostess gia' esistenti");
             }
         }
+        HostessDAO hostessDAO = new HostessDAO();
 
         if(hasNumero){
-            hostess.add(new Hostess(login,password,nomeCompleto,codiceFiscale,numeroDiCellulare,idHostess, salarioInt));
+            hostessDAO.salvaHostess(new Hostess(login,password,nomeCompleto,codiceFiscale,numeroDiCellulare,idHostess,salarioInt));
         }else{
-            hostess.add(new Hostess(login,password,nomeCompleto,codiceFiscale,idHostess, salarioInt));
+            hostessDAO.salvaHostess(new Hostess(login,password,nomeCompleto,codiceFiscale,null,idHostess, salarioInt));
         }
     }
 
@@ -278,6 +277,7 @@ public class  Controller {
         return hostess;
     }
 
+    //OBSOLETO
     //restituisce un array di stringhe dove ogni elemento è un attributo di hostess sotto forma di stringa
     public String[] getHostess(int i){
         String[] hostess = new String[6];
@@ -291,13 +291,25 @@ public class  Controller {
         return hostess;
     }
 
-    //restituisce un arraylist di stringhe contenente id e nome di ciascun hostess
-    public ArrayList<String> getListaHostess(){
-        ArrayList<String> hostessList = new ArrayList<>();
-        for (Hostess hostess : hostess){
-            hostessList.add(hostess.getIdHostess() + " " + hostess.getNomeCompleto());
+    //restituisce una lista di array di stringhe contenenti i singoli attributi di hostess
+    public List<String[]> getListaHostess() throws SQLException {
+        List<String[]> listaHostess = new ArrayList<>();
+        HostessDAO hostessDAO = new HostessDAO();
+        for (Hostess hostess : hostessDAO.getListaHostess()){
+            String[] h = new String[7];
+            h[0] = hostess.getLogin();
+            h[1] = hostess.getPassword();
+            h[2] = hostess.getNomeCompleto();
+            h[3] = hostess.getCodiceFiscale();
+            h[4] = hostess.getNumeroDiCellulare();
+            h[5] = hostess.getIdHostess();
+            h[6] = String.valueOf(hostess.getSalario());
+
+            listaHostess.add(h);
         }
-        return hostessList;
+
+        hostessDAO.closeConnection();
+        return listaHostess;
     }
 
     //stampa su terminale login e nome di ciascun hostess
@@ -308,10 +320,13 @@ public class  Controller {
     }
 
     //rimuove un hostess dalla lista degli hostess
-    public void rimuoviHostess(int i)throws Exception{
-        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
+    public void rimuoviHostess(String idHostess)throws Exception{
+        if (idHostess.isBlank()){
             throw new Exception("nessun hostess selezionato");
-        hostess.remove(i);
+        }
+        HostessDAO hostessDAO = new HostessDAO();
+        hostessDAO.rimuoviHostess(idHostess);
+        hostessDAO.closeConnection();
     }
 
     /*
@@ -367,7 +382,7 @@ public class  Controller {
     public List<String[]> getListaAerei() throws SQLException {
         List<String[]> aerei = new ArrayList<>();
         AereoDAO aereoDAO = new AereoDAO();
-        for(Aereo a : aereoDAO.getAerei()){
+        for(Aereo a : aereoDAO.getListaAerei()){
             String[] aereo = new String[3];
             aereo[0] = a.getIdAereo();
             aereo[1] = a.getModello();

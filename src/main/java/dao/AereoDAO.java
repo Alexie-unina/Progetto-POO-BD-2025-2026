@@ -63,7 +63,7 @@ public class AereoDAO {
         }
     }
 
-    public List<Aereo> getAerei() throws SQLException {
+    public List<Aereo> getListaAerei() throws SQLException {
         String query = """
                 SELECT *
                 FROM Aereo;

@@ -1,7 +1,6 @@
 package dao;
 
 import database.ConnessioneDatabase;
-import model.Cliente;
 import model.Pilota;
 
 import java.sql.*;
@@ -75,7 +74,7 @@ public class PilotaDAO {
         }
     }
 
-    public List<Pilota> getPiloti() throws SQLException {
+    public List<Pilota> getListaPiloti() throws SQLException {
         String query = """
                 SELECT *
                 FROM Pilota
@@ -105,10 +104,8 @@ public class PilotaDAO {
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1,idPilota);
-            
-            int i = ps.executeUpdate();
-            System.out.println(i);
-            return true;
+
+            return ps.execute();
         } catch (SQLException e) {
             throw new SQLException(e);
         }

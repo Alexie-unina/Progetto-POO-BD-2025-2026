@@ -100,7 +100,7 @@ public class ListaPiloti {
                         JOptionPane.showMessageDialog(null,"Selezionare prima un pilota");
                         return;
                     }
-                    controller.rimuoviPilota(listaPiloti.get(JListaPiloti.getSelectedIndex())[0]);
+                    controller.rimuoviPilota(listaPiloti.get(JListaPiloti.getSelectedIndex())[5]);
                     System.out.println("rimosso correttamente");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null,ex.getMessage());
