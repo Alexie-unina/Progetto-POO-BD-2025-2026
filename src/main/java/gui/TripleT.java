@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class TripleT {
     private JPanel mainPanel;
@@ -20,11 +21,16 @@ public class TripleT {
         frame.setContentPane(mainPanel);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        try{
-            ttt = ImageIO.read(new File("src/main/java/tripleT.png"));
+        URL imgURL = getClass().getResource("/tripleT.png");
+        if (imgURL == null) {
+            throw new RuntimeException("Resource not found on classpath!");
+        }
+        try {
+            ttt = ImageIO.read(imgURL);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         tripleT.setIcon(new ImageIcon(ttt));
         frame.pack();
 
