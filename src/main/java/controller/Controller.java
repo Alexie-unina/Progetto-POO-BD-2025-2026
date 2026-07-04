@@ -492,15 +492,15 @@ public class  Controller {
         VoloDAO voloDAO = new VoloDAO();
         List<String[]> listaVoli = new ArrayList<>();
         for (Volo volo : voloDAO.getListaVoli()){
-            String[] v = new String[9];
+            String[] v = new String[8];
             v[0] = volo.getIdVolo();
             v[1] = volo.getDestinazione();
-            v[3] = String.valueOf(volo.getDurata());
-            v[4] = volo.getPilota().getIdPilota()    + " " + volo.getPilota().getNomeCompleto();
-            v[5] = volo.getCoPilota().getIdPilota()  + " " + volo.getCoPilota().getNomeCompleto();
-            v[6] = volo.getHostess1().getIdHostess() + " " + volo.getHostess1().getNomeCompleto();
-            v[7] = volo.getHostess2().getIdHostess() + " " + volo.getHostess2().getNomeCompleto();
-            v[8] = volo.getAereo().getIdAereo();
+            v[2] = String.valueOf(volo.getDurata());
+            v[3] = volo.getPilota().getIdPilota()    + " " + volo.getPilota().getNomeCompleto();
+            v[4] = volo.getCoPilota().getIdPilota()  + " " + volo.getCoPilota().getNomeCompleto();
+            v[5] = volo.getHostess1().getIdHostess() + " " + volo.getHostess1().getNomeCompleto();
+            v[6] = volo.getHostess2().getIdHostess() + " " + volo.getHostess2().getNomeCompleto();
+            v[7] = volo.getAereo().getIdAereo();
 
             listaVoli.add(v);
         }
