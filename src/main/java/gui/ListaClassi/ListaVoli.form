@@ -50,7 +50,10 @@
             <children>
               <component id="63635" class="javax.swing.JList" binding="JListaVoli">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <enabled value="true"/>
+                  <font size="24"/>
+                </properties>
               </component>
             </children>
           </scrollpane>
@@ -60,7 +63,9 @@
                 <preferred-size width="150" height="50"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+            </properties>
           </component>
         </children>
       </grid>

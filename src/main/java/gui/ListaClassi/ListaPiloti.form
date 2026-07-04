@@ -50,7 +50,9 @@
             <children>
               <component id="3bda0" class="javax.swing.JList" binding="JListaPiloti">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <font size="24"/>
+                </properties>
               </component>
             </children>
           </scrollpane>
