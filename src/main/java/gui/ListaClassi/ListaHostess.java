@@ -47,12 +47,12 @@ public class ListaHostess {
         frame = new JFrame("Lista Aerei");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
         refreshLista();
         JListaHostess.setModel(model);
+        frame.pack();
 
         indietroButton.addActionListener(new ActionListener() {
             @Override

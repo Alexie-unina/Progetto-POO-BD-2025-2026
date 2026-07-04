@@ -4,9 +4,15 @@ import controller.Controller;
 import dao.PilotaDAO;
 import gui.ListaClassi.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Home {
     private JPanel mainPanel;
@@ -20,7 +26,6 @@ public class Home {
     private JLabel mm;
     private static JFrame frameHome;
     private Controller controller;
-
     public static void main(String[] args) {
         frameHome = new JFrame("Home");
         frameHome.setContentPane(new Home().mainPanel);
@@ -32,7 +37,6 @@ public class Home {
     public Home() {
         controller = new Controller();
         // Add action listeners or other initialization code here
-
         btnEsci.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,6 +78,13 @@ public class Home {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ListaPrenotazioni(frameHome,controller);
+            }
+        });
+        mm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                new TripleT(frameHome);
             }
         });
     }

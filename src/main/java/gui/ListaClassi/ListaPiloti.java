@@ -49,12 +49,12 @@ public class ListaPiloti {
         frame = new JFrame("Lista Piloti");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
         refreshLista();
         JListaPiloti.setModel(model);
+        frame.pack();
 
 
         indietroButton.addActionListener(new ActionListener() {

@@ -47,11 +47,13 @@ public class ListaClienti {
         frame = new JFrame("Lista Clienti");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
         refreshLista();
         JListaClienti.setModel(model);
+        frame.pack();
+
+
         indietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
