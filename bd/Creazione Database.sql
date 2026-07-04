@@ -107,10 +107,18 @@ BEGIN
 
 
     IF (numeroPostiPrenotati >= ( NumeroPostiAereo * 1.10 ) ) THEN
-       RAISE EXCEPTION 'Aereo Pienamente Prenotato';
+       RAISE EXCEPTION 'Aereo Pienamente Prenotato!
+       Posti Totali Aereo : %
+       Posti gia Prenotati: %', numeroPostiAereo,numeroPostiPrenotati;
     END IF;
 
     RETURN NEW;
 
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER trgOverbooking
+BEFORE INSERT ON Prenotazione
+FOR EACH ROW
+EXECUTE FUNCTION checkOverbooking();

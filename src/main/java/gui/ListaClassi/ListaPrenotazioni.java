@@ -36,6 +36,7 @@ public class ListaPrenotazioni {
                         + listaPrenotazioni.get(i)[8]);     //Classe
             }
             model.addAll(listaPrenotazioniFormattata);
+            frame.pack();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"E stato riscontrato un problema con il database \n Informazioni in Console");
             System.out.println(e.getMessage());
@@ -48,12 +49,12 @@ public class ListaPrenotazioni {
         frame = new JFrame("Lista Prenotazioni");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
         frameChiamante.setVisible(false);
         frame.setVisible(true);
 
         refreshLista();
         JListaPrenotazioni.setModel(model);
+        frame.pack();
 
 
         indietroButton.addActionListener(new ActionListener() {
@@ -102,6 +103,7 @@ public class ListaPrenotazioni {
                     JOptionPane.showMessageDialog(null,ex.getMessage());
                 }
                 refreshLista();
+
             }
         });
     }
