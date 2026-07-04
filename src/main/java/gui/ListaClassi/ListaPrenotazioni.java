@@ -97,6 +97,10 @@ public class ListaPrenotazioni {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
+                    if(JListaPrenotazioni.getSelectedIndex() == -1){
+                        JOptionPane.showMessageDialog(null,"Selezionare prima una prenotazione");
+                        return;
+                    }
                     controller.rimuoviPrenotazione(listaPrenotazioni.get(JListaPrenotazioni.getSelectedIndex())[0]);
                     System.out.println("rimosso correttamente");
                 } catch (Exception ex) {

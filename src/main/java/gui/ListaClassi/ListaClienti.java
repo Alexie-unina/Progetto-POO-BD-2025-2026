@@ -92,7 +92,8 @@ public class ListaClienti {
                 try {
                     int i = JListaClienti.getSelectedIndex();
                     if(i == -1){
-                        JOptionPane.showMessageDialog(null,"Selezionare un cliente");
+                        JOptionPane.showMessageDialog(null,"Selezionare prima un cliente");
+                        return;
                     }
                     controller.rimuoviCliente(listaClienti.get(i)[5]);
                     System.out.println("rimosso correttamente");

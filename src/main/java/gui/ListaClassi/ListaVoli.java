@@ -102,6 +102,10 @@ public class ListaVoli {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
+                    if(JListaVoli.getSelectedIndex() == -1){
+                        JOptionPane.showMessageDialog(null,"Selezionare prima un volo");
+                        return;
+                    }
                     controller.rimuoviVolo(listaVoli.get(JListaVoli.getSelectedIndex())[0]);
                     System.out.println("rimosso correttamente");
                 }
