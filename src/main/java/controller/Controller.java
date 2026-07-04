@@ -99,7 +99,7 @@ public class  Controller {
         return listaClienti;
     }
 
-    //stampa su terminale login e nomecompleto di ciascun cliente
+    //stampa su terminale login e nome completo di ciascun cliente
     public void stampaClienti(){ //Per debug
         for (Cliente cliente : clienti){
             System.out.println(cliente.getLogin() + cliente.getNomeCompleto());
@@ -416,6 +416,7 @@ public class  Controller {
 //        return aereo;
 //    }
 
+    //restituisce un array di stringhe contenente gli attributi di un aereo sotto forma di stringa
     public String[] getAereo(String idAereo) throws SQLException {
         Aereo a = new AereoDAO().getAereo(idAereo);
         String[] aereo = new String[3];
@@ -610,6 +611,7 @@ public class  Controller {
         prenotazioneDAO.closeConnection();
     }
 
+    //restituisce id e nome dei clienti prenotati per il volo selezionato
     public String mostraClientiVolo(String idVolo)throws Exception{
         VoloDAO voloDAO = new VoloDAO();
         String clienti = voloDAO.mostraClientiVolo(idVolo);
