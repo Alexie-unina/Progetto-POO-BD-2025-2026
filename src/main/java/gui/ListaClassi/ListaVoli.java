@@ -85,9 +85,17 @@ public class ListaVoli {
                 "Co-pilota:" + volo[4] + "\n" +
                 "hostess 1:" + volo[5] + "\n" +
                 "hostess 2:" + volo[6] + "\n" +
-                "aereo:" + volo[7] + "\n";
+                "aereo:" + volo[7] + "\n" +
+                "clienti: ";
+                try {
+                    String clienti = controller.mostraClientiVolo(volo[0]);
+                    s = s + clienti;
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,ex.getMessage());
+                }
 
                 textArea.setText(s);
+                frame.pack();
             }
         });
         rimuoviButton.addActionListener(new ActionListener() {

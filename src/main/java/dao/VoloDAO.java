@@ -91,6 +91,7 @@ public class VoloDAO {
     }
 
     public boolean rimuoviVolo(String idVolo) throws SQLException {
+        Connection connection = ConnessioneDatabase.getInstance().connection;
         String query = """
                 DELETE
                 FROM VOLO
@@ -105,6 +106,28 @@ public class VoloDAO {
         throw new RuntimeException(e);
         }
     }
+
+    public String mostraClientiVolo(String idVolo) throws SQLException {
+        Connection connection = ConnessioneDatabase.getInstance().connection;
+        String query = """
+                SELECT Cliente.idCliente, Cliente.nomeCompleto
+                        FROM Cliente\s
+                        JOIN PRENOTAZIONE
+                          on cliente.idCliente = Prenotazione.idCliente
+                        JOIN Volo
+                          on Volo.idVolo = prenotazione.IdVolo
+                        WHERE Prenotazione.idVolo = ?;
+        """;
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1,idVolo);
+        ResultSet rs = ps.executeQuery();
+        String clienti = "";
+        while(rs.next()){
+            clienti += "\t" + rs.getString(1) + " " + rs.getString(2) + "\n";
+        }
+        return clienti;
+    }
+
 
     public void closeConnection() throws SQLException {
         connection.close();

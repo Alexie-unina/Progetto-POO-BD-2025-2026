@@ -609,5 +609,12 @@ public class  Controller {
         prenotazioneDAO.rimuoviPrenotazione(idPrenotazione);
         prenotazioneDAO.closeConnection();
     }
+
+    public String mostraClientiVolo(String idVolo)throws Exception{
+        VoloDAO voloDAO = new VoloDAO();
+        String clienti = voloDAO.mostraClientiVolo(idVolo);
+        voloDAO.closeConnection();
+        return clienti;
+    }
 }
 

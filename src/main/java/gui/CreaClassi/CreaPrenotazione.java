@@ -84,7 +84,7 @@ public class CreaPrenotazione {
                 System.out.println("classe prenotazione in gui:" + classe);
                 try
                 {
-                    controller.creaPrenotazione(idPrenotazione, listaClienti.get(comboClienti.getSelectedIndex())[5], listaVoli.get(comboClienti.getSelectedIndex())[0], posto, classe);
+                    controller.creaPrenotazione(idPrenotazione, listaClienti.get(comboClienti.getSelectedIndex())[5], listaVoli.get(comboVoli.getSelectedIndex())[0], posto, classe);
                 }
                 catch (Exception ex) {
                     JOptionPane.showMessageDialog(frame,ex.getMessage());
