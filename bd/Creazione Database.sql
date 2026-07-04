@@ -45,8 +45,7 @@ CREATE TABLE Cliente(
 	idCliente			TEXT		NOT NULL PRIMARY KEY,
 
 	CONSTRAINT passwdlenght CHECK (length(password) >= 8),
-	CONSTRAINT CodiceFiscaleLenght CHECK (length(codiceFiscale) = 16)
-
+	CONSTRAINT CodiceFiscaleLenght CHECK (length(codiceFiscale) = 16),
 );
 CREATE TABLE Aereo(
 	idAereo				TEXT		NOT NULL PRIMARY KEY,
@@ -80,7 +79,7 @@ CREATE TABLE Prenotazione(
 	idPrenotazione 		TEXT 		NOT NULL PRIMARY KEY,
 	idCliente			TEXT		NOT NULL,
 	idVolo				TEXT		NOT NULL,
-	posto				CHAR(3)		NOT NULL,
+	posto				CHAR(3)		NOT NULL, --Posto non puo essere unique altrimenti l'overbooking non avrebbe senso
 	classe				VARCHAR(15) NOT NULL,
 	CONSTRAINT FK_CLIENTE FOREIGN KEY (idCliente) REFERENCES CLIENTE(idCliente)
 		ON DELETE CASCADE,
@@ -88,3 +87,30 @@ CREATE TABLE Prenotazione(
 		ON DELETE CASCADE,
 	CONSTRAINT ClasseENUM CHECK (classe IN ('PRIMA','ECONOMY','ECONOMYPLUS','BUSINESS'))
 );
+
+CREATE FUNCTION checkOverbooking()
+RETURNS TRIGGER AS $$
+DECLARE
+    numeroPostiPrenotati INTEGER;
+    numeroPostiAereo INTEGER;
+BEGIN
+
+    SELECT COUNT(IdPrenotazione) INTO numeroPostiPrenotati
+    FROM Prenotazione
+    WHERE NEW.idVolo = Prenotazione.idVolo;
+
+    SELECT Aereo.nPosti INTO numeroPostiAereo
+    FROM Volo
+    JOIN Aereo
+        ON Aereo.idAereo = Volo.idAereo
+    WHERE Volo.idVolo = NEW.idVolo;
+
+
+    IF (numeroPostiPrenotati >= ( NumeroPostiAereo * 1.10 ) ) THEN
+       RAISE EXCEPTION 'Aereo Pienamente Prenotato';
+    END IF;
+
+    RETURN NEW;
+
+END;
+$$ LANGUAGE plpgsql;
