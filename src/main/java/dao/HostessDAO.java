@@ -21,15 +21,16 @@ public class HostessDAO {
     public boolean salvaHostess(Hostess h) throws SQLException {
         String query = """
                 INSERT INTO Hostess (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idHostess,salario)
-                VALUES 	(?,?,?,?,?,?,?)
-                    ON CONFLICT (idHostess) DO UPDATE
-                            SET login               =   EXCLUDED.login,
-                                password            =   EXCLUDED.password,
-                                nomeCompleto        =   EXCLUDED.nomeCompleto,
-                                codiceFiscale       =   EXCLUDED.codiceFiscale,
-                                numeroCellulare     =   EXCLUDED.numeroCellulare,
-                                salario             =   EXCLUDED.salario;
+                VALUES 	(?,?,?,?,?,?,?);
                 """;
+//                    ON CONFLICT (idHostess) DO UPDATE
+//                            SET login               =   EXCLUDED.login,
+//                                password            =   EXCLUDED.password,
+//                                nomeCompleto        =   EXCLUDED.nomeCompleto,
+//                                codiceFiscale       =   EXCLUDED.codiceFiscale,
+//                               numeroCellulare     =   EXCLUDED.numeroCellulare,
+//                                salario             =   EXCLUDED.salario;
+
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1,h.getLogin());

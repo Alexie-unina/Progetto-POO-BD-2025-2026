@@ -48,20 +48,41 @@ public class PrenotazioneDAO {
                 rs.getString(5));
 
     }
-    public List<String> getListaPrenotazioni() throws SQLException {
+    public List<Prenotazione> getListaPrenotazioni() throws SQLException {
         String query = """
-                SELECT idPrenotazione,posto
+                SELECT *
                 FROM Prenotazione;
                 """;
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
-        List<String> prenotazioni = new ArrayList<>();
+        List<Prenotazione> prenotazioni = new ArrayList<>();
         while (rs.next()){
-            prenotazioni.add(rs.getString(1) + " " + rs.getString(2));
+            prenotazioni.add(new Prenotazione(
+                    rs.getString(1),
+                    new ClienteDAO().getCliente(rs.getString(2)),
+                    new VoloDAO().getVolo(rs.getString(3)),
+                    rs.getString(4),
+                    rs.getString(5)
+            ));
         }
         return prenotazioni;
     }
 
+    public boolean rimuoviPrenotazione(String idPrenotazione) throws SQLException {
+        String query = """
+                DELETE
+                FROM Prenotazione
+                WHERE (idPrenotazione = ?);
+                """;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1,idPrenotazione);
+
+            return ps.execute();
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void closeConnection() throws SQLException {
         connection.close();
     }

@@ -21,15 +21,16 @@ public class PilotaDAO {
     public boolean salvaPilota(Pilota p) throws SQLException {
         String query = """
                 INSERT INTO Pilota (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario)
-                VALUES 	(?,?,?,?,?,?,?)
-                    ON CONFLICT (idPilota) DO UPDATE
-                            SET login               =   EXCLUDED.login,
-                                password            =   EXCLUDED.password,
-                                nomeCompleto        =   EXCLUDED.nomeCompleto,
-                                codiceFiscale       =   EXCLUDED.codiceFiscale,
-                                numeroCellulare     =   EXCLUDED.numeroCellulare,
-                                salario             =   EXCLUDED.salario;
+                VALUES 	(?,?,?,?,?,?,?);
                 """;
+//                    ON CONFLICT (idPilota) DO UPDATE
+//                            SET login               =   EXCLUDED.login,
+//                                password            =   EXCLUDED.password,
+//                                nomeCompleto        =   EXCLUDED.nomeCompleto,
+//                                codiceFiscale       =   EXCLUDED.codiceFiscale,
+//                                numeroCellulare     =   EXCLUDED.numeroCellulare,
+//                                salario             =   EXCLUDED.salario;
+                
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1,p.getLogin());

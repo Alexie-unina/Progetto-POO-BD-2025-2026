@@ -20,11 +20,11 @@ public class AereoDAO {
     public boolean salvaAereo(Aereo a) throws SQLException {
         String query = """
                 INSERT INTO Aereo (idAereo,modello,nPosti)
-                VALUES 	(?,?,?)
-                ON CONFLICT (idAereo) DO UPDATE
-                    SET modello = EXCLUDED.modello,
-                    nPosti = EXCLUDED.nPosti;
+                VALUES 	(?,?,?);
                 """;
+//                ON CONFLICT (idAereo) DO UPDATE
+//                    SET modello = EXCLUDED.modello,
+//                    nPosti = EXCLUDED.nPosti;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1,a.getIdAereo());

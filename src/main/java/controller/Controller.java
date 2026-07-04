@@ -523,10 +523,12 @@ public class  Controller {
     }
 
     //rimuove un volo dalla lista dei voli
-    public void rimuoviVolo(int i)throws Exception{
-        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
+    public void rimuoviVolo(String idVolo)throws Exception{
+        if(idVolo.isEmpty()) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
             throw new Exception("nessun volo selezionato");
-        voli.remove(i);
+        VoloDAO voloDAO = new VoloDAO();
+        voloDAO.rimuoviVolo(idVolo);
+        voloDAO.closeConnection();
     }
 
     //crea un oggetto di tipo Prenotazione, facendo i dovuti controlli sugli attributi
@@ -566,11 +568,24 @@ public class  Controller {
     }
 
     //restituisce un arraylist di stringhe contenente id e classe di ciascuna prenotazione
-    public ArrayList<String> getListaPrenotazioni(){
-        ArrayList<String> listaPrenotazioni = new ArrayList<>();
-        for(Prenotazione prenotazione : prenotazioni){
-            listaPrenotazioni.add(prenotazione.getIdPrenotazione() + " " + prenotazione.getClasse());
+    public ArrayList<String[]> getListaPrenotazioni() throws SQLException {
+        ArrayList<String[]> listaPrenotazioni = new ArrayList<>();
+        PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
+        for(Prenotazione prenotazione : prenotazioneDAO.getListaPrenotazioni()){
+            String[] p = new  String[9];
+            p[0] = prenotazione.getIdPrenotazione();
+            p[1] = prenotazione.getCliente().getIdCliente();
+            p[2] = prenotazione.getCliente().getNomeCompleto();
+            p[3] = prenotazione.getVolo().getIdVolo();
+            p[4] = prenotazione.getVolo().getDestinazione();
+            p[5] = prenotazione.getVolo().getPilota().getIdPilota();
+            p[6] = prenotazione.getVolo().getCoPilota().getNomeCompleto();
+            p[7] = prenotazione.getPosto();
+            p[8] = prenotazione.getClasse();
+
+            listaPrenotazioni.add(p);
         }
+        prenotazioneDAO.closeConnection();
         return listaPrenotazioni;
     }
 
@@ -587,10 +602,12 @@ public class  Controller {
     }
 
     //rimuove una prenotazione dalla lista delle prenotazioni
-    public void rimuoviPrenotazione(int i)throws Exception{
-        if(i == -1) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
+    public void rimuoviPrenotazione(String idPrenotazione)throws Exception{
+        if(idPrenotazione.isEmpty()) //-1 è il valore restituito dal metodo getSelectedIndex di TextArea in caso nessun elemento sia selezionato
             throw new Exception("nessuna prenotazione selezionato");
-        prenotazioni.remove(i);
+        PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
+        prenotazioneDAO.rimuoviPrenotazione(idPrenotazione);
+        prenotazioneDAO.closeConnection();
     }
 }
 

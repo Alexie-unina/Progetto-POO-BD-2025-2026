@@ -20,14 +20,14 @@ public class ClienteDAO {
     public boolean salvaCliente(Cliente c) throws SQLException {
         String query = """
                 INSERT INTO Cliente (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idCliente)
-                VALUES 	(?,?,?,?,?,?)
-                    ON CONFLICT (idCliente) DO UPDATE
-                        SET login               =   EXCLUDED.login,
-                            password            =   EXCLUDED.password,
-                            nomeCompleto        =   EXCLUDED.nomeCompleto,
-                            codiceFiscale       =   EXCLUDED.codiceFiscale,
-                            numeroCellulare     =   EXCLUDED.numeroCellulare;
+                VALUES 	(?,?,?,?,?,?);
                 """;
+//        ON CONFLICT (idCliente) DO UPDATE
+//        SET login               =   EXCLUDED.login,
+//                password            =   EXCLUDED.password,
+//                nomeCompleto        =   EXCLUDED.nomeCompleto,
+//                codiceFiscale       =   EXCLUDED.codiceFiscale,
+//                numeroCellulare     =   EXCLUDED.numeroCellulare;
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1,c.getLogin());
         ps.setString(2,c.getPassword());

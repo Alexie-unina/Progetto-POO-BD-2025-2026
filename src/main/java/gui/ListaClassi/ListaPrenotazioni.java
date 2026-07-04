@@ -8,6 +8,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListaPrenotazioni {
 
@@ -20,10 +23,23 @@ public class ListaPrenotazioni {
     private JTextArea textArea;
     private JButton rimuoviButton;
     DefaultListModel<String> model = new DefaultListModel<>();
-
+    ArrayList<String[]> listaPrenotazioni = new ArrayList<>();
     public void refreshLista(){
         model.clear();
-        model.addAll(controller.getListaPrenotazioni());
+        try {
+            listaPrenotazioni = controller.getListaPrenotazioni();
+            List<String> listaPrenotazioniFormattata = new ArrayList<>();
+            for (int i = 0; i < listaPrenotazioni.size() ; i++){
+                listaPrenotazioniFormattata.add(listaPrenotazioni.get(i)[0] + " " //IdPrenotazione
+                        + listaPrenotazioni.get(i)[2] + " " //Nome Cliente
+                        + listaPrenotazioni.get(i)[4] + " " //Destinazione
+                        + listaPrenotazioni.get(i)[8]);     //Classe
+            }
+            model.addAll(listaPrenotazioniFormattata);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"E stato riscontrato un problema con il database \n Informazioni in Console");
+            System.out.println(e.getMessage());
+        }
     }
 
     public ListaPrenotazioni(JFrame frameChiamante, Controller controller){
@@ -60,27 +76,27 @@ public class ListaPrenotazioni {
             public void valueChanged(ListSelectionEvent e) {
                 int i = JListaPrenotazioni.getSelectedIndex();
                 String[] prenotazione;
-                try {
-                    prenotazione = controller.getPrenotazione(i);
-                    String s = "Proprietà della prenotazione: " + "\n" +
-                            "idPrenotazione:" + prenotazione[0] + "\n" +
-                            "cliente:" + prenotazione[1] + "\n" +
-                            "volo:" + prenotazione[2] + "\n" +
-                            "posto:" + prenotazione[3] + "\n" +
-                            "classe:" + prenotazione[4] + "\n";
-
-                    textArea.setText(s);
-                }
-                catch (Exception ex){
+                if (i==-1){
                     textArea.setText("");
+                    return;
                 }
+                prenotazione = listaPrenotazioni.get(i);
+                String s = "Proprietà della prenotazione: " + "\n" +
+                    "idPrenotazione:" + prenotazione[0] + "\n" +
+                    "cliente: id:" + prenotazione[1] + " Nome:" + prenotazione[2] + "\n" +
+                    "volo: id: " + prenotazione[3] + " Destinazione: " + prenotazione[4]+ "\n" +
+                    "Pilota id: " + prenotazione[5] + " Nome: " + prenotazione[6] + "\n" +
+                    "posto:" + prenotazione[7] + "\n" +
+                    "classe:" + prenotazione[8] + "\n";
+
+                textArea.setText(s);
             }
         });
         rimuoviButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    controller.rimuoviPrenotazione(JListaPrenotazioni.getSelectedIndex());
+                    controller.rimuoviPrenotazione(listaPrenotazioni.get(JListaPrenotazioni.getSelectedIndex())[0]);
                     System.out.println("rimosso correttamente");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null,ex.getMessage());

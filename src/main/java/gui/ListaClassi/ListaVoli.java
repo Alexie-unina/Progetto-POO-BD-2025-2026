@@ -94,7 +94,7 @@ public class ListaVoli {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    controller.rimuoviVolo(JListaVoli.getSelectedIndex());
+                    controller.rimuoviVolo(listaVoli.get(JListaVoli.getSelectedIndex())[0]);
                     System.out.println("rimosso correttamente");
                 }
                 catch (Exception ex){

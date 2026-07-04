@@ -20,7 +20,7 @@ public class VoloDAO {
 
         String query = """
                 INSERT INTO Volo (idVolo,destinazione,durata,idPilota,idCopilota,idHostess1,idHostess2,idAereo)
-                    VALUES(?,?,?,?,?,?,?,?)
+                VALUES(?,?,?,?,?,?,?,?);
                 """;
         try{
             PreparedStatement ps = connection.prepareStatement(query);
