@@ -18,9 +18,9 @@ public class ClienteDAO {
     }
 
     /**
+     * Salva un Cliente nel database
      * @author Alessandro Pizzi
      * @author Emanuele Servillo
-     * Salva un Cliente nel database
      * @see Cliente
      *
      * @param c {@link Cliente} da salvare
@@ -51,9 +51,9 @@ public class ClienteDAO {
     }
 
     /**
+     * Recupera un Cliente dal database
      * @author Alessandro Pizzi
      * @author Emanuele Servillo
-     * Recupera un Cliente dal database
      * @see Cliente
      *
      * @param idCliente id del {@link Cliente} da recuperare
@@ -116,7 +116,7 @@ public class ClienteDAO {
      * @author Emanuele Servillo
      * @see Cliente
      *
-     * @param idCliente id del {@link Cliente} da rimuovere
+     * @param idCliente id dell' {@link Cliente} da rimuovere
      * @return se l'operazione e andata a buon fine
      * @throws SQLException se si verifica un errore durante la connessione al database oppure durante l'esecuzione della query
      */

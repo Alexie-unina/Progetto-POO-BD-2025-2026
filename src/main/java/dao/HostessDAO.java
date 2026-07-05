@@ -1,6 +1,7 @@
 package dao;
 
 import database.ConnessioneDatabase;
+import model.Cliente;
 import model.Hostess;
 import model.Pilota;
 
@@ -18,6 +19,16 @@ public class HostessDAO {
         }
     }
 
+    /**
+     * Salva un Hostess nel database
+     * @author Alessandro Pizzi
+     * @author Emanuele Servillo
+     * @see Hostess
+     *
+     * @param h {@link Hostess} da salvare
+     * @return se l'operazione e andata a buon fine
+     * @throws SQLException se si verifica un errore durante la connessione al database oppure durante l'esecuzione della query
+     */
     public boolean salvaHostess(Hostess h) throws SQLException {
         String query = """
                 INSERT INTO Hostess (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idHostess,salario)
@@ -49,6 +60,17 @@ public class HostessDAO {
         }
 
     }
+
+    /**
+     * Recupera un Hostess dal database
+     * @author Alessandro Pizzi
+     * @author Emanuele Servillo
+     * @see Hostess
+     *
+     * @param idHostess id del {@link Hostess} da recuperare
+     * @return l'oggetto {@link Hostess} con l'id specificato
+     * @throws SQLException se si verifica un errore durante la connessione al database oppure durante l'esecuzione della query
+     */
     public Hostess getHostess(String idHostess) throws SQLException {
         String query = """
                 SELECT login,password,nomeCompleto,codiceFiscale,numeroCellulare,idHostess,salario
@@ -76,6 +98,17 @@ public class HostessDAO {
         }
     }
 
+    /**
+     * Recupera tutti gli Hostess dal database e li restituisce in una lista
+     * @author Alessandro Pizzi
+     * @author Emanuele Servillo
+     * @see Hostess
+     * @see List
+     *
+     * @return una lista di {@link Hostess} contenente tutti gli hostess presenti nel database
+     * @throws SQLException se si verifica un errore durante la connessione al database oppure durante l'esecuzione della query
+     */
+
     public List<Hostess> getListaHostess() throws SQLException {
         String query = """
                 SELECT *
@@ -98,6 +131,17 @@ public class HostessDAO {
 
     }
 
+    /**
+     * Rimuove un Hostess dal database
+     * @author Alessandro Pizzi
+     * @author Emanuele Servillo
+     * @see Hostess
+     *
+     * @param idHostess id dell' {@link Hostess} da rimuovere
+     * @return se l'operazione e andata a buon fine
+     * @throws SQLException se si verifica un errore durante la connessione al database oppure durante l'esecuzione della query
+     */
+
     public boolean rimuoviHostess(String idHostess) throws SQLException {
         String query = """
                 DELETE
@@ -113,6 +157,7 @@ public class HostessDAO {
             throw new SQLException(e);
         }
     }
+
 
     public void closeConnection() throws SQLException {
         connection.close();
