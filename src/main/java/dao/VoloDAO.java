@@ -15,6 +15,27 @@ public class VoloDAO {
     public VoloDAO() throws SQLException {
     }
 
+    /**
+     * Salva un Volo nella tabella Volo
+     * <p>
+     *    Esempio di utilizzo:
+     * {@snippet :
+     * VoloDAO voloDAO = new VoloDAO();
+     * Volo v = new Volo(a, a, a, a, a, a, a, a);
+     * voloDAO.salvaVolo();
+     * voloDAO.closeConnection();
+     *
+     * }
+     * </p>
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     *
+     *
+     * @param v il {@link Volo} da salvare
+     * @see Volo
+     * @return se l'operazione è andata a buon fine
+     * @throws SQLException se ci sono stati problemi con la connessione o l'esecuzione della query
+     */
     public boolean salvaVolo(Volo v) throws SQLException {
         Connection connection = ConnessioneDatabase.getInstance().connection;
 
@@ -42,6 +63,16 @@ public class VoloDAO {
         }
     }
 
+    /**
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @return la lista dei Voli {@link Volo}
+     * @see Volo
+     * @see HostessDAO
+     * @see PilotaDAO
+     * @see AereoDAO
+     * @throws SQLException se ci sono stati problemi con la connessione o l'esecuzione della query
+     */
     public List<Volo> getListaVoli() throws SQLException {
         Connection connection = ConnessioneDatabase.getInstance().connection;
 
@@ -68,6 +99,16 @@ public class VoloDAO {
         return voli;
     }
 
+    /**
+     * Recupera un Volo dalla tabella Volo
+     * @param idvolo id del {@link Volo} da recuperare
+     * @see Volo
+     * @see PilotaDAO
+     * @see HostessDAO
+     * @see AereoDAO
+     * @return il Volo recuperato
+     * @throws SQLException se ci sono stati problemi con la connessione o l'esecuzione della query
+     */
     public Volo getVolo(String idvolo) throws SQLException {
         Connection connection = ConnessioneDatabase.getInstance().connection;
         String query = """
@@ -90,6 +131,12 @@ public class VoloDAO {
         }
     }
 
+    /**
+     * Rimuove un Volo dalla tabella Volo
+     * @param idVolo id del Volo da rimuovere
+     * @return se l'operazione è andata a buon fine
+     * @throws SQLException se ci sono stati problemi con la connessione o l'esecuzione della query
+     */
     public boolean rimuoviVolo(String idVolo) throws SQLException {
         Connection connection = ConnessioneDatabase.getInstance().connection;
         String query = """
@@ -107,6 +154,15 @@ public class VoloDAO {
         }
     }
 
+    /**
+     * Mostra i Clienti prenotati per un Volo
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @param idVolo id del {@link Volo} da cui selezionare i Clienti
+     * @see Volo
+     * @return Stringhe contenenti login e nome dei clienti prenotati al Volo
+     * @throws SQLException se ci sono stati problemi con la connessione o l'esecuzione della query
+     */
     public String mostraClientiVolo(String idVolo) throws SQLException {
         Connection connection = ConnessioneDatabase.getInstance().connection;
         String query = """
@@ -128,7 +184,12 @@ public class VoloDAO {
         return clienti;
     }
 
-
+    /**
+     * Chiude la connessione al database
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @throws SQLException se ci sono stati problemi con la connessione
+     */
     public void closeConnection() throws SQLException {
         connection.close();
     }
