@@ -52,6 +52,7 @@ public class  Controller {
      * @throws AuthenticationException se la password è mancante o troppo corta
      * @throws SQLException se si verifica un errore durante il salvataggio nel database
      */
+
     //crea un oggetto di tipo Cliente, facendo i dovuti controlli sui suoi attributi
     public void creaCliente(String login,
                             String password,
