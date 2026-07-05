@@ -17,6 +17,17 @@ public class ClienteDAO {
         }
     }
 
+    /**
+     * @author Alessandro Pizzi
+     * @author Emanuele Servillo
+     * Salva un Cliente nel database
+     * @see Cliente
+     *
+     * @param c {@link Cliente} da salvare
+     * @return se l'operazione e andata a buon fine
+     * @throws SQLException se si verifica un errore durante la connessione al database oppure durante l'esecuzione della query
+     */
+
     public boolean salvaCliente(Cliente c) throws SQLException {
         String query = """
                 INSERT INTO Cliente (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idCliente)
@@ -38,6 +49,17 @@ public class ClienteDAO {
         boolean res = ps.execute();
         return res;
     }
+
+    /**
+     * @author Alessandro Pizzi
+     * @author Emanuele Servillo
+     * Recupera un Cliente dal database
+     * @see Cliente
+     *
+     * @param idCliente id del {@link Cliente} da recuperare
+     * @return l'oggetto {@link Cliente} con l'id specificato
+     * @throws SQLException se si verifica un errore durante la connessione al database oppure durante l'esecuzione della query
+     */
     public Cliente getCliente(String idCliente) throws SQLException {
         String query = """
                 SELECT login,password,nomeCompleto,codiceFiscale,numeroCellulare,idCliente
@@ -58,6 +80,16 @@ public class ClienteDAO {
             rs.getString(6));
     }
 
+    /**
+     * Recupera tutti i clienti dal database e li restituisce in una lista
+     * @author Alessandro Pizzi
+     * @author Emanuele Servillo
+     * @see Cliente
+     * @see List
+     *
+     * @return una lista di {@link Cliente} contenente tutti i clienti presenti nel database
+     * @throws SQLException se si verifica un errore durante la connessione al database oppure durante l'esecuzione della query
+     */
     public List<Cliente> getClienti() throws SQLException {
         String query = """
                 SELECT *
@@ -78,6 +110,16 @@ public class ClienteDAO {
         return clienti;
     }
 
+    /**
+     * Rimuove un cliente dal database
+     * @author Alessandro Pizzi
+     * @author Emanuele Servillo
+     * @see Cliente
+     *
+     * @param idCliente id del {@link Cliente} da rimuovere
+     * @return se l'operazione e andata a buon fine
+     * @throws SQLException se si verifica un errore durante la connessione al database oppure durante l'esecuzione della query
+     */
     public boolean rimuoviCliente(String idCliente) throws SQLException {
         String query = """
                 DELETE
@@ -90,6 +132,16 @@ public class ClienteDAO {
         return ps.execute();
     }
 
+    /**
+     * Chiude la connessione al database
+     * @author Alessandro Pizzi
+     * @author Emanuele Servillo
+     *
+     * @see ConnessioneDatabase
+     * @see Connection
+     *
+     * @throws SQLException se si verifica un errore durante la chiusura della connessione
+     */
     public void closeConnection() throws SQLException {
         connection.close();
     }

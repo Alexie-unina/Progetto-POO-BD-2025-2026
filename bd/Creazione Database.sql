@@ -86,19 +86,21 @@ CREATE TABLE Prenotazione(
 	posto				CHAR(3)		NOT NULL, --Posto non puo essere unique altrimenti l'overbooking non avrebbe senso
 	classe				VARCHAR(15) NOT NULL,
 	CONSTRAINT FK_CLIENTE FOREIGN KEY (idCliente) REFERENCES CLIENTE(idCliente)
-		ON DELETE CASCADE,
+		ON DELETE CASCADE,CREATE OR REPLACE FUNCTION checkPostoPrenotazione()
+
 	CONSTRAINT FK_VOLO FOREIGN KEY (idVolo) REFERENCES VOLO(idVolo)
 		ON DELETE CASCADE,
 	CONSTRAINT ClasseENUM CHECK (classe IN ('PRIMA','ECONOMY','ECONOMYPLUS','BUSINESS'))
 );
 
-CREATE FUNCTION checkOverbooking()
+CREATE OR REPLACE FUNCTION checkOverbooking()
 RETURNS TRIGGER AS $$
 DECLARE
     numeroPostiPrenotati INTEGER;
     numeroPostiAereo INTEGER;
 BEGIN
 
+    --Numero Posti Prenotati
     SELECT COUNT(IdPrenotazione) INTO numeroPostiPrenotati
     FROM Prenotazione
     WHERE NEW.idVolo = Prenotazione.idVolo;
@@ -110,7 +112,7 @@ BEGIN
     WHERE Volo.idVolo = NEW.idVolo;
 
 
-    IF (numeroPostiPrenotati >= ( NumeroPostiAereo * 1.10 ) ) THEN
+    IF (numeroPostiPrenotati + 1 > ( CAST(NumeroPostiAereo AS REAL) * 1.10 ) ) THEN
        RAISE EXCEPTION 'Aereo Pienamente Prenotato!
        Posti Totali Aereo : %
        Posti gia Prenotati: %', numeroPostiAereo,numeroPostiPrenotati;
@@ -119,7 +121,7 @@ BEGIN
     RETURN NEW;
 
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE 'plpgsql';
 
 
 CREATE TRIGGER trgOverbooking
@@ -157,7 +159,7 @@ BEGIN
 
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trg_checkPostoPrenotazione
     BEFORE INSERT ON Prenotazione
