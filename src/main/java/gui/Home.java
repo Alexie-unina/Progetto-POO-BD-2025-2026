@@ -36,7 +36,6 @@ public class Home {
 
     public Home() {
         controller = new Controller();
-        // Add action listeners or other initialization code here
         btnEsci.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
