@@ -15,6 +15,12 @@ public class TripleT {
     private JLabel tripleT;
     private JFrame frame;
     private BufferedImage ttt;
+
+    /**
+     * TUNG TUNG TUNG SAHUR
+     * ttt = TripleT
+     * @author Triple Tee
+     */
     public TripleT(JFrame frameChiamante){
         frame = new JFrame("TripleT");
         frameChiamante.setVisible(false);
