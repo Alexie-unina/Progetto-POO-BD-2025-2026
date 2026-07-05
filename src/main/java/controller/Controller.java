@@ -88,12 +88,34 @@ public class  Controller {
     }
     //OBSOLETO
     //restituisce l'arraylist di clienti
+
+    /**
+     * Restituisce l'arraylist di clienti.
+     *
+     * @author Alessandro Pizzi
+     * @return L'arraylist di clienti.
+     */
     public ArrayList<Cliente> getClienti(){
         return clienti;
     }
 
 
     //restituisce la lista contenente array di stringhe formati dai singoli attributi di cliente
+
+    /**
+     * Restituisce una lista di array di stringhe contenenti i singoli attributi di cliente.
+     * 1. login
+     * 2. password
+     * 3. nome completo
+     * 4. codice fiscale
+     * 5. numero di cellulare
+     * 6. id cliente
+     *
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @return La lista di array di stringhe contenenti i singoli attributi di cliente.
+     * @throws SQLException Se si verifica un errore durante la query al database.
+     */
     public List<String[]> getListaClienti() throws SQLException {
         List<String[]> listaClienti = new ArrayList<>();
         ClienteDAO clienteDAO = new ClienteDAO();
