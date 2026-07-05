@@ -45,7 +45,7 @@ CREATE TABLE Cliente(
 	idCliente			TEXT		NOT NULL PRIMARY KEY,
 
 	CONSTRAINT passwdlenght CHECK (length(password) >= 8),
-	CONSTRAINT CodiceFiscaleLenght CHECK (length(codiceFiscale) = 16),
+	CONSTRAINT CodiceFiscaleLenght CHECK (length(codiceFiscale) = 16)
 );
 CREATE TABLE Aereo(
 	idAereo				TEXT		NOT NULL PRIMARY KEY,
@@ -122,3 +122,40 @@ CREATE TRIGGER trgOverbooking
 BEFORE INSERT ON Prenotazione
 FOR EACH ROW
 EXECUTE FUNCTION checkOverbooking();
+
+CREATE OR REPLACE FUNCTION checkPostoPrenotazione()
+    RETURNS TRIGGER AS $$
+DECLARE
+    numeroStessoClientePosto INTEGER;
+    numeroTotalePosto INTEGER;
+BEGIN
+    -- A) stesso cliente non può prenotare lo stesso posto due vol1te sullo stesso volo
+    SELECT COUNT(*) INTO numeroStessoClientePosto
+    FROM Prenotazione
+    WHERE idVolo = NEW.idVolo
+      AND posto = NEW.posto
+      AND idCliente = NEW.idCliente;
+
+    IF numeroStessoClientePosto >= 1 THEN
+        RAISE EXCEPTION 'Il cliente ha gia'' prenotato questo posto su questo volo';
+    END IF;
+
+    -- B) lo stesso posto può essere prenotato al massimo 2 volte sullo stesso volo
+    SELECT COUNT(*) INTO numeroTotalePosto
+    -- Conta quante volte lo stesso posto è già stato prenotato per questo volo
+    FROM Prenotazione
+    WHERE idVolo = NEW.idVolo
+      AND posto = NEW.posto;
+
+    IF numeroTotalePosto >= 2 THEN
+        RAISE EXCEPTION 'Posto % gia'' prenotato il numero massimo di volte su questo volo', NEW.posto;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_checkPostoPrenotazione
+    BEFORE INSERT ON Prenotazione
+    FOR EACH ROW
+EXECUTE FUNCTION checkPostoPrenotazione();
