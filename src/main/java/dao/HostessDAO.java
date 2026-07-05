@@ -23,8 +23,8 @@ public class HostessDAO {
      * Salva un Hostess nel database
      * @author Alessandro Pizzi
      * @author Emanuele Servillo
-     * @see Hostess
      *
+     * @see Hostess
      * @param h {@link Hostess} da salvare
      * @return se l'operazione e andata a buon fine
      * @throws SQLException se si verifica un errore durante la connessione al database oppure durante l'esecuzione della query
