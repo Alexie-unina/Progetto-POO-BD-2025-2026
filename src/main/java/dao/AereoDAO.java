@@ -17,6 +17,16 @@ public class AereoDAO {
         }
     }
 
+    /**
+     * Salva un Aereo nella tabella Aereo
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     *
+     * @see Aereo
+     * @param a {@link Aereo} da salvare
+     * @return se l'operazione è andata a buon fine
+     * @throws SQLException se ci sono stati problemi nella connessione o nell'esecuzione della query
+     */
     public boolean salvaAereo(Aereo a) throws SQLException {
         String query = """
                 INSERT INTO Aereo (idAereo,modello,nPosti)
@@ -40,6 +50,17 @@ public class AereoDAO {
         }
 
     }
+
+    /**
+     * Recupera un Aereo dal database
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     *
+     * @param idAereo id dell'{@link Aereo} da recuperare
+     * @see Aereo
+     * @return L'aereo recuperato
+     * @throws SQLException se ci sono stati problemi nella connessione o nell'esecuzione della query
+     */
     public Aereo getAereo(String idAereo) throws SQLException {
         String query = """
                 SELECT idAereo,modello,nPosti
@@ -63,6 +84,14 @@ public class AereoDAO {
         }
     }
 
+    /**
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     *
+     * @return la lista degli Aerei {@link Aereo}
+     * @see Aereo
+     * @throws SQLException se ci sono stati problemi nella connessione o nell'esecuzione della query
+     */
     public List<Aereo> getListaAerei() throws SQLException {
         String query = """
                 SELECT *
@@ -83,6 +112,16 @@ public class AereoDAO {
         }
     }
 
+    /**
+     * Rimuove un {@link Aereo} dalla tabella Aereo
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     *
+     * @see Aereo
+     * @param idAereo id dell'aereo da rimuovere
+     * @return se l'operazione è andata a buon fine
+     * @throws SQLException se ci sono stati problemi nella connessione o nell'esecuzione della query
+     */
     public boolean rimuoviAereo(String idAereo) throws SQLException {
         String query = """
                 DELETE
@@ -100,6 +139,12 @@ public class AereoDAO {
         }
     }
 
+    /**
+     * Chiude la connessione col database
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @throws SQLException se ci sono stati problemi con la connessione
+     */
     public void closeConnection() throws SQLException {
         connection.close();
     }
