@@ -27,6 +27,22 @@ public class ListaClienti {
     private List<String[]> listaClienti;
     private DefaultListModel<String> model = new DefaultListModel<String>();
 
+    /**
+     * Aggiorna la lista grafica dei clienti con i dati presenti nel database.
+     * Recupera i clienti tramite il controller, formatta id e nome completo di ogni cliente
+     * e le inserisce nel modello della lista.
+     *
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @see Controller
+     * @see DefaultListModel
+     * @see JList
+     * @see JTextArea
+     * @see SQLException
+     * @see JOptionPane
+     * @see model.Cliente
+     * @see dao.ClienteDAO
+     */
     private void refreshLista () {
         model.clear();
         try {

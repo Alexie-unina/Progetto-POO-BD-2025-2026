@@ -28,6 +28,22 @@ public class ListaAerei {
     DefaultListModel<String> model = new DefaultListModel<String>();
     private List<String[]> listaAerei = new ArrayList<>();
 
+    /**
+     * Aggiorna la lista grafica degli aerei con i dati presenti nel database.
+     * Recupera gli aerei tramite il controller, formatta id e modello di ogni aereo
+     * e li mostra nel modello della lista.
+     *
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @see Controller
+     * @see DefaultListModel
+     * @see JList
+     * @see JTextArea
+     * @see SQLException
+     * @see JOptionPane
+     * @see model.Aereo
+     * @see dao.AereoDAO
+     */
     private void refreshLista () {
         model.clear();
         try {
@@ -43,6 +59,16 @@ public class ListaAerei {
         }
     }
 
+    /**
+     * Costruttore della classe ListaAerei
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     *
+     * @see JFrame
+     * @see Controller
+     * @param frameChiamante
+     * @param controller
+     */
     public ListaAerei(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
         this.controller = controller;
@@ -55,8 +81,6 @@ public class ListaAerei {
         System.out.println("Aggiornata lista aerei"); //Debug
         JListaAerei.setModel(model);
         frame.pack();
-
-
 
         indietroButton.addActionListener(new ActionListener() {
             @Override
@@ -107,8 +131,6 @@ public class ListaAerei {
                 refreshLista();
             }
         });
-
     }
-
 
 }

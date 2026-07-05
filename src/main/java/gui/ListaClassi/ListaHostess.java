@@ -26,6 +26,22 @@ public class ListaHostess {
     DefaultListModel<String> model = new DefaultListModel<>();
     private List<String[]> listaHostess = new ArrayList<>();
 
+    /**
+     * Aggiorna la lista grafica degli Hostess con i dati presenti nel database.
+     * Recupera gli Hostess tramite il controller, formatta id e Nome Completo di ogni hostess
+     * e li mostra nel modello della lista.
+     *
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @see Controller
+     * @see DefaultListModel
+     * @see JList
+     * @see JTextArea
+     * @see SQLException
+     * @see JOptionPane
+     * @see model.Hostess
+     * @see dao.HostessDAO
+     */
     private void refreshLista () {
         model.clear();
         try {

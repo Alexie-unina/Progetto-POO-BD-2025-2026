@@ -4,6 +4,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * La classe ConnessioneDatabase implementa il pattern Singleton per gestire
+ * la connessione al database PostgreSQL utilizzato dall'applicazione.
+ * Garantisce che ci sia una sola istanza attiva della connessione durante
+ * il ciclo di vita dell'applicazione. Fornisce inoltre metodi per accedere
+ * alla connessione stessa in modo sicuro.
+ * @author Alessandro Pizzi
+ * @author Emanuele Servillo
+ * @see Connection
+ * @see DriverManager
+ * @see SQLException
+ *
+ */
 public class ConnessioneDatabase {
 
 	// ATTRIBUTI

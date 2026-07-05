@@ -28,6 +28,22 @@ public class ListaPiloti {
     DefaultListModel<String> model = new DefaultListModel<>();
     private List<String[]> listaPiloti = new ArrayList<>();
 
+    /**
+     * Aggiorna la lista grafica dei piloti con i dati presenti nel database.
+     * Recupera i piloti tramite il controller, formatta id e nome completo di ogni pilota
+     * e aggiorna il modello associato alla lista.
+     *
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @see Controller
+     * @see DefaultListModel
+     * @see JList
+     * @see JTextArea
+     * @see SQLException
+     * @see JOptionPane
+     * @see model.Pilota
+     * @see dao.PilotaDAO
+     */
     public void refreshLista(){
         model.clear();
         try {
@@ -43,6 +59,25 @@ public class ListaPiloti {
         }
     }
 
+    /**
+     * Costruttore della classe ListaPiloti.
+     * Inizializza la finestra grafica per la visualizzazione dei piloti,
+     * nasconde la finestra chiamante, carica la lista dei piloti e configura
+     * i listener per navigazione, creazione, selezione e rimozione.
+     *
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @param frameChiamante finestra precedente da nascondere durante la visualizzazione della lista
+     * @param controller controller usato per accedere ai dati e alle operazioni sui piloti
+     * @see JFrame
+     * @see Controller
+     * @see CreaPilota
+     * @see ActionListener
+     * @see ListSelectionListener
+     * @see JOptionPane
+     * @see model.Pilota
+     * @see dao.PilotaDAO
+     */
     public ListaPiloti(JFrame frameChiamante,Controller controller) {
         this.frameChiamante = frameChiamante;
         this.controller = controller;
@@ -55,7 +90,6 @@ public class ListaPiloti {
         refreshLista();
         JListaPiloti.setModel(model);
         frame.pack();
-
 
         indietroButton.addActionListener(new ActionListener() {
             @Override
@@ -110,4 +144,3 @@ public class ListaPiloti {
         });
     }
 }
-

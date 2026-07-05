@@ -24,6 +24,26 @@ public class ListaPrenotazioni {
     private JButton rimuoviButton;
     DefaultListModel<String> model = new DefaultListModel<>();
     ArrayList<String[]> listaPrenotazioni = new ArrayList<>();
+
+    /**
+     * Aggiorna la lista grafica delle prenotazioni con i dati presenti nel database.
+     * Recupera le prenotazioni tramite il controller, formatta le informazioni principali
+     * di ciascuna prenotazione e aggiorna il modello della lista.
+     *
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @see Controller
+     * @see DefaultListModel
+     * @see JList
+     * @see JTextArea
+     * @see SQLException
+     * @see JOptionPane
+     * @see model.Prenotazione
+     * @see model.Cliente
+     * @see model.Volo
+     * @see model.Pilota
+     * @see dao.PrenotazioneDAO
+     */
     public void refreshLista(){
         model.clear();
         try {
@@ -43,6 +63,28 @@ public class ListaPrenotazioni {
         }
     }
 
+    /**
+     * Costruttore della classe ListaPrenotazioni.
+     * Inizializza la finestra grafica per la visualizzazione delle prenotazioni,
+     * carica i dati iniziali e configura i listener per tornare indietro,
+     * creare una nuova prenotazione, visualizzare i dettagli e rimuovere una prenotazione.
+     *
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @param frameChiamante finestra precedente da nascondere durante la visualizzazione della lista
+     * @param controller controller usato per accedere ai dati e alle operazioni sulle prenotazioni
+     * @see JFrame
+     * @see Controller
+     * @see CreaPrenotazione
+     * @see ActionListener
+     * @see ListSelectionListener
+     * @see JOptionPane
+     * @see model.Prenotazione
+     * @see model.Cliente
+     * @see model.Volo
+     * @see model.Pilota
+     * @see dao.PrenotazioneDAO
+     */
     public ListaPrenotazioni(JFrame frameChiamante, Controller controller){
         this.frameChiamante = frameChiamante;
         this.controller = controller;
@@ -51,7 +93,6 @@ public class ListaPrenotazioni {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameChiamante.setVisible(false);
         frame.setVisible(true);
-
         refreshLista();
         JListaPrenotazioni.setModel(model);
         frame.pack();
