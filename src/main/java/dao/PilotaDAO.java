@@ -1,6 +1,7 @@
 package dao;
 
 import database.ConnessioneDatabase;
+import model.Aereo;
 import model.Pilota;
 
 import java.sql.*;
@@ -18,6 +19,15 @@ public class PilotaDAO {
         }
     }
 
+    /**
+     * Salva un Pilota nella tabella Pilota
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @param p {@link Pilota} da salvare
+     * @see Pilota
+     * @return se l'operazione è andata a buon fine
+     * @throws SQLException se ci sono stati problemi con la connessione o l'esecuzione della query
+     */
     public boolean salvaPilota(Pilota p) throws SQLException {
         String query = """
                 INSERT INTO Pilota (login,password,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario)
@@ -46,8 +56,17 @@ public class PilotaDAO {
             
             throw new RuntimeException(e);
         }
-
     }
+
+    /**
+     * Recupera un Pilota dalla tabella Pilota
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @param idPilota id del {@link Pilota} da recuperare
+     * @see Pilota
+     * @return il Pilota recuperato
+     * @throws SQLException se ci sono stati problemi con la connessione o l'esecuzione della query
+     */
     public Pilota getPilota(String idPilota) throws SQLException {
         String query = """
                 SELECT login,password,nomeCompleto,codiceFiscale,numeroCellulare,idPilota,salario
@@ -75,6 +94,13 @@ public class PilotaDAO {
         }
     }
 
+    /**
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @return la lista dei Piloti {@link Pilota}
+     * @see Pilota
+     * @throws SQLException se ci sono stati problemi con la connessione o l'esecuzione della query
+     */
     public List<Pilota> getListaPiloti() throws SQLException {
         String query = """
                 SELECT *
@@ -96,6 +122,15 @@ public class PilotaDAO {
         return piloti;
     }
 
+    /**
+     * Rimuove un Pilota dalla tabella Pilota
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @param idPilota id del {@link Pilota} da rimuovere
+     * @see Pilota
+     * @return se l'operazione è andata a buon fine
+     * @throws SQLException se ci sono stati problemi con la connessione o l'esecuzione della query
+     */
     public boolean rimuoviPilota(String idPilota) throws SQLException {
         String query = """
                 DELETE
@@ -112,6 +147,12 @@ public class PilotaDAO {
         }
     }
 
+    /**
+     * Chiude la connessione al database
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     * @throws SQLException se ci sono stati problemi con la connessione
+     */
     public void closeConnection() throws SQLException {
         connection.close();
     }
