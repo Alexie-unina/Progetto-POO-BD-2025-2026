@@ -39,6 +39,19 @@ public class  Controller {
        scemo chi legge
     */
 
+    /**
+     * Crea un nuovo cliente dopo aver validato i dati inseriti e lo salva tramite DAO.
+     *
+     * @param login login del cliente; non deve essere vuoto e deve essere univoco
+     * @param password password del cliente; non deve essere vuota e deve contenere almeno 8 caratteri
+     * @param nomeCompleto nome completo del cliente; non deve essere vuoto
+     * @param codiceFiscale codice fiscale del cliente; deve essere lungo 16 caratteri
+     * @param numeroDiCellulare numero di cellulare del cliente; può essere vuoto, in tal caso viene salvato come {@code null}
+     * @param idCliente identificativo univoco del cliente; non deve essere vuoto
+     * @throws ChiaveException se {@code login} o {@code idCliente} sono mancanti oppure già esistenti
+     * @throws AuthenticationException se la password è mancante o troppo corta
+     * @throws SQLException se si verifica un errore durante il salvataggio nel database
+     */
     //crea un oggetto di tipo Cliente, facendo i dovuti controlli sui suoi attributi
     public void creaCliente(String login,
                             String password,

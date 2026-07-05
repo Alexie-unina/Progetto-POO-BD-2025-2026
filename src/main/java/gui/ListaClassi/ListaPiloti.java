@@ -34,7 +34,7 @@ public class ListaPiloti {
             listaPiloti = controller.getListaPiloti();
             List<String> listaPilotiFormattata = new ArrayList<>();
             for (int i = 0; i < listaPiloti.size() ; i++){
-                listaPilotiFormattata.add(listaPiloti.get(i)[0] + " " + listaPiloti.get(i)[2]);
+                listaPilotiFormattata.add(listaPiloti.get(i)[5] + " " + listaPiloti.get(i)[2]);
             }
             model.addAll(listaPilotiFormattata);
         } catch (SQLException e) {

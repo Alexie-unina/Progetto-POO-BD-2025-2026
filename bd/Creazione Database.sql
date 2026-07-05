@@ -6,10 +6,14 @@ DROP TABLE IF EXISTS Cliente CASCADE;
 DROP TABLE IF EXISTS Aereo CASCADE;
 DROP TABLE IF EXISTS Volo CASCADE;
 DROP TABLE IF EXISTS Prenotazione CASCADE;
+DROP TRIGGER IF EXISTS trgOverbooking ON Prenotazione;
+DROP TRIGGER IF EXISTS trg_checkPostoPrenotazione ON Prenotazione;
+DROP FUNCTION IF EXISTS checkOverbooking();
+DROP FUNCTION IF EXISTS checkPostoPrenotazione();
 
 CREATE TABLE Pilota(
 
-	login				VARCHAR(30) NOT NULL,
+	login				VARCHAR(30) NOT NULL UNIQUE ,
 	password			VARCHAR(60) NOT NULL,
 	nomeCompleto		VARCHAR(30) NOT NULL,
 	codiceFiscale		CHAR(16)	NOT NULL,
@@ -23,7 +27,7 @@ CREATE TABLE Pilota(
 );
 CREATE TABLE Hostess(
 
-	login				VARCHAR(30) NOT NULL,
+	login				VARCHAR(30) NOT NULL UNIQUE,
 	password			VARCHAR(60) NOT NULL,
 	nomeCompleto		VARCHAR(30) NOT NULL,
 	codiceFiscale		CHAR(16)	NOT NULL,
@@ -37,7 +41,7 @@ CREATE TABLE Hostess(
 );
 CREATE TABLE Cliente(
 
-	login				VARCHAR(30) NOT NULL,
+	login				VARCHAR(30) NOT NULL UNIQUE,
 	password			VARCHAR(60) NOT NULL,
 	nomeCompleto		VARCHAR(30) NOT NULL,
 	codiceFiscale		CHAR(16)	NOT NULL,

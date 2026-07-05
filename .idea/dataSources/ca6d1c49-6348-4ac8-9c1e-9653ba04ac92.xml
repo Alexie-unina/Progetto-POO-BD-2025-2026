@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.55">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>900</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1071</IntrospectionStateNumber>
       <ServerVersion>18.4</ServerVersion>
       <StartupTime>1782984807</StartupTime>
       <TimeZones>true ACDT
@@ -1390,7 +1390,21 @@ false posix/Zulu
 true posixrules
 </TimeZones>
     </root>
-    <database id="2" parent="1" name="postgres">
+    <database id="2" parent="1" name="aereoporto">
+      <Grants>11||10|C|G
+11||-9223372036854775808|U|G
+11||10|U|G
+2200||6171|C|G
+2200||-9223372036854775808|U|G
+2200||6171|U|G
+13229||10|C|G
+13229||-9223372036854775808|U|G
+13229||10|U|G</Grants>
+      <IntrospectionStateNumber>1072</IntrospectionStateNumber>
+      <ObjectId>24963</ObjectId>
+      <OwnerName>postgres</OwnerName>
+    </database>
+    <database id="3" parent="1" name="postgres">
       <Comment>default administrative connection database</Comment>
       <Current>1</Current>
       <Grants>11||10|C|G
@@ -1402,22 +1416,8 @@ true posixrules
 13229||10|C|G
 13229||-9223372036854775808|U|G
 13229||10|U|G</Grants>
-      <IntrospectionStateNumber>890</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1071</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
-      <OwnerName>postgres</OwnerName>
-    </database>
-    <database id="3" parent="1" name="aereoporto">
-      <Grants>11||10|C|G
-11||-9223372036854775808|U|G
-11||10|U|G
-2200||6171|C|G
-2200||-9223372036854775808|U|G
-2200||6171|U|G
-13229||10|C|G
-13229||-9223372036854775808|U|G
-13229||10|U|G</Grants>
-      <IntrospectionStateNumber>900</IntrospectionStateNumber>
-      <ObjectId>24963</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
     <role id="4" parent="1" name="pg_checkpoint">
@@ -4927,12 +4927,516 @@ true posixrules
       <ValidatorSchema>pg_catalog</ValidatorSchema>
     </language>
     <schema id="271" parent="2" name="information_schema">
+      <AutoIntrospectionLevel>2</AutoIntrospectionLevel>
+      <Grants>13249||10|d|G
+13249||10|a|G
+13249||10|x|G
+13249||-9223372036854775808|r|G
+13249||10|r|G
+13249||10|t|G
+13249||10|D|G
+13249||10|w|G
+13258||10|d|G
+13258||10|a|G
+13258||10|x|G
+13258||-9223372036854775808|r|G
+13258||10|r|G
+13258||10|t|G
+13258||10|D|G
+13258||10|w|G
+13263||10|d|G
+13263||10|a|G
+13263||10|x|G
+13263||-9223372036854775808|r|G
+13263||10|r|G
+13263||10|t|G
+13263||10|D|G
+13263||10|w|G
+13267||10|d|G
+13267||10|a|G
+13267||10|x|G
+13267||-9223372036854775808|r|G
+13267||10|r|G
+13267||10|t|G
+13267||10|D|G
+13267||10|w|G
+13272||10|d|G
+13272||10|a|G
+13272||10|x|G
+13272||-9223372036854775808|r|G
+13272||10|r|G
+13272||10|t|G
+13272||10|D|G
+13272||10|w|G
+13277||10|d|G
+13277||10|a|G
+13277||10|x|G
+13277||-9223372036854775808|r|G
+13277||10|r|G
+13277||10|t|G
+13277||10|D|G
+13277||10|w|G
+13282||10|d|G
+13282||10|a|G
+13282||10|x|G
+13282||-9223372036854775808|r|G
+13282||10|r|G
+13282||10|t|G
+13282||10|D|G
+13282||10|w|G
+13287||10|d|G
+13287||10|a|G
+13287||10|x|G
+13287||-9223372036854775808|r|G
+13287||10|r|G
+13287||10|t|G
+13287||10|D|G
+13287||10|w|G
+13292||10|d|G
+13292||10|a|G
+13292||10|x|G
+13292||-9223372036854775808|r|G
+13292||10|r|G
+13292||10|t|G
+13292||10|D|G
+13292||10|w|G
+13297||10|d|G
+13297||10|a|G
+13297||10|x|G
+13297||-9223372036854775808|r|G
+13297||10|r|G
+13297||10|t|G
+13297||10|D|G
+13297||10|w|G
+13302||10|d|G
+13302||10|a|G
+13302||10|x|G
+13302||-9223372036854775808|r|G
+13302||10|r|G
+13302||10|t|G
+13302||10|D|G
+13302||10|w|G
+13307||10|d|G
+13307||10|a|G
+13307||10|x|G
+13307||-9223372036854775808|r|G
+13307||10|r|G
+13307||10|t|G
+13307||10|D|G
+13307||10|w|G
+13312||10|d|G
+13312||10|a|G
+13312||10|x|G
+13312||-9223372036854775808|r|G
+13312||10|r|G
+13312||10|t|G
+13312||10|D|G
+13312||10|w|G
+13317||10|d|G
+13317||10|a|G
+13317||10|x|G
+13317||-9223372036854775808|r|G
+13317||10|r|G
+13317||10|t|G
+13317||10|D|G
+13317||10|w|G
+13322||10|d|G
+13322||10|a|G
+13322||10|x|G
+13322||-9223372036854775808|r|G
+13322||10|r|G
+13322||10|t|G
+13322||10|D|G
+13322||10|w|G
+13327||10|d|G
+13327||10|a|G
+13327||10|x|G
+13327||-9223372036854775808|r|G
+13327||10|r|G
+13327||10|t|G
+13327||10|D|G
+13327||10|w|G
+13332||10|d|G
+13332||10|a|G
+13332||10|x|G
+13332||-9223372036854775808|r|G
+13332||10|r|G
+13332||10|t|G
+13332||10|D|G
+13332||10|w|G
+13337||10|d|G
+13337||10|a|G
+13337||10|x|G
+13337||-9223372036854775808|r|G
+13337||10|r|G
+13337||10|t|G
+13337||10|D|G
+13337||10|w|G
+13341||10|d|G
+13341||10|a|G
+13341||10|x|G
+13341||-9223372036854775808|r|G
+13341||10|r|G
+13341||10|t|G
+13341||10|D|G
+13341||10|w|G
+13346||10|d|G
+13346||10|a|G
+13346||10|x|G
+13346||-9223372036854775808|r|G
+13346||10|r|G
+13346||10|t|G
+13346||10|D|G
+13346||10|w|G
+13350||10|d|G
+13350||10|a|G
+13350||10|x|G
+13350||-9223372036854775808|r|G
+13350||10|r|G
+13350||10|t|G
+13350||10|D|G
+13350||10|w|G
+13355||10|d|G
+13355||10|a|G
+13355||10|x|G
+13355||-9223372036854775808|r|G
+13355||10|r|G
+13355||10|t|G
+13355||10|D|G
+13355||10|w|G
+13360||10|d|G
+13360||10|a|G
+13360||10|x|G
+13360||-9223372036854775808|r|G
+13360||10|r|G
+13360||10|t|G
+13360||10|D|G
+13360||10|w|G
+13365||10|d|G
+13365||10|a|G
+13365||10|x|G
+13365||-9223372036854775808|r|G
+13365||10|r|G
+13365||10|t|G
+13365||10|D|G
+13365||10|w|G
+13369||10|d|G
+13369||10|a|G
+13369||10|x|G
+13369||-9223372036854775808|r|G
+13369||10|r|G
+13369||10|t|G
+13369||10|D|G
+13369||10|w|G
+13374||10|d|G
+13374||10|a|G
+13374||10|x|G
+13374||-9223372036854775808|r|G
+13374||10|r|G
+13374||10|t|G
+13374||10|D|G
+13374||10|w|G
+13379||10|d|G
+13379||10|a|G
+13379||10|x|G
+13379||-9223372036854775808|r|G
+13379||10|r|G
+13379||10|t|G
+13379||10|D|G
+13379||10|w|G
+13383||10|d|G
+13383||10|a|G
+13383||10|x|G
+13383||-9223372036854775808|r|G
+13383||10|r|G
+13383||10|t|G
+13383||10|D|G
+13383||10|w|G
+13388||10|d|G
+13388||10|a|G
+13388||10|x|G
+13388||-9223372036854775808|r|G
+13388||10|r|G
+13388||10|t|G
+13388||10|D|G
+13388||10|w|G
+13393||10|d|G
+13393||10|a|G
+13393||10|x|G
+13393||-9223372036854775808|r|G
+13393||10|r|G
+13393||10|t|G
+13393||10|D|G
+13393||10|w|G
+13398||10|d|G
+13398||10|a|G
+13398||10|x|G
+13398||-9223372036854775808|r|G
+13398||10|r|G
+13398||10|t|G
+13398||10|D|G
+13398||10|w|G
+13403||10|d|G
+13403||10|a|G
+13403||10|x|G
+13403||-9223372036854775808|r|G
+13403||10|r|G
+13403||10|t|G
+13403||10|D|G
+13403||10|w|G
+13407||10|d|G
+13407||10|a|G
+13407||10|x|G
+13407||-9223372036854775808|r|G
+13407||10|r|G
+13407||10|t|G
+13407||10|D|G
+13407||10|w|G
+13412||10|d|G
+13412||10|a|G
+13412||10|x|G
+13412||-9223372036854775808|r|G
+13412||10|r|G
+13412||10|t|G
+13412||10|D|G
+13412||10|w|G
+13417||10|d|G
+13417||10|a|G
+13417||10|x|G
+13417||-9223372036854775808|r|G
+13417||10|r|G
+13417||10|t|G
+13417||10|D|G
+13417||10|w|G
+13427||10|d|G
+13427||10|a|G
+13427||10|x|G
+13427||-9223372036854775808|r|G
+13427||10|r|G
+13427||10|t|G
+13427||10|D|G
+13427||10|w|G
+13432||10|d|G
+13432||10|a|G
+13432||10|x|G
+13432||-9223372036854775808|r|G
+13432||10|r|G
+13432||10|t|G
+13432||10|D|G
+13432||10|w|G
+13437||10|d|G
+13437||10|a|G
+13437||10|x|G
+13437||-9223372036854775808|r|G
+13437||10|r|G
+13437||10|t|G
+13437||10|D|G
+13437||10|w|G
+13442||10|d|G
+13442||10|a|G
+13442||10|x|G
+13442||-9223372036854775808|r|G
+13442||10|r|G
+13442||10|t|G
+13442||10|D|G
+13442||10|w|G
+13446||10|d|G
+13446||10|a|G
+13446||10|x|G
+13446||-9223372036854775808|r|G
+13446||10|r|G
+13446||10|t|G
+13446||10|D|G
+13446||10|w|G
+13456||10|d|G
+13456||10|a|G
+13456||10|x|G
+13456||-9223372036854775808|r|G
+13456||10|r|G
+13456||10|t|G
+13456||10|D|G
+13456||10|w|G
+13461||10|d|G
+13461||10|a|G
+13461||10|x|G
+13461||-9223372036854775808|r|G
+13461||10|r|G
+13461||10|t|G
+13461||10|D|G
+13461||10|w|G
+13466||10|d|G
+13466||10|a|G
+13466||10|x|G
+13466||-9223372036854775808|r|G
+13466||10|r|G
+13466||10|t|G
+13466||10|D|G
+13466||10|w|G
+13471||10|d|G
+13471||10|a|G
+13471||10|x|G
+13471||-9223372036854775808|r|G
+13471||10|r|G
+13471||10|t|G
+13471||10|D|G
+13471||10|w|G
+13475||10|d|G
+13475||10|a|G
+13475||10|x|G
+13475||-9223372036854775808|r|G
+13475||10|r|G
+13475||10|t|G
+13475||10|D|G
+13475||10|w|G
+13480||10|d|G
+13480||10|a|G
+13480||10|x|G
+13480||-9223372036854775808|r|G
+13480||10|r|G
+13480||10|t|G
+13480||10|D|G
+13480||10|w|G
+13484||10|d|G
+13484||10|a|G
+13484||10|x|G
+13484||-9223372036854775808|r|G
+13484||10|r|G
+13484||10|t|G
+13484||10|D|G
+13484||10|w|G
+13489||10|d|G
+13489||10|a|G
+13489||10|x|G
+13489||-9223372036854775808|r|G
+13489||10|r|G
+13489||10|t|G
+13489||10|D|G
+13489||10|w|G
+13494||10|d|G
+13494||10|a|G
+13494||10|x|G
+13494||-9223372036854775808|r|G
+13494||10|r|G
+13494||10|t|G
+13494||10|D|G
+13494||10|w|G
+13499||10|d|G
+13499||10|a|G
+13499||10|x|G
+13499||-9223372036854775808|r|G
+13499||10|r|G
+13499||10|t|G
+13499||10|D|G
+13499||10|w|G
+13504||10|d|G
+13504||10|a|G
+13504||10|x|G
+13504||-9223372036854775808|r|G
+13504||10|r|G
+13504||10|t|G
+13504||10|D|G
+13504||10|w|G
+13509||10|d|G
+13509||10|a|G
+13509||10|x|G
+13509||-9223372036854775808|r|G
+13509||10|r|G
+13509||10|t|G
+13509||10|D|G
+13509||10|w|G
+13514||10|d|G
+13514||10|a|G
+13514||10|x|G
+13514||-9223372036854775808|r|G
+13514||10|r|G
+13514||10|t|G
+13514||10|D|G
+13514||10|w|G
+13524||10|d|G
+13524||10|a|G
+13524||10|x|G
+13524||-9223372036854775808|r|G
+13524||10|r|G
+13524||10|t|G
+13524||10|D|G
+13524||10|w|G
+13532||10|d|G
+13532||10|a|G
+13532||10|x|G
+13532||-9223372036854775808|r|G
+13532||10|r|G
+13532||10|t|G
+13532||10|D|G
+13532||10|w|G
+13536||10|d|G
+13536||10|a|G
+13536||10|x|G
+13536||-9223372036854775808|r|G
+13536||10|r|G
+13536||10|t|G
+13536||10|D|G
+13536||10|w|G
+13544||10|d|G
+13544||10|a|G
+13544||10|x|G
+13544||-9223372036854775808|r|G
+13544||10|r|G
+13544||10|t|G
+13544||10|D|G
+13544||10|w|G
+13548||10|d|G
+13548||10|a|G
+13548||10|x|G
+13548||-9223372036854775808|r|G
+13548||10|r|G
+13548||10|t|G
+13548||10|D|G
+13548||10|w|G
+13557||10|d|G
+13557||10|a|G
+13557||10|x|G
+13557||-9223372036854775808|r|G
+13557||10|r|G
+13557||10|t|G
+13557||10|D|G
+13557||10|w|G
+13561||10|d|G
+13561||10|a|G
+13561||10|x|G
+13561||-9223372036854775808|r|G
+13561||10|r|G
+13561||10|t|G
+13561||10|D|G
+13561||10|w|G
+13570||10|d|G
+13570||10|a|G
+13570||10|x|G
+13570||-9223372036854775808|r|G
+13570||10|r|G
+13570||10|t|G
+13570||10|D|G
+13570||10|w|G
+13575||10|d|G
+13575||10|a|G
+13575||10|x|G
+13575||-9223372036854775808|r|G
+13575||10|r|G
+13575||10|t|G
+13575||10|D|G
+13575||10|w|G</Grants>
+      <LastIntrospectionLevel>2</LastIntrospectionLevel>
+      <LastIntrospectionLocalTimestamp>2026-07-04.18:26:34</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionVersion>260210</LastIntrospectionVersion>
       <ObjectId>13229</ObjectId>
       <StateNumber>551</StateNumber>
       <OwnerName>postgres</OwnerName>
     </schema>
     <schema id="272" parent="2" name="pg_catalog">
+      <AutoIntrospectionLevel>1</AutoIntrospectionLevel>
       <Comment>system catalog schema</Comment>
+      <LastIntrospectionLevel>1</LastIntrospectionLevel>
+      <LastIntrospectionLocalTimestamp>2026-07-04.18:26:34</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionVersion>260210</LastIntrospectionVersion>
       <ObjectId>11</ObjectId>
       <StateNumber>545</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4941,11 +5445,11 @@ true posixrules
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <LastIntrospectionL1Xid>890</LastIntrospectionL1Xid>
-      <LastIntrospectionL2Xid>890</LastIntrospectionL2Xid>
-      <LastIntrospectionL3Xid>890</LastIntrospectionL3Xid>
+      <LastIntrospectionL1Xid>1072</LastIntrospectionL1Xid>
+      <LastIntrospectionL2Xid>1072</LastIntrospectionL2Xid>
+      <LastIntrospectionL3Xid>1072</LastIntrospectionL3Xid>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2026-07-04.18:26:36</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2026-07-05.13:07:55</LastIntrospectionLocalTimestamp>
       <LastIntrospectionVersion>260210</LastIntrospectionVersion>
       <ObjectId>2200</ObjectId>
       <StateNumber>545</StateNumber>
@@ -8379,516 +8883,12 @@ true posixrules
       <ValidatorSchema>pg_catalog</ValidatorSchema>
     </language>
     <schema id="521" parent="3" name="information_schema">
-      <AutoIntrospectionLevel>2</AutoIntrospectionLevel>
-      <Grants>13249||10|d|G
-13249||10|a|G
-13249||10|x|G
-13249||-9223372036854775808|r|G
-13249||10|r|G
-13249||10|t|G
-13249||10|D|G
-13249||10|w|G
-13258||10|d|G
-13258||10|a|G
-13258||10|x|G
-13258||-9223372036854775808|r|G
-13258||10|r|G
-13258||10|t|G
-13258||10|D|G
-13258||10|w|G
-13263||10|d|G
-13263||10|a|G
-13263||10|x|G
-13263||-9223372036854775808|r|G
-13263||10|r|G
-13263||10|t|G
-13263||10|D|G
-13263||10|w|G
-13267||10|d|G
-13267||10|a|G
-13267||10|x|G
-13267||-9223372036854775808|r|G
-13267||10|r|G
-13267||10|t|G
-13267||10|D|G
-13267||10|w|G
-13272||10|d|G
-13272||10|a|G
-13272||10|x|G
-13272||-9223372036854775808|r|G
-13272||10|r|G
-13272||10|t|G
-13272||10|D|G
-13272||10|w|G
-13277||10|d|G
-13277||10|a|G
-13277||10|x|G
-13277||-9223372036854775808|r|G
-13277||10|r|G
-13277||10|t|G
-13277||10|D|G
-13277||10|w|G
-13282||10|d|G
-13282||10|a|G
-13282||10|x|G
-13282||-9223372036854775808|r|G
-13282||10|r|G
-13282||10|t|G
-13282||10|D|G
-13282||10|w|G
-13287||10|d|G
-13287||10|a|G
-13287||10|x|G
-13287||-9223372036854775808|r|G
-13287||10|r|G
-13287||10|t|G
-13287||10|D|G
-13287||10|w|G
-13292||10|d|G
-13292||10|a|G
-13292||10|x|G
-13292||-9223372036854775808|r|G
-13292||10|r|G
-13292||10|t|G
-13292||10|D|G
-13292||10|w|G
-13297||10|d|G
-13297||10|a|G
-13297||10|x|G
-13297||-9223372036854775808|r|G
-13297||10|r|G
-13297||10|t|G
-13297||10|D|G
-13297||10|w|G
-13302||10|d|G
-13302||10|a|G
-13302||10|x|G
-13302||-9223372036854775808|r|G
-13302||10|r|G
-13302||10|t|G
-13302||10|D|G
-13302||10|w|G
-13307||10|d|G
-13307||10|a|G
-13307||10|x|G
-13307||-9223372036854775808|r|G
-13307||10|r|G
-13307||10|t|G
-13307||10|D|G
-13307||10|w|G
-13312||10|d|G
-13312||10|a|G
-13312||10|x|G
-13312||-9223372036854775808|r|G
-13312||10|r|G
-13312||10|t|G
-13312||10|D|G
-13312||10|w|G
-13317||10|d|G
-13317||10|a|G
-13317||10|x|G
-13317||-9223372036854775808|r|G
-13317||10|r|G
-13317||10|t|G
-13317||10|D|G
-13317||10|w|G
-13322||10|d|G
-13322||10|a|G
-13322||10|x|G
-13322||-9223372036854775808|r|G
-13322||10|r|G
-13322||10|t|G
-13322||10|D|G
-13322||10|w|G
-13327||10|d|G
-13327||10|a|G
-13327||10|x|G
-13327||-9223372036854775808|r|G
-13327||10|r|G
-13327||10|t|G
-13327||10|D|G
-13327||10|w|G
-13332||10|d|G
-13332||10|a|G
-13332||10|x|G
-13332||-9223372036854775808|r|G
-13332||10|r|G
-13332||10|t|G
-13332||10|D|G
-13332||10|w|G
-13337||10|d|G
-13337||10|a|G
-13337||10|x|G
-13337||-9223372036854775808|r|G
-13337||10|r|G
-13337||10|t|G
-13337||10|D|G
-13337||10|w|G
-13341||10|d|G
-13341||10|a|G
-13341||10|x|G
-13341||-9223372036854775808|r|G
-13341||10|r|G
-13341||10|t|G
-13341||10|D|G
-13341||10|w|G
-13346||10|d|G
-13346||10|a|G
-13346||10|x|G
-13346||-9223372036854775808|r|G
-13346||10|r|G
-13346||10|t|G
-13346||10|D|G
-13346||10|w|G
-13350||10|d|G
-13350||10|a|G
-13350||10|x|G
-13350||-9223372036854775808|r|G
-13350||10|r|G
-13350||10|t|G
-13350||10|D|G
-13350||10|w|G
-13355||10|d|G
-13355||10|a|G
-13355||10|x|G
-13355||-9223372036854775808|r|G
-13355||10|r|G
-13355||10|t|G
-13355||10|D|G
-13355||10|w|G
-13360||10|d|G
-13360||10|a|G
-13360||10|x|G
-13360||-9223372036854775808|r|G
-13360||10|r|G
-13360||10|t|G
-13360||10|D|G
-13360||10|w|G
-13365||10|d|G
-13365||10|a|G
-13365||10|x|G
-13365||-9223372036854775808|r|G
-13365||10|r|G
-13365||10|t|G
-13365||10|D|G
-13365||10|w|G
-13369||10|d|G
-13369||10|a|G
-13369||10|x|G
-13369||-9223372036854775808|r|G
-13369||10|r|G
-13369||10|t|G
-13369||10|D|G
-13369||10|w|G
-13374||10|d|G
-13374||10|a|G
-13374||10|x|G
-13374||-9223372036854775808|r|G
-13374||10|r|G
-13374||10|t|G
-13374||10|D|G
-13374||10|w|G
-13379||10|d|G
-13379||10|a|G
-13379||10|x|G
-13379||-9223372036854775808|r|G
-13379||10|r|G
-13379||10|t|G
-13379||10|D|G
-13379||10|w|G
-13383||10|d|G
-13383||10|a|G
-13383||10|x|G
-13383||-9223372036854775808|r|G
-13383||10|r|G
-13383||10|t|G
-13383||10|D|G
-13383||10|w|G
-13388||10|d|G
-13388||10|a|G
-13388||10|x|G
-13388||-9223372036854775808|r|G
-13388||10|r|G
-13388||10|t|G
-13388||10|D|G
-13388||10|w|G
-13393||10|d|G
-13393||10|a|G
-13393||10|x|G
-13393||-9223372036854775808|r|G
-13393||10|r|G
-13393||10|t|G
-13393||10|D|G
-13393||10|w|G
-13398||10|d|G
-13398||10|a|G
-13398||10|x|G
-13398||-9223372036854775808|r|G
-13398||10|r|G
-13398||10|t|G
-13398||10|D|G
-13398||10|w|G
-13403||10|d|G
-13403||10|a|G
-13403||10|x|G
-13403||-9223372036854775808|r|G
-13403||10|r|G
-13403||10|t|G
-13403||10|D|G
-13403||10|w|G
-13407||10|d|G
-13407||10|a|G
-13407||10|x|G
-13407||-9223372036854775808|r|G
-13407||10|r|G
-13407||10|t|G
-13407||10|D|G
-13407||10|w|G
-13412||10|d|G
-13412||10|a|G
-13412||10|x|G
-13412||-9223372036854775808|r|G
-13412||10|r|G
-13412||10|t|G
-13412||10|D|G
-13412||10|w|G
-13417||10|d|G
-13417||10|a|G
-13417||10|x|G
-13417||-9223372036854775808|r|G
-13417||10|r|G
-13417||10|t|G
-13417||10|D|G
-13417||10|w|G
-13427||10|d|G
-13427||10|a|G
-13427||10|x|G
-13427||-9223372036854775808|r|G
-13427||10|r|G
-13427||10|t|G
-13427||10|D|G
-13427||10|w|G
-13432||10|d|G
-13432||10|a|G
-13432||10|x|G
-13432||-9223372036854775808|r|G
-13432||10|r|G
-13432||10|t|G
-13432||10|D|G
-13432||10|w|G
-13437||10|d|G
-13437||10|a|G
-13437||10|x|G
-13437||-9223372036854775808|r|G
-13437||10|r|G
-13437||10|t|G
-13437||10|D|G
-13437||10|w|G
-13442||10|d|G
-13442||10|a|G
-13442||10|x|G
-13442||-9223372036854775808|r|G
-13442||10|r|G
-13442||10|t|G
-13442||10|D|G
-13442||10|w|G
-13446||10|d|G
-13446||10|a|G
-13446||10|x|G
-13446||-9223372036854775808|r|G
-13446||10|r|G
-13446||10|t|G
-13446||10|D|G
-13446||10|w|G
-13456||10|d|G
-13456||10|a|G
-13456||10|x|G
-13456||-9223372036854775808|r|G
-13456||10|r|G
-13456||10|t|G
-13456||10|D|G
-13456||10|w|G
-13461||10|d|G
-13461||10|a|G
-13461||10|x|G
-13461||-9223372036854775808|r|G
-13461||10|r|G
-13461||10|t|G
-13461||10|D|G
-13461||10|w|G
-13466||10|d|G
-13466||10|a|G
-13466||10|x|G
-13466||-9223372036854775808|r|G
-13466||10|r|G
-13466||10|t|G
-13466||10|D|G
-13466||10|w|G
-13471||10|d|G
-13471||10|a|G
-13471||10|x|G
-13471||-9223372036854775808|r|G
-13471||10|r|G
-13471||10|t|G
-13471||10|D|G
-13471||10|w|G
-13475||10|d|G
-13475||10|a|G
-13475||10|x|G
-13475||-9223372036854775808|r|G
-13475||10|r|G
-13475||10|t|G
-13475||10|D|G
-13475||10|w|G
-13480||10|d|G
-13480||10|a|G
-13480||10|x|G
-13480||-9223372036854775808|r|G
-13480||10|r|G
-13480||10|t|G
-13480||10|D|G
-13480||10|w|G
-13484||10|d|G
-13484||10|a|G
-13484||10|x|G
-13484||-9223372036854775808|r|G
-13484||10|r|G
-13484||10|t|G
-13484||10|D|G
-13484||10|w|G
-13489||10|d|G
-13489||10|a|G
-13489||10|x|G
-13489||-9223372036854775808|r|G
-13489||10|r|G
-13489||10|t|G
-13489||10|D|G
-13489||10|w|G
-13494||10|d|G
-13494||10|a|G
-13494||10|x|G
-13494||-9223372036854775808|r|G
-13494||10|r|G
-13494||10|t|G
-13494||10|D|G
-13494||10|w|G
-13499||10|d|G
-13499||10|a|G
-13499||10|x|G
-13499||-9223372036854775808|r|G
-13499||10|r|G
-13499||10|t|G
-13499||10|D|G
-13499||10|w|G
-13504||10|d|G
-13504||10|a|G
-13504||10|x|G
-13504||-9223372036854775808|r|G
-13504||10|r|G
-13504||10|t|G
-13504||10|D|G
-13504||10|w|G
-13509||10|d|G
-13509||10|a|G
-13509||10|x|G
-13509||-9223372036854775808|r|G
-13509||10|r|G
-13509||10|t|G
-13509||10|D|G
-13509||10|w|G
-13514||10|d|G
-13514||10|a|G
-13514||10|x|G
-13514||-9223372036854775808|r|G
-13514||10|r|G
-13514||10|t|G
-13514||10|D|G
-13514||10|w|G
-13524||10|d|G
-13524||10|a|G
-13524||10|x|G
-13524||-9223372036854775808|r|G
-13524||10|r|G
-13524||10|t|G
-13524||10|D|G
-13524||10|w|G
-13532||10|d|G
-13532||10|a|G
-13532||10|x|G
-13532||-9223372036854775808|r|G
-13532||10|r|G
-13532||10|t|G
-13532||10|D|G
-13532||10|w|G
-13536||10|d|G
-13536||10|a|G
-13536||10|x|G
-13536||-9223372036854775808|r|G
-13536||10|r|G
-13536||10|t|G
-13536||10|D|G
-13536||10|w|G
-13544||10|d|G
-13544||10|a|G
-13544||10|x|G
-13544||-9223372036854775808|r|G
-13544||10|r|G
-13544||10|t|G
-13544||10|D|G
-13544||10|w|G
-13548||10|d|G
-13548||10|a|G
-13548||10|x|G
-13548||-9223372036854775808|r|G
-13548||10|r|G
-13548||10|t|G
-13548||10|D|G
-13548||10|w|G
-13557||10|d|G
-13557||10|a|G
-13557||10|x|G
-13557||-9223372036854775808|r|G
-13557||10|r|G
-13557||10|t|G
-13557||10|D|G
-13557||10|w|G
-13561||10|d|G
-13561||10|a|G
-13561||10|x|G
-13561||-9223372036854775808|r|G
-13561||10|r|G
-13561||10|t|G
-13561||10|D|G
-13561||10|w|G
-13570||10|d|G
-13570||10|a|G
-13570||10|x|G
-13570||-9223372036854775808|r|G
-13570||10|r|G
-13570||10|t|G
-13570||10|D|G
-13570||10|w|G
-13575||10|d|G
-13575||10|a|G
-13575||10|x|G
-13575||-9223372036854775808|r|G
-13575||10|r|G
-13575||10|t|G
-13575||10|D|G
-13575||10|w|G</Grants>
-      <LastIntrospectionLevel>2</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2026-07-04.18:26:34</LastIntrospectionLocalTimestamp>
-      <LastIntrospectionVersion>260210</LastIntrospectionVersion>
       <ObjectId>13229</ObjectId>
       <StateNumber>551</StateNumber>
       <OwnerName>postgres</OwnerName>
     </schema>
     <schema id="522" parent="3" name="pg_catalog">
-      <AutoIntrospectionLevel>1</AutoIntrospectionLevel>
       <Comment>system catalog schema</Comment>
-      <LastIntrospectionLevel>1</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2026-07-04.18:26:34</LastIntrospectionLocalTimestamp>
-      <LastIntrospectionVersion>260210</LastIntrospectionVersion>
       <ObjectId>11</ObjectId>
       <StateNumber>545</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -8897,573 +8897,646 @@ true posixrules
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <LastIntrospectionL1Xid>900</LastIntrospectionL1Xid>
-      <LastIntrospectionL2Xid>900</LastIntrospectionL2Xid>
-      <LastIntrospectionL3Xid>900</LastIntrospectionL3Xid>
+      <LastIntrospectionL1Xid>1071</LastIntrospectionL1Xid>
+      <LastIntrospectionL2Xid>1071</LastIntrospectionL2Xid>
+      <LastIntrospectionL3Xid>1071</LastIntrospectionL3Xid>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2026-07-04.18:34:36</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2026-07-05.13:07:54</LastIntrospectionLocalTimestamp>
       <LastIntrospectionVersion>260210</LastIntrospectionVersion>
       <ObjectId>2200</ObjectId>
       <StateNumber>545</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
-    <routine id="524" parent="523" name="checkoverbooking">
+    <routine id="524" parent="273" name="checkoverbooking">
       <DetailsLevel>3</DetailsLevel>
-      <ObjectId>25097</ObjectId>
+      <ObjectId>25365</ObjectId>
       <PgRoutineKind>pg-trigger</PgRoutineKind>
       <ResultsDefinition>trigger</ResultsDefinition>
       <Rows>0.0</Rows>
       <SourceTextLength>614</SourceTextLength>
-      <StateNumber>908</StateNumber>
+      <StateNumber>1015</StateNumber>
       <LanguageName>plpgsql</LanguageName>
       <OwnerName>postgres</OwnerName>
     </routine>
-    <table id="525" parent="523" name="aereo">
+    <routine id="525" parent="273" name="checkpostoprenotazione">
+      <DetailsLevel>3</DetailsLevel>
+      <ObjectId>25367</ObjectId>
+      <PgRoutineKind>pg-trigger</PgRoutineKind>
+      <ResultsDefinition>trigger</ResultsDefinition>
+      <Rows>0.0</Rows>
+      <SourceTextLength>942</SourceTextLength>
+      <StateNumber>1019</StateNumber>
+      <LanguageName>plpgsql</LanguageName>
+      <OwnerName>postgres</OwnerName>
+    </routine>
+    <table id="526" parent="273" name="aereo">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>25010</ObjectId>
-      <StateNumber>806</StateNumber>
+      <ObjectId>25289</ObjectId>
+      <StateNumber>1011</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="526" parent="523" name="cliente">
+    <table id="527" parent="273" name="cliente">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>24996</ObjectId>
-      <StateNumber>806</StateNumber>
+      <ObjectId>25273</ObjectId>
+      <StateNumber>1013</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="527" parent="523" name="hostess">
+    <table id="528" parent="273" name="hostess">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>24980</ObjectId>
-      <StateNumber>806</StateNumber>
+      <ObjectId>25255</ObjectId>
+      <StateNumber>1011</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="528" parent="523" name="pilota">
+    <table id="529" parent="273" name="pilota">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>24964</ObjectId>
-      <StateNumber>806</StateNumber>
+      <ObjectId>25237</ObjectId>
+      <StateNumber>1011</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="529" parent="523" name="prenotazione">
+    <table id="530" parent="273" name="prenotazione">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>25063</ObjectId>
-      <StateNumber>840</StateNumber>
+      <ObjectId>25342</ObjectId>
+      <StateNumber>1013</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="530" parent="523" name="volo">
+    <table id="531" parent="273" name="volo">
       <DetailsLevel>2</DetailsLevel>
-      <ObjectId>25021</ObjectId>
-      <StateNumber>806</StateNumber>
+      <ObjectId>25300</ObjectId>
+      <StateNumber>1011</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <argument id="531" parent="524">
+    <argument id="532" parent="524">
       <ArgumentDirection>R</ArgumentDirection>
       <StoredType>trigger|0s</StoredType>
     </argument>
-    <check id="532" parent="525" name="npostipositivo">
+    <argument id="533" parent="525">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>trigger|0s</StoredType>
+    </argument>
+    <check id="534" parent="526" name="npostipositivo">
       <ColNames>nposti</ColNames>
-      <ObjectId>25013</ObjectId>
+      <ObjectId>25292</ObjectId>
       <Predicate>nposti &gt; 0</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1009</StateNumber>
     </check>
-    <column id="533" parent="525" name="idaereo">
+    <column id="535" parent="526" name="idaereo">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1009</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="534" parent="525" name="modello">
+    <column id="536" parent="526" name="modello">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1009</StateNumber>
       <StoredType>varchar(30)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="535" parent="525" name="nposti">
+    <column id="537" parent="526" name="nposti">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1009</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <index id="536" parent="525" name="aereo_pkey">
+    <index id="538" parent="526" name="aereo_pkey">
       <ColNames>idaereo</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>25019</ObjectId>
+      <ObjectId>25298</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1009</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="537" parent="525" name="aereo_pkey">
+    <key id="539" parent="526" name="aereo_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>25020</ObjectId>
+      <ObjectId>25299</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
-      <UnderlyingIndexId>25019</UnderlyingIndexId>
+      <StateNumber>1009</StateNumber>
+      <UnderlyingIndexId>25298</UnderlyingIndexId>
     </key>
-    <check id="538" parent="526" name="passwdlenght">
+    <check id="540" parent="527" name="passwdlenght">
       <ColNames>password</ColNames>
-      <ObjectId>24999</ObjectId>
+      <ObjectId>25276</ObjectId>
       <Predicate>length((password)::text) &gt;= 8</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1007</StateNumber>
     </check>
-    <check id="539" parent="526" name="codicefiscalelenght">
+    <check id="541" parent="527" name="codicefiscalelenght">
       <ColNames>codicefiscale</ColNames>
-      <ObjectId>25000</ObjectId>
+      <ObjectId>25277</ObjectId>
       <Predicate>length(codicefiscale) = 16</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1007</StateNumber>
     </check>
-    <column id="540" parent="526" name="login">
+    <column id="542" parent="527" name="login">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1007</StateNumber>
       <StoredType>varchar(30)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="541" parent="526" name="password">
+    <column id="543" parent="527" name="password">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1007</StateNumber>
       <StoredType>varchar(60)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="542" parent="526" name="nomecompleto">
+    <column id="544" parent="527" name="nomecompleto">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1007</StateNumber>
       <StoredType>varchar(30)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="543" parent="526" name="codicefiscale">
+    <column id="545" parent="527" name="codicefiscale">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1007</StateNumber>
       <StoredType>char(16)|0s</StoredType>
       <TypeId>1042</TypeId>
     </column>
-    <column id="544" parent="526" name="numerocellulare">
+    <column id="546" parent="527" name="numerocellulare">
       <Position>5</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1007</StateNumber>
       <StoredType>char(13)|0s</StoredType>
       <TypeId>1042</TypeId>
     </column>
-    <column id="545" parent="526" name="idcliente">
+    <column id="547" parent="527" name="idcliente">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1007</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <index id="546" parent="526" name="cliente_pkey">
+    <index id="548" parent="527" name="cliente_login_key">
+      <ColNames>login</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>25287</ObjectId>
+      <StateNumber>1007</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <index id="549" parent="527" name="cliente_pkey">
       <ColNames>idcliente</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>25008</ObjectId>
+      <ObjectId>25285</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1007</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="547" parent="526" name="cliente_pkey">
+    <key id="550" parent="527" name="cliente_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>25009</ObjectId>
+      <ObjectId>25286</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
-      <UnderlyingIndexId>25008</UnderlyingIndexId>
+      <StateNumber>1007</StateNumber>
+      <UnderlyingIndexId>25285</UnderlyingIndexId>
     </key>
-    <check id="548" parent="527" name="passwdlenght">
+    <key id="551" parent="527" name="cliente_login_key">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>25288</ObjectId>
+      <StateNumber>1007</StateNumber>
+      <UnderlyingIndexId>25287</UnderlyingIndexId>
+    </key>
+    <check id="552" parent="528" name="passwdlenght">
       <ColNames>password</ColNames>
-      <ObjectId>24983</ObjectId>
+      <ObjectId>25258</ObjectId>
       <Predicate>length((password)::text) &gt;= 8</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
     </check>
-    <check id="549" parent="527" name="codicefiscalelenght">
+    <check id="553" parent="528" name="codicefiscalelenght">
       <ColNames>codicefiscale</ColNames>
-      <ObjectId>24984</ObjectId>
+      <ObjectId>25259</ObjectId>
       <Predicate>length(codicefiscale) = 16</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
     </check>
-    <check id="550" parent="527" name="salariopositivo">
+    <check id="554" parent="528" name="salariopositivo">
       <ColNames>salario</ColNames>
-      <ObjectId>24985</ObjectId>
+      <ObjectId>25260</ObjectId>
       <Predicate>salario &gt; (0)::double precision</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
     </check>
-    <column id="551" parent="527" name="login">
+    <column id="555" parent="528" name="login">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
       <StoredType>varchar(30)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="552" parent="527" name="password">
+    <column id="556" parent="528" name="password">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
       <StoredType>varchar(60)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="553" parent="527" name="nomecompleto">
+    <column id="557" parent="528" name="nomecompleto">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
       <StoredType>varchar(30)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="554" parent="527" name="codicefiscale">
+    <column id="558" parent="528" name="codicefiscale">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
       <StoredType>char(16)|0s</StoredType>
       <TypeId>1042</TypeId>
     </column>
-    <column id="555" parent="527" name="numerocellulare">
+    <column id="559" parent="528" name="numerocellulare">
       <Position>5</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
       <StoredType>char(13)|0s</StoredType>
       <TypeId>1042</TypeId>
     </column>
-    <column id="556" parent="527" name="idhostess">
+    <column id="560" parent="528" name="idhostess">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="557" parent="527" name="salario">
+    <column id="561" parent="528" name="salario">
       <NotNull>1</NotNull>
       <Position>7</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
       <StoredType>real|0s</StoredType>
       <TypeId>700</TypeId>
     </column>
-    <index id="558" parent="527" name="hostess_pkey">
+    <index id="562" parent="528" name="hostess_login_key">
+      <ColNames>login</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>25271</ObjectId>
+      <StateNumber>1004</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <index id="563" parent="528" name="hostess_pkey">
       <ColNames>idhostess</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24994</ObjectId>
+      <ObjectId>25269</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1004</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="559" parent="527" name="hostess_pkey">
+    <key id="564" parent="528" name="hostess_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24995</ObjectId>
+      <ObjectId>25270</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
-      <UnderlyingIndexId>24994</UnderlyingIndexId>
+      <StateNumber>1004</StateNumber>
+      <UnderlyingIndexId>25269</UnderlyingIndexId>
     </key>
-    <check id="560" parent="528" name="passwdlenght">
+    <key id="565" parent="528" name="hostess_login_key">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>25272</ObjectId>
+      <StateNumber>1004</StateNumber>
+      <UnderlyingIndexId>25271</UnderlyingIndexId>
+    </key>
+    <check id="566" parent="529" name="passwdlenght">
       <ColNames>password</ColNames>
-      <ObjectId>24967</ObjectId>
+      <ObjectId>25240</ObjectId>
       <Predicate>length((password)::text) &gt;= 8</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1002</StateNumber>
     </check>
-    <check id="561" parent="528" name="codicefiscalelenght">
+    <check id="567" parent="529" name="codicefiscalelenght">
       <ColNames>codicefiscale</ColNames>
-      <ObjectId>24968</ObjectId>
+      <ObjectId>25241</ObjectId>
       <Predicate>length(codicefiscale) = 16</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1002</StateNumber>
     </check>
-    <check id="562" parent="528" name="salariopositivo">
+    <check id="568" parent="529" name="salariopositivo">
       <ColNames>salario</ColNames>
-      <ObjectId>24969</ObjectId>
+      <ObjectId>25242</ObjectId>
       <Predicate>salario &gt; (0)::double precision</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1002</StateNumber>
     </check>
-    <column id="563" parent="528" name="login">
+    <column id="569" parent="529" name="login">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1002</StateNumber>
       <StoredType>varchar(30)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="564" parent="528" name="password">
+    <column id="570" parent="529" name="password">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1002</StateNumber>
       <StoredType>varchar(60)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="565" parent="528" name="nomecompleto">
+    <column id="571" parent="529" name="nomecompleto">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1002</StateNumber>
       <StoredType>varchar(30)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="566" parent="528" name="codicefiscale">
+    <column id="572" parent="529" name="codicefiscale">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1002</StateNumber>
       <StoredType>char(16)|0s</StoredType>
       <TypeId>1042</TypeId>
     </column>
-    <column id="567" parent="528" name="numerocellulare">
+    <column id="573" parent="529" name="numerocellulare">
       <Position>5</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1002</StateNumber>
       <StoredType>char(13)|0s</StoredType>
       <TypeId>1042</TypeId>
     </column>
-    <column id="568" parent="528" name="idpilota">
+    <column id="574" parent="529" name="idpilota">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1002</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="569" parent="528" name="salario">
+    <column id="575" parent="529" name="salario">
       <NotNull>1</NotNull>
       <Position>7</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1002</StateNumber>
       <StoredType>real|0s</StoredType>
       <TypeId>700</TypeId>
     </column>
-    <index id="570" parent="528" name="pilota_pkey">
-      <ColNames>idpilota</ColNames>
+    <index id="576" parent="529" name="pilota_login_key">
+      <ColNames>login</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24978</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
+      <ObjectId>25253</ObjectId>
+      <StateNumber>1002</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="571" parent="528" name="pilota_pkey">
+    <index id="577" parent="529" name="pilota_pkey">
+      <ColNames>idpilota</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24979</ObjectId>
+      <ObjectId>25251</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
-      <UnderlyingIndexId>24978</UnderlyingIndexId>
+      <StateNumber>1002</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="578" parent="529" name="pilota_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>25252</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1002</StateNumber>
+      <UnderlyingIndexId>25251</UnderlyingIndexId>
     </key>
-    <check id="572" parent="529" name="classeenum">
+    <key id="579" parent="529" name="pilota_login_key">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>25254</ObjectId>
+      <StateNumber>1002</StateNumber>
+      <UnderlyingIndexId>25253</UnderlyingIndexId>
+    </key>
+    <check id="580" parent="530" name="classeenum">
       <ColNames>classe</ColNames>
-      <ObjectId>25093</ObjectId>
+      <ObjectId>25345</ObjectId>
       <Predicate>(classe)::text = ANY ((ARRAY[&apos;PRIMA&apos;::character varying, &apos;ECONOMY&apos;::character varying, &apos;ECONOMYPLUS&apos;::character varying, &apos;BUSINESS&apos;::character varying])::text[])</Predicate>
-      <StateNumber>840</StateNumber>
+      <StateNumber>1013</StateNumber>
     </check>
-    <column id="573" parent="529" name="idprenotazione">
+    <column id="581" parent="530" name="idprenotazione">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1013</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="574" parent="529" name="idcliente">
+    <column id="582" parent="530" name="idcliente">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1013</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="575" parent="529" name="idvolo">
+    <column id="583" parent="530" name="idvolo">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1013</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="576" parent="529" name="posto">
+    <column id="584" parent="530" name="posto">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1013</StateNumber>
       <StoredType>char(3)|0s</StoredType>
       <TypeId>1042</TypeId>
     </column>
-    <column id="577" parent="529" name="classe">
+    <column id="585" parent="530" name="classe">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1013</StateNumber>
       <StoredType>varchar(15)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <foreign-key id="578" parent="529" name="fk_cliente">
+    <foreign-key id="586" parent="530" name="fk_cliente">
       <ColNames>idcliente</ColNames>
-      <ObjectId>25076</ObjectId>
+      <ObjectId>25355</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1013</StateNumber>
       <RefKeyColPositions>6</RefKeyColPositions>
-      <RefTableId>24996</RefTableId>
+      <RefTableId>25273</RefTableId>
     </foreign-key>
-    <foreign-key id="579" parent="529" name="fk_volo">
+    <foreign-key id="587" parent="530" name="fk_volo">
       <ColNames>idvolo</ColNames>
-      <ObjectId>25081</ObjectId>
+      <ObjectId>25360</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1013</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>25021</RefTableId>
+      <RefTableId>25300</RefTableId>
     </foreign-key>
-    <index id="580" parent="529" name="prenotazione_pkey">
+    <index id="588" parent="530" name="prenotazione_pkey">
       <ColNames>idprenotazione</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>25074</ObjectId>
+      <ObjectId>25353</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1013</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="581" parent="529" name="prenotazione_pkey">
+    <key id="589" parent="530" name="prenotazione_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>25075</ObjectId>
+      <ObjectId>25354</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
-      <UnderlyingIndexId>25074</UnderlyingIndexId>
+      <StateNumber>1013</StateNumber>
+      <UnderlyingIndexId>25353</UnderlyingIndexId>
     </key>
-    <trigger id="582" parent="529" name="trgoverbooking">
+    <trigger id="590" parent="530" name="trg_checkpostoprenotazione">
       <Events>I</Events>
-      <ObjectId>25098</ObjectId>
-      <StateNumber>910</StateNumber>
+      <ObjectId>25368</ObjectId>
+      <StateNumber>1021</StateNumber>
       <Turn>before-row</Turn>
-      <CallRoutineId>25097</CallRoutineId>
+      <CallRoutineId>25367</CallRoutineId>
     </trigger>
-    <check id="583" parent="530" name="lavoratori_diversi">
+    <trigger id="591" parent="530" name="trgoverbooking">
+      <Events>I</Events>
+      <ObjectId>25366</ObjectId>
+      <StateNumber>1017</StateNumber>
+      <Turn>before-row</Turn>
+      <CallRoutineId>25365</CallRoutineId>
+    </trigger>
+    <check id="592" parent="531" name="lavoratori_diversi">
       <ColNames>idpilota
 idcopilota
 idhostess1
 idhostess2</ColNames>
-      <ObjectId>25024</ObjectId>
+      <ObjectId>25303</ObjectId>
       <Predicate>NOT ((idpilota = idcopilota) OR (idhostess1 = idhostess2))</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
     </check>
-    <check id="584" parent="530" name="durata_reale">
+    <check id="593" parent="531" name="durata_reale">
       <ColNames>durata</ColNames>
-      <ObjectId>25025</ObjectId>
+      <ObjectId>25304</ObjectId>
       <Predicate>durata &gt; 0</Predicate>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
     </check>
-    <column id="585" parent="530" name="idvolo">
+    <column id="594" parent="531" name="idvolo">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="586" parent="530" name="destinazione">
+    <column id="595" parent="531" name="destinazione">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <StoredType>varchar(30)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="587" parent="530" name="durata">
+    <column id="596" parent="531" name="durata">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="588" parent="530" name="idpilota">
+    <column id="597" parent="531" name="idpilota">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="589" parent="530" name="idcopilota">
+    <column id="598" parent="531" name="idcopilota">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="590" parent="530" name="idhostess1">
+    <column id="599" parent="531" name="idhostess1">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="591" parent="530" name="idhostess2">
+    <column id="600" parent="531" name="idhostess2">
       <NotNull>1</NotNull>
       <Position>7</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="592" parent="530" name="idaereo">
+    <column id="601" parent="531" name="idaereo">
       <NotNull>1</NotNull>
       <Position>8</Position>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <foreign-key id="593" parent="530" name="fk_pilota">
+    <foreign-key id="602" parent="531" name="fk_pilota">
       <ColNames>idpilota</ColNames>
-      <ObjectId>25038</ObjectId>
+      <ObjectId>25317</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <RefKeyColPositions>6</RefKeyColPositions>
-      <RefTableId>24964</RefTableId>
+      <RefTableId>25237</RefTableId>
     </foreign-key>
-    <foreign-key id="594" parent="530" name="fk_copilota">
+    <foreign-key id="603" parent="531" name="fk_copilota">
       <ColNames>idcopilota</ColNames>
-      <ObjectId>25043</ObjectId>
+      <ObjectId>25322</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <RefKeyColPositions>6</RefKeyColPositions>
-      <RefTableId>24964</RefTableId>
+      <RefTableId>25237</RefTableId>
     </foreign-key>
-    <foreign-key id="595" parent="530" name="fk_hostess1">
+    <foreign-key id="604" parent="531" name="fk_hostess1">
       <ColNames>idhostess1</ColNames>
-      <ObjectId>25048</ObjectId>
+      <ObjectId>25327</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <RefKeyColPositions>6</RefKeyColPositions>
-      <RefTableId>24980</RefTableId>
+      <RefTableId>25255</RefTableId>
     </foreign-key>
-    <foreign-key id="596" parent="530" name="fk_hostess2">
+    <foreign-key id="605" parent="531" name="fk_hostess2">
       <ColNames>idhostess2</ColNames>
-      <ObjectId>25053</ObjectId>
+      <ObjectId>25332</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <RefKeyColPositions>6</RefKeyColPositions>
-      <RefTableId>24980</RefTableId>
+      <RefTableId>25255</RefTableId>
     </foreign-key>
-    <foreign-key id="597" parent="530" name="fk_aereo">
+    <foreign-key id="606" parent="531" name="fk_aereo">
       <ColNames>idaereo</ColNames>
-      <ObjectId>25058</ObjectId>
+      <ObjectId>25337</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>25010</RefTableId>
+      <RefTableId>25289</RefTableId>
     </foreign-key>
-    <index id="598" parent="530" name="volo_pkey">
+    <index id="607" parent="531" name="volo_pkey">
       <ColNames>idvolo</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>25036</ObjectId>
+      <ObjectId>25315</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
+      <StateNumber>1011</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="599" parent="530" name="volo_pkey">
+    <key id="608" parent="531" name="volo_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>25037</ObjectId>
+      <ObjectId>25316</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>806</StateNumber>
-      <UnderlyingIndexId>25036</UnderlyingIndexId>
+      <StateNumber>1011</StateNumber>
+      <UnderlyingIndexId>25315</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>
