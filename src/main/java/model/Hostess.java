@@ -10,12 +10,12 @@ public class Hostess extends Utente{
      * @author Alessandro Pizzi
      * @author Emanuele Servillo
      * @see Utente
-     * @param login
-     * @param password
-     * @param nomeCompleto
-     * @param codiceFiscale
-     * @param idHostess
-     * @param salario
+     * @param login  login dell'hostess
+     * @param password password dell'hostess
+     * @param nomeCompleto nome completo dell'hostess
+     * @param codiceFiscale codice fiscale dell'hostess
+     * @param idHostess identificativo univoco dell'hostess
+     * @param salario salario dell'hostess
      */
     public Hostess(String login,String password,String nomeCompleto, String codiceFiscale, String idHostess,double salario){
         super(login,password, nomeCompleto, codiceFiscale);
@@ -28,13 +28,13 @@ public class Hostess extends Utente{
      * @author Alessandro Pizzi
      * @author Emanuele Servillo
      * @see Utente
-     * @param login
-     * @param password
-     * @param nomeCompleto
-     * @param codiceFiscale
-     * @param idHostess
-     * @param salario
-     * @param numeroDiCellulare
+     * @param login login dell'hostess
+     * @param password password dell'hostess
+     * @param nomeCompleto nome completo dell'hostess
+     * @param codiceFiscale codice fiscale dell'hostess
+     * @param idHostess identificativo univoco dell'hostess
+     * @param salario salario dell'hostess
+     * @param numeroDiCellulare numero di cellulare dell'hostess
      */
     public Hostess(String login,String password, String nomeCompleto,  String codiceFiscale, String numeroDiCellulare, String idHostess,double salario){
         super(login,password, nomeCompleto, codiceFiscale, numeroDiCellulare);

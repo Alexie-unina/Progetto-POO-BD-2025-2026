@@ -2,9 +2,9 @@ package model;
 
 public class Prenotazione {
     private final String idPrenotazione;
-    private Cliente cliente;
-    private Volo volo;
-    private String posto;
+    private final Cliente cliente;
+    private final Volo volo;
+    private final String posto;
 
     /**
      * Classe di prenotazione
@@ -17,7 +17,7 @@ public class Prenotazione {
         BUSINESS,
         PRIMA
     }
-    private ClassePrenotazione classePrenotazione;
+    private final ClassePrenotazione classePrenotazione;
 //    public void setIdPrenotazione(String idPrenotazione){
 //        this.idPrenotazione = idPrenotazione;
 //    }

@@ -1,18 +1,12 @@
 package gui;
 
 import controller.Controller;
-import dao.PilotaDAO;
 import gui.ListaClassi.*;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Home {
     private JPanel mainPanel;
@@ -25,7 +19,7 @@ public class Home {
     private JButton btnEsci;
     private JLabel mm;
     private static JFrame frameHome;
-    private Controller controller;
+    private final Controller controller;
     public static void main(String[] args) {
         frameHome = new JFrame("Home");
         frameHome.setContentPane(new Home().mainPanel);
