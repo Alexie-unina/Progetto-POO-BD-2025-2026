@@ -31,4 +31,8 @@ errore.
 
 > ListaPrenotazioni apre CreaNuovaPrenotazione che istanzia una prenotazione
 
-![Class Diagram gui.svg](Class%20Diagram%20gui.svg)
+![Class Diagram.svg](Class%20Diagram.svg)
+
+
+
+![Agenzia.svg](Agenzia.svg)
