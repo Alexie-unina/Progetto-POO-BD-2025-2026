@@ -39,7 +39,7 @@ import java.security.InvalidParameterException;
     * @see Controller
     * @see JFrame
     * @see JButton
-    * * @see JTextField
+    * @see JTextField
     */
     public CreaAereo(JFrame mainFrame,JFrame frameChiamante, Controller controller){
         System.out.println("Costruttore creaaereo chiamato!"); //Debug

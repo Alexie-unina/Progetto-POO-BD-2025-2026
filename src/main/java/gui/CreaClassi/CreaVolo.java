@@ -31,6 +31,28 @@ public class CreaVolo {
     List<String[]> listaHostess = new ArrayList<>();
     List<String[]> listaAerei = new ArrayList<>();
 
+    /**
+     * Costruisce e visualizza la finestra grafica per la creazione di un nuovo volo.
+     * <p>
+     * Il costruttore inizializza il frame dedicato alla creazione del volo,
+     * chiude la finestra chiamante e configura i listener dei pulsanti.
+     * Il pulsante "Indietro" riporta l'utente alla finestra principale, mentre
+     * il pulsante di creazione legge i dati inseriti nei campi di testo e delega
+     * al {@link Controller} la creazione del volo.
+     * </p>
+     *
+     * @author Alessandro Pizzi
+     * @author Emy Servillo
+     *
+     * @param mainFrame frame principale dell'applicazione da rendere nuovamente visibile al termine dell'operazione
+     * @param frameChiamante frame da cui è stata aperta la schermata di creazione e che viene chiuso all'apertura
+     * @param controller controller applicativo utilizzato per creare il nuovo volo
+     *
+     * @see Controller
+     * @see JFrame
+     * @see JButton
+     * @see JTextField
+     */
     public CreaVolo(JFrame mainFrame, JFrame frameChiamante, Controller controller){
         frameChiamante.dispose();
         frame = new JFrame("Crea Nuovo Aereo");
