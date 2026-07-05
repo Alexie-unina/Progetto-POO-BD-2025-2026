@@ -1,38 +1,34 @@
-# Intefaccia grafica
-il nostro progetto consiste nel sistema gestionale di un aeroporto, 
-che immagazzina i dati dei vari clienti, piloti, e hostess dell'aeroporto 
-oltre agli aerei, i voli previsti e le prenotazioni effettuate.
-tramite la gui inclusa nel src, chi utilizza il programma può visualizzare
-le rispettive liste di: piloti; hostess; clienti; aerei; voli; prenotazioni.
-Dal frame di ogni lista è possibile aggiungere un elemento, riempendo ogni
-campo dell'oggetto che si sta creando. in caso un campo obbligatorio non 
-venisse riempito o un campo venisse riempito in modo incompleto e/o errato
-verrà lanciata un eccezione e mostrato un messaggio spiegando il relativo 
-errore.
+# Interazione col database
+
+CORREZIONE ERRORE PRECEDENTE
+aggiunto getPassword() mancante alla classe utente perché la sua mancanza impediva di salvare gli oggetti al database.
 
 
-> Home apre le seguenti classi
-> * ListaPiloti
-> * ListaHostess
-> * ListaClienti
-> * ListaAerei
-> * ListaVoli
-> * ListaPrenotazioni
 
-> ListaPiloti apre CreaNuovoPilota che istanzia un pilota
 
-> ListaHostess apre CreaNuovaHostess che istanzia un'hostess
 
-> ListaClienti apre CreaNuovoCliente che istanzia un cliente
+> in questo homework è stato creato il database con le tabelle
+> * Pilota
+> * Hostess
+> * Cliente
+> * Aereo
+> * Volo
+> * Prenotazione.
 
-> ListaAerei apre CreaNuovoAereo che istanzia un aereo
- 
-> ListaVoli apre CreaNuovoVolo che istanzia un volo 
+> abbiamo modificato il 
+> codice in java per salvare i dati sul database (Tramite opportuni DAO)
+> a cui siamo collegati invece che in ArrayList come veniva
+> fatto in precedenza. 
 
-> ListaPrenotazioni apre CreaNuovaPrenotazione che istanzia una prenotazione
+> abbiamo inoltre aggiunto
+> l'opzione di rimuovere un elemento da una lista, che prima era 
+> assente poiché i dati non erano persistenti.
+> abbiamo scritto una documentazione in JavaDoc per ogni
+ >metodo utilizzato, che ne spiega scopo, eventuali parametri presi e valori restituiti.
 
+## Class diagram aggiornato
 ![Class Diagram.svg](Class%20Diagram.svg)
 
 
-
+## Sequence diagram della gui
 ![Agenzia.svg](Agenzia.svg)
