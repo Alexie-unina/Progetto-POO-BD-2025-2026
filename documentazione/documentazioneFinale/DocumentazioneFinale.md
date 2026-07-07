@@ -26,9 +26,9 @@ aggiunto getPassword() mancante alla classe utente perché la sua mancanza imped
 > abbiamo scritto una documentazione in JavaDoc per ogni
  >metodo utilizzato, che ne spiega scopo, eventuali parametri presi e valori restituiti.
 
-## Class diagram aggiornato
+## diagramma aggiornato
 ![Class Diagram.svg](Class%20Diagram.svg)
 
 
-## Sequence diagram della gui
+## diagramma della gui
 ![Agenzia.svg](Agenzia.svg)
