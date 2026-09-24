@@ -86,7 +86,7 @@ CREATE TABLE Prenotazione(
 	posto				CHAR(3)		NOT NULL, --Posto non puo essere unique altrimenti l'overbooking non avrebbe senso
 	classe				VARCHAR(15) NOT NULL,
 	CONSTRAINT FK_CLIENTE FOREIGN KEY (idCliente) REFERENCES CLIENTE(idCliente)
-		ON DELETE CASCADE,CREATE OR REPLACE FUNCTION checkPostoPrenotazione()
+		ON DELETE CASCADE,
 
 	CONSTRAINT FK_VOLO FOREIGN KEY (idVolo) REFERENCES VOLO(idVolo)
 		ON DELETE CASCADE,
@@ -165,3 +165,42 @@ CREATE TRIGGER trg_checkPostoPrenotazione
     BEFORE INSERT ON Prenotazione
     FOR EACH ROW
 EXECUTE FUNCTION checkPostoPrenotazione();
+
+--Controllo univocita login.
+
+CREATE FUNCTION checkLoginUnivoco()
+RETURNS TRIGGER AS $$
+DECLARE
+    numero INTEGER;
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM Cliente
+        WHERE login = new.login
+        UNION ALL
+        SELECT 1
+        FROM Hostess
+        WHERE login = new.login
+        UNION ALL
+        SELECT 1
+        FROM Pilota
+        WHERE login = new.login
+    ) THEN
+        RAISE EXCEPTION 'Login %s gia'' esistente', new.login;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE TRIGGER trg_cliente_login
+  BEFORE INSERT OR UPDATE ON Cliente FOR EACH ROW
+  EXECUTE FUNCTION checkLoginUnivoco();
+
+CREATE OR REPLACE TRIGGER trg_pilota_login
+  BEFORE INSERT OR UPDATE ON Pilota FOR EACH ROW
+  EXECUTE FUNCTION checkLoginUnivoco();
+
+CREATE OR REPLACE TRIGGER trg_hostess_login
+  BEFORE INSERT OR UPDATE ON Hostess FOR EACH ROW
+  EXECUTE FUNCTION checkLoginUnivoco();
