@@ -4959,8 +4959,8 @@ true posixrules
       <PgRoutineKind>pg-trigger</PgRoutineKind>
       <ResultsDefinition>trigger</ResultsDefinition>
       <Rows>0.0</Rows>
-      <SourceTextLength>404</SourceTextLength>
-      <StateNumber>1139</StateNumber>
+      <SourceTextLength>403</SourceTextLength>
+      <StateNumber>1146</StateNumber>
       <LanguageName>plpgsql</LanguageName>
       <OwnerName>postgres</OwnerName>
     </routine>

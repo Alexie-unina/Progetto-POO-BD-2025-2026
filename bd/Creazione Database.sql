@@ -168,7 +168,7 @@ EXECUTE FUNCTION checkPostoPrenotazione();
 
 --Controllo univocita login.
 
-CREATE FUNCTION checkLoginUnivoco()
+CREATE OR REPLACE FUNCTION checkLoginUnivoco()
 RETURNS TRIGGER AS $$
 DECLARE
     numero INTEGER;
@@ -186,7 +186,7 @@ BEGIN
         FROM Pilota
         WHERE login = new.login
     ) THEN
-        RAISE EXCEPTION 'Login %s gia'' esistente', new.login;
+        RAISE EXCEPTION 'Login % gia'' esistente', new.login;
     END IF;
 
     RETURN NEW;
